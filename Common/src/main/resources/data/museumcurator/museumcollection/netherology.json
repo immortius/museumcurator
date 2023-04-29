@@ -1,0 +1,49 @@
+{
+  "name" : "Netherology",
+  "exhibits" : [
+    {
+      "name" : "Botany",
+      "items" : [
+        "minecraft:wither_rose",
+
+        "minecraft:crimson_nylium",
+        "minecraft:crimson_roots",
+        "minecraft:crimson_fungus",
+        "minecraft:weeping_vines",
+        "minecraft:crimson_hyphae",
+        "minecraft:crimson_stem",
+        "minecraft:stripped_crimson_hyphae",
+        "minecraft:stripped_crimson_stem",
+        "minecraft:crimson_planks",
+        "minecraft:crimson_slab",
+
+        "minecraft:nether_sprouts",
+        "minecraft:warped_nylium",
+        "minecraft:warped_roots",
+        "minecraft:warped_fungus",
+        "minecraft:twisting_vines",
+        "minecraft:warped_hyphae",
+        "minecraft:warped_stem",
+        "minecraft:stripped_warped_hyphae",
+        "minecraft:stripped_warped_stem",
+        "minecraft:warped_planks",
+        "minecraft:warped_slab"
+      ]
+    },
+    {
+      "name" : "Minerals",
+      "items" : [
+        "minecraft:nether_gold_ore",
+        "minecraft:nether_quartz_ore",
+        "minecraft:ancient_debris",
+        "minecraft:netherite_block"
+      ]
+    },
+    {
+      "name" : "Architecture",
+      "items" : [
+
+      ]
+    }
+  ]
+}

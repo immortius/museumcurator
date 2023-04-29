@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "xyz.immortius.museumcurator.mixins",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "${refmap_target}",
+  "mixins": [
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

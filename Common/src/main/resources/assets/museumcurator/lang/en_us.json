@@ -1,0 +1,6 @@
+{
+  "config.museumcurator.title": "Museum Curator",
+  "commands.museumcurator.dumperror" : "Failed to write item dump",
+  "item.museumcurator.museumchecklist" : "Museum Checklist",
+  "museumcurator.menu.checklist.title" : "Museum Checklist"
+}

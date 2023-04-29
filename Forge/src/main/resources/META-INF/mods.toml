@@ -1,0 +1,31 @@
+# Find more information on toml format here:  https://github.com/toml-lang/toml
+# ModLoader settings
+modLoader="javafml"
+loaderVersion="[40,)"
+license="MIT License"
+#issueTrackerURL="https://change.me.to.your.issue.tracker.example.invalid/"
+# A list of mods - how many allowed here is determined by the individual mod loader
+[[mods]]
+modId="museumcurator"
+version="${file.jarVersion}"
+displayName="Museum Curator"
+# A URL to query for updates for this mod. See the JSON update specification https://mcforge.readthedocs.io/en/latest/gettingstarted/autoupdate/
+updateJSONURL="https://immortius.xyz/museumcurator/updates.json"
+displayURL="https://immortius.xyz/museumcurator"
+logoFile="logo.png"
+authors="Immortius"
+description='''
+This mod provides assistance with building a minecraft museum display every item available in Minecraft.
+'''
+[[dependencies.museumcurator]]
+    modId="forge"
+    mandatory=true
+    versionRange="[40,)"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.museumcurator]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.18.2,1.19)"
+    ordering="NONE"
+    side="BOTH"

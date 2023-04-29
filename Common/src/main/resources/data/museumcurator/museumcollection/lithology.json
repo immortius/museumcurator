@@ -1,0 +1,155 @@
+{
+  "name" : "Lithology",
+  "exhibits" : [
+    {
+      "name" : "Stone",
+      "items" : [
+        "minecraft:cobblestone",
+        "minecraft:cobblestone_slab",
+        "minecraft:cobblestone_stairs",
+        "minecraft:cobblestone_wall",
+        "minecraft:mossy_cobblestone",
+        "minecraft:mossy_cobblestone_slab",
+        "minecraft:mossy_cobblestone_stairs",
+        "minecraft:mossy_cobblestone_wall",
+        "minecraft:stone",
+        "minecraft:stone_slab",
+        "minecraft:stone_stairs",
+        "minecraft:smooth_stone",
+        "minecraft:smooth_stone_slab",
+        "minecraft:stone_bricks",
+        "minecraft:cracked_stone_bricks",
+        "minecraft:chiseled_stone_bricks",
+        "minecraft:stone_brick_slab",
+        "minecraft:stone_brick_stairs",
+        "minecraft:stone_brick_wall",
+        "minecraft:mossy_stone_bricks",
+        "minecraft:mossy_stone_brick_slab",
+        "minecraft:mossy_stone_brick_stairs",
+        "minecraft:mossy_stone_brick_wall"
+      ]
+    },
+    {
+      "name" : "Deepslate",
+      "items" : [
+        "minecraft:cobbled_deepslate",
+        "minecraft:cobbled_deepslate_stairs",
+        "minecraft:cobbled_deepslate_slab",
+        "minecraft:cobbled_deepslate_wall",
+        "minecraft:deepslate",
+        "minecraft:chiseled_deepslate",
+        "minecraft:polished_deepslate",
+        "minecraft:polished_deepslate_slab",
+        "minecraft:polished_deepslate_stairs",
+        "minecraft:polished_deepslate_wall",
+        "minecraft:deepslate_bricks",
+        "minecraft:deepslate_brick_slab",
+        "minecraft:deepslate_brick_stairs",
+        "minecraft:deepslate_brick_wall",
+        "minecraft:cracked_deepslate_bricks",
+        "minecraft:deepslate_tiles",
+        "minecraft:deepslate_tile_slab",
+        "minecraft:deepslate_tile_stairs",
+        "minecraft:deepslate_tile_wall",
+        "minecraft:cracked_deepslate_tiles"
+      ]
+    },
+    {
+      "name" : "Andesite",
+      "items" : [
+        "minecraft:andesite",
+        "minecraft:andesite_slab",
+        "minecraft:andesite_stairs",
+        "minecraft:andesite_wall",
+        "minecraft:polished_andesite",
+        "minecraft:polished_andesite_slab",
+        "minecraft:polished_andesite_stairs"
+      ]
+    },
+    {
+      "name" : "Diorite",
+      "items" : [
+        "minecraft:diorite",
+        "minecraft:diorite_slab",
+        "minecraft:diorite_stairs",
+        "minecraft:diorite_wall",
+        "minecraft:polished_diorite",
+        "minecraft:polished_diorite_slab",
+        "minecraft:polished_diorite_stairs"
+      ]
+    },
+    {
+      "name" : "Granite",
+      "items" : [
+        "minecraft:granite",
+        "minecraft:granite_slab",
+        "minecraft:granite_stairs",
+        "minecraft:granite_wall",
+        "minecraft:polished_granite",
+        "minecraft:polished_granite_slab",
+        "minecraft:polished_granite_stairs"
+      ]
+    },
+    {
+      "name" : "Sand",
+      "items" : [
+        "minecraft:sand",
+        "minecraft:sandstone",
+        "minecraft:sandstone_slab",
+        "minecraft:sandstone_stairs",
+        "minecraft:sandstone_wall",
+        "minecraft:cut_sandstone",
+        "minecraft:cut_sandstone_slab",
+        "minecraft:chiseled_sandstone",
+        "minecraft:smooth_sandstone",
+        "minecraft:smooth_sandstone_slab",
+        "minecraft:smooth_sandstone_stairs"
+      ]
+    },
+    {
+      "name" : "Red Sand",
+      "items" : [
+        "minecraft:red_sand",
+        "minecraft:red_sandstone",
+        "minecraft:red_sandstone_slab",
+        "minecraft:red_sandstone_stairs",
+        "minecraft:red_sandstone_wall",
+        "minecraft:cut_red_sandstone",
+        "minecraft:cut_red_sandstone_slab",
+        "minecraft:chiseled_red_sandstone",
+        "minecraft:smooth_red_sandstone",
+        "minecraft:smooth_red_sandstone_slab",
+        "minecraft:smooth_red_sandstone_stairs"
+      ]
+    },
+    {
+      "name" : "Dirt",
+      "items" : [
+        "minecraft:dirt",
+        "minecraft:coarse_dirt",
+        "minecraft:rooted_dirt",
+        "minecraft:grass_block",
+        "minecraft:podzol"
+      ]
+    },
+    {
+      "name" : "Coal",
+      "items" : [
+        "minecraft:coal_ore",
+        "minecraft:deepslate_coal_ore",
+        "minecraft:coal",
+        "minecraft:coal_block"
+      ]
+    },
+    {
+      "name" : "Other Rock",
+      "items" : [
+        "minecraft:gravel",
+        "minecraft:calcite",
+        "minecraft:tuff",
+        "minecraft:dripstone_block",
+        "minecraft:pointed_dripstone"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "name" : "Oceanology",
+  "exhibits" : [
+    {
+      "name" : "",
+      "items" : [
+        "minecraft:wet_sponge",
+        "minecraft:sponge",
+        "minecraft:seagrass",
+        "minecraft:kelp",
+        "minecraft:sea_pickle"
+      ]
+    }
+  ]
+}
