@@ -12,15 +12,15 @@ import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
-import xyz.immortius.museumcurator.client.screens.ChecklistCollectionScreen;
 import xyz.immortius.museumcurator.common.data.MuseumCollection;
 import xyz.immortius.museumcurator.common.data.MuseumExhibit;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-public class ChecklistContainerWidget extends AbstractContainerEventHandler implements Widget, NarratableEntry {
+public class ScrollContainerWidget extends AbstractContainerEventHandler implements Widget, NarratableEntry {
 
     private static final int SCROLLBAR_WIDTH = 6;
     private static final int SCROLLBAR_SPACE = 2;
@@ -30,36 +30,33 @@ public class ChecklistContainerWidget extends AbstractContainerEventHandler impl
     private int width;
     private int height;
     private double scrollAmount;
-    private final List<ChecklistExhibitEntry> children = new ArrayList<>();
-    private ChecklistExhibitEntry hovered;
+    private final List<ScrollContainerEntry> children = new ArrayList<>();
+    private ScrollContainerEntry hovered;
     private boolean scrolling;
 
-    public ChecklistContainerWidget(int x, int y, int width, int height, MuseumCollection collection) {
+    public ScrollContainerWidget(int x, int y, int width, int height, List<? extends ScrollContainerEntry> entries) {
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
-        for (MuseumExhibit exhibit : collection.getExhibits()) {
-            this.addEntry(new ChecklistExhibitEntry(exhibit));
-        }
+        this.children.addAll(entries);
     }
 
-    public void addEntry(ChecklistExhibitEntry entry) {
+    public void addEntry(ScrollContainerEntry entry) {
         children.add(entry);
-        entry.parent = this;
     }
 
     private void setScrollAmount(double amount) {
         scrollAmount = Mth.clamp(amount, 0, getMaxScroll());
     }
 
-    private ChecklistExhibitEntry getEntryAtPosition(double mouseX, double mouseY) {
+    private ScrollContainerEntry getEntryAtPosition(double mouseX, double mouseY) {
         if (mouseX < this.x || mouseX > this.x + width - SCROLLBAR_WIDTH - SCROLLBAR_SPACE || mouseY < y || mouseY > y + height) {
             return null;
         }
         double absolutePos = mouseY + scrollAmount - y;
         int totalY = 0;
-        for (ChecklistExhibitEntry entry : children) {
+        for (ScrollContainerEntry entry : children) {
             int entryHeight = entry.getHeight(width - SCROLLBAR_WIDTH - SCROLLBAR_SPACE);
             if (totalY < absolutePos && totalY + entryHeight >= absolutePos) {
                 return entry;
@@ -83,11 +80,11 @@ public class ChecklistContainerWidget extends AbstractContainerEventHandler impl
         RenderSystem.disableBlend();
     }
 
-    public Component getTooltip(int mouseX, int mouseY) {
+    public List<Component> getTooltip(int mouseX, int mouseY) {
         if (hovered != null) {
             return hovered.getTooltip(mouseX, mouseY);
         }
-        return null;
+        return Collections.emptyList();
     }
 
     private void renderScrollbar(Tesselator tesselator, BufferBuilder bufferbuilder) {
@@ -134,7 +131,7 @@ public class ChecklistContainerWidget extends AbstractContainerEventHandler impl
         double scale = Minecraft.getInstance().getWindow().getGuiScale();
         RenderSystem.enableScissor((int) (scale * x), (int) (scale * (Minecraft.getInstance().getWindow().getGuiScaledHeight() - height - y)), (int) (scale * width), (int) (scale * height));
         int absoluteY = 0;
-        for (ChecklistExhibitEntry child : children) {
+        for (ScrollContainerEntry child : children) {
             int rowBottom = absoluteY + child.getHeight(width - SCROLLBAR_WIDTH - SCROLLBAR_SPACE);
             if (rowBottom >= scrollAmount && absoluteY <= scrollAmount + height) {
                 child.render(stack, y + absoluteY - (int) scrollAmount, x, width - SCROLLBAR_WIDTH - SCROLLBAR_SPACE, rowBottom - absoluteY, mouseX, mouseY, Objects.equals(this.hovered, child), delta);
@@ -159,7 +156,7 @@ public class ChecklistContainerWidget extends AbstractContainerEventHandler impl
         if (!this.isMouseOver(mouseX, mouseY)) {
             return false;
         } else {
-            ChecklistExhibitEntry e = this.getEntryAtPosition(mouseX, mouseY);
+            ScrollContainerEntry e = this.getEntryAtPosition(mouseX, mouseY);
             if (e != null) {
                 if (e.mouseClicked(mouseX, mouseY, button)) {
                     this.setFocused(e);
@@ -232,46 +229,6 @@ public class ChecklistContainerWidget extends AbstractContainerEventHandler impl
     @Override
     public NarrationPriority narrationPriority() {
         return NarrationPriority.NONE;
-    }
-
-    public static class ChecklistExhibitEntry implements GuiEventListener {
-
-        private ChecklistExhibitWidget sectionWidget;
-        private List<AbstractWidget> widgets = new ArrayList<>();
-        private ChecklistContainerWidget parent;
-
-        public ChecklistExhibitEntry(MuseumExhibit exhibit) {
-            this.sectionWidget = new ChecklistExhibitWidget(0,0,0,0, exhibit);
-            widgets.add(sectionWidget);
-        }
-
-        public List<? extends NarratableEntry> narratables() {
-            return widgets;
-        }
-
-        public void render(PoseStack stack, int top, int left, int width, int height, int mouseX, int mouseY, boolean hovered, float delta) {
-            sectionWidget.x = left;
-            sectionWidget.y = top;
-            sectionWidget.setWidth(width);
-            sectionWidget.render(stack, mouseX, mouseY, delta);
-        }
-
-        public int getHeight(int width) {
-            sectionWidget.setWidth(width);
-            return sectionWidget.calcHeight();
-        }
-
-        public List<? extends GuiEventListener> children() {
-            return widgets;
-        }
-
-        public boolean isMouseOver(double mouseX, double mouseY) {
-            return Objects.equals(parent.getEntryAtPosition(mouseX, mouseY), this);
-        }
-
-        public Component getTooltip(int mouseX, int mouseY) {
-            return sectionWidget.getTooltip(mouseX, mouseY);
-        }
     }
 
 }

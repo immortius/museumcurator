@@ -1,0 +1,53 @@
+{
+  "name" : "Technology",
+  "exhibits" : [
+    {
+      "name" : "Workbenches",
+      "items" : [
+        "minecraft:crafting_table",
+        "minecraft:furnace",
+        "minecraft:blast_furnace",
+        "minecraft:smithing_table",
+        "minecraft:anvil",
+        "minecraft:chipped_anvil",
+        "minecraft:damaged_anvil",
+        "minecraft:grindstone",
+        "minecraft:stonecutter",
+        "minecraft:cauldron",
+        "minecraft:composter"
+      ]
+    },
+    {
+      "name" : "Boats",
+      "items" : [
+        "minecraft:oak_boat",
+        "minecraft:dark_oak_boat",
+        "minecraft:acacia_boat",
+        "minecraft:birch_boat",
+        "minecraft:jungle_boat",
+        "minecraft:spruce_boat"
+      ]
+    },
+    {
+      "name" : "Navigation",
+      "items" : [
+        "minecraft:map",
+        "minecraft:filled_map",
+        "minecraft:cartography_table",
+        "minecraft:compass",
+        "minecraft:lodestone"
+      ]
+    },
+    {
+      "name": "Artifacts",
+      "items" : [
+        "minecraft:totem_of_undying",
+        "minecraft:respawn_anchor",
+        "minecraft:nether_star",
+        "minecraft:beacon",
+        "minecraft:heart_of_the_sea",
+        "minecraft:conduit"
+      ]
+    }
+  ]
+}

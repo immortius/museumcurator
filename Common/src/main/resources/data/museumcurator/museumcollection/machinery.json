@@ -1,0 +1,78 @@
+{
+  "name" : "Machinery",
+  "exhibits" : [
+    {
+      "name" : "Buttons",
+      "items" : [
+        "minecraft:oak_button",
+        "minecraft:dark_oak_button",
+        "minecraft:acacia_button",
+        "minecraft:birch_button",
+        "minecraft:jungle_button",
+        "minecraft:spruce_button",
+        "minecraft:stone_button",
+        "minecraft:crimson_button",
+        "minecraft:warped_button",
+        "minecraft:polished_blackstone_button"
+      ]
+    },
+    {
+      "name" : "Pressure Plates",
+      "items" : [
+        "minecraft:oak_pressure_plate",
+        "minecraft:dark_oak_pressure_plate",
+        "minecraft:acacia_pressure_plate",
+        "minecraft:birch_pressure_plate",
+        "minecraft:jungle_pressure_plate",
+        "minecraft:spruce_pressure_plate",
+        "minecraft:crimson_pressure_plate",
+        "minecraft:warped_pressure_plate",
+        "minecraft:stone_pressure_plate",
+        "minecraft:polished_blackstone_pressure_plate",
+        "minecraft:light_weighted_pressure_plate",
+        "minecraft:heavy_weighted_pressure_plate"
+      ]
+    },
+    {
+      "name" : "Minecarts",
+      "items" : [
+        "minecraft:rail",
+        "minecraft:powered_rail",
+        "minecraft:activator_rail",
+        "minecraft:detector_rail",
+        "minecraft:minecart",
+        "minecraft:chest_minecart",
+        "minecraft:furnace_minecart",
+        "minecraft:hopper_minecart",
+        "minecraft:tnt_minecart"
+      ]
+    },
+    {
+      "name" : "Redstone Mechanisms",
+      "items" : [
+        "minecraft:lever",
+        "minecraft:redstone_torch",
+        "minecraft:repeater",
+        "minecraft:comparator",
+        "minecraft:observer",
+        "minecraft:piston",
+        "minecraft:sticky_piston",
+        "minecraft:dispenser",
+        "minecraft:dropper",
+        "minecraft:note_block",
+        "minecraft:daylight_detector",
+        "minecraft:redstone_lamp"
+      ]
+    },
+    {
+      "name" : "Gadgets",
+      "items" : [
+        "minecraft:clock",
+        "minecraft:lightning_rod",
+        "minecraft:spyglass",
+        "minecraft:tripwire_hook"
+      ]
+    }
+
+  ]
+}

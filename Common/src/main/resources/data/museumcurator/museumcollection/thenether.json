@@ -1,0 +1,137 @@
+{
+  "name" : "The Nether",
+  "exhibits" : [
+    {
+      "name" : "Crimson Botany",
+      "items" : [
+        "minecraft:nether_wart",
+        "minecraft:crimson_nylium",
+        "minecraft:crimson_roots",
+        "minecraft:crimson_fungus",
+        "minecraft:weeping_vines",
+        "minecraft:crimson_hyphae",
+        "minecraft:crimson_stem",
+        "minecraft:nether_wart_block",
+        "minecraft:stripped_crimson_hyphae",
+        "minecraft:stripped_crimson_stem",
+        "minecraft:crimson_planks",
+        "minecraft:crimson_slab",
+        "minecraft:crimson_stairs",
+        "minecraft:shroomlight"
+      ]
+    },
+    {
+      "name" : "Warped Botany",
+      "items" : [
+        "minecraft:nether_sprouts",
+        "minecraft:warped_nylium",
+        "minecraft:warped_roots",
+        "minecraft:warped_fungus",
+        "minecraft:twisting_vines",
+        "minecraft:warped_hyphae",
+        "minecraft:warped_stem",
+        "minecraft:warped_wart_block",
+        "minecraft:stripped_warped_hyphae",
+        "minecraft:stripped_warped_stem",
+        "minecraft:warped_planks",
+        "minecraft:warped_slab",
+        "minecraft:warped_stairs"
+      ]
+    },
+    {
+      "name" : "Creature Samples",
+      "items" : [
+        "minecraft:blaze_powder",
+        "minecraft:blaze_rod",
+        "minecraft:ghast_tear",
+        "minecraft:magma_cream",
+        "minecraft:wither_skeleton_skull"
+      ]
+    },
+    {
+      "name" : "Basalt",
+      "items" : [
+        "minecraft:basalt",
+        "minecraft:polished_basalt",
+        "minecraft:smooth_basalt"
+      ]
+    },
+    {
+      "name" : "Blackstone",
+      "items" : [
+        "minecraft:blackstone",
+        "minecraft:gilded_blackstone",
+        "minecraft:blackstone_slab",
+        "minecraft:blackstone_stairs",
+        "minecraft:blackstone_wall",
+        "minecraft:polished_blackstone",
+        "minecraft:polished_blackstone_slab",
+        "minecraft:polished_blackstone_stairs",
+        "minecraft:polished_blackstone_wall",
+        "minecraft:chiseled_polished_blackstone",
+        "minecraft:polished_blackstone_bricks",
+        "minecraft:polished_blackstone_brick_slab",
+        "minecraft:polished_blackstone_brick_stairs",
+        "minecraft:polished_blackstone_brick_wall",
+        "minecraft:cracked_polished_blackstone_bricks"
+      ]
+    },
+    {
+      "name" : "Netherrack",
+      "items" : [
+        "minecraft:netherrack",
+        "minecraft:nether_quartz_ore",
+        "minecraft:nether_gold_ore",
+        "minecraft:nether_brick",
+        "minecraft:nether_bricks",
+        "minecraft:nether_brick_slab",
+        "minecraft:nether_brick_stairs",
+        "minecraft:nether_brick_wall",
+        "minecraft:chiseled_nether_bricks",
+        "minecraft:cracked_nether_bricks",
+        "minecraft:red_nether_bricks",
+        "minecraft:red_nether_brick_slab",
+        "minecraft:red_nether_brick_stairs",
+        "minecraft:red_nether_brick_wall"
+      ]
+    },
+    {
+      "name" : "Quartz",
+      "items" : [
+        "minecraft:quartz",
+        "minecraft:quartz_block",
+        "minecraft:quartz_bricks",
+        "minecraft:quartz_pillar",
+        "minecraft:quartz_slab",
+        "minecraft:quartz_stairs",
+        "minecraft:chiseled_quartz_block",
+        "minecraft:smooth_quartz",
+        "minecraft:smooth_quartz_slab",
+        "minecraft:smooth_quartz_stairs"
+      ]
+    },
+    {
+      "name" : "Netherite",
+      "items" : [
+        "minecraft:ancient_debris",
+        "minecraft:netherite_scrap",
+        "minecraft:netherite_ingot",
+        "minecraft:netherite_block"
+      ]
+    },
+    {
+      "name" : "Soil",
+      "items" : [
+        "minecraft:soul_sand",
+        "minecraft:soul_soil"
+      ]
+    },
+    {
+      "name" : "Glowstone",
+      "items" : [
+        "minecraft:glowstone_dust",
+        "minecraft:glowstone"
+      ]
+    }
+  ]
+}

@@ -1,12 +1,18 @@
 package xyz.immortius.museumcurator.client.screens;
 
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
+import xyz.immortius.museumcurator.client.uielements.ScrollContainerEntry;
+import xyz.immortius.museumcurator.client.uielements.ScrollContainerWidget;
 import xyz.immortius.museumcurator.common.data.MuseumCollection;
 import xyz.immortius.museumcurator.common.data.MuseumCollections;
 import xyz.immortius.museumcurator.common.menus.MuseumChecklistMenu;
 
+import java.util.Collections;
 import java.util.List;
 
 public class ChecklistOverviewScreen extends AbstractChecklistScreen {
@@ -20,13 +26,41 @@ public class ChecklistOverviewScreen extends AbstractChecklistScreen {
     protected void init() {
         super.init();
 
-        int yOffset = 50;
-        for (MuseumCollection group : MuseumCollections.getCollections()) {
-            Button groupButton = new Button((width - imageWidth) / 2 + 64, topPos + yOffset, 128, 20, group.getName(), button -> {
-                this.minecraft.setScreen(new ChecklistCollectionScreen(menu, playerInventory, group.getName(), group, this));
+        List<ChecklistCollectionEntry> collectionEntries = MuseumCollections.getCollections().stream().map(x -> new ChecklistCollectionEntry(this, x)).toList();
+        ScrollContainerWidget scrollContainer = new ScrollContainerWidget(leftPos + 16, topPos + 46, 226, 173, collectionEntries);
+        addRenderableWidget(scrollContainer);
+    }
+
+    public class ChecklistCollectionEntry implements ScrollContainerEntry {
+
+        private final Button button;
+
+        public ChecklistCollectionEntry(Screen parentScreen, MuseumCollection collection) {
+            button = new Button(0, 0, 128, 20, collection.getName(), button -> {
+                Minecraft.getInstance().setScreen(new ChecklistCollectionScreen(menu, playerInventory, collection.getName(), collection, parentScreen));
             });
-            addRenderableWidget(groupButton);
-            yOffset += 24;
+        }
+
+        @Override
+        public void render(PoseStack stack, int top, int left, int width, int height, int mouseX, int mouseY, boolean hovered, float delta) {
+            button.x = left + width / 2 - 64;
+            button.y = top + 2;
+            button.render(stack, mouseX, mouseY, delta);
+        }
+
+        @Override
+        public boolean mouseClicked(double mouseX, double mouseY, int mouseButton) {
+            return button.mouseClicked(mouseX, mouseY, mouseButton);
+        }
+
+        @Override
+        public int getHeight(int width) {
+            return 24;
+        }
+
+        @Override
+        public List<Component> getTooltip(int mouseX, int mouseY) {
+            return Collections.emptyList();
         }
     }
 

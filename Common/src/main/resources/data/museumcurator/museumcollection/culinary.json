@@ -1,0 +1,61 @@
+{
+  "name" : "Culinary",
+  "exhibits" : [
+    {
+      "name" : "Ingredients",
+      "items" : [
+        "minecraft:sugar",
+        "minecraft:fermented_spider_eye",
+        "minecraft:glistering_melon_slice",
+        "minecraft:dragon_breath"
+      ]
+    },
+    {
+      "name" : "Soups and Stews",
+      "items" : [
+        "minecraft:bowl",
+        "minecraft:beetroot_soup",
+        "minecraft:mushroom_stew",
+        "minecraft:rabbit_stew",
+        "minecraft:suspicious_stew"
+      ]
+    },
+    {
+      "name" : "Baked",
+      "items" : [
+        "minecraft:smoker",
+        "minecraft:bread",
+        "minecraft:baked_potato",
+        "minecraft:cooked_beef",
+        "minecraft:cooked_chicken",
+        "minecraft:cooked_cod",
+        "minecraft:cooked_mutton",
+        "minecraft:cooked_porkchop",
+        "minecraft:cooked_rabbit",
+        "minecraft:cooked_salmon"
+      ]
+    },
+    {
+      "name" : "Desserts",
+      "items" : [
+        "minecraft:cookie",
+        "minecraft:cake",
+        "minecraft:pumpkin_pie",
+        "minecraft:golden_carrot",
+        "minecraft:golden_apple",
+        "minecraft:enchanted_golden_apple"
+      ]
+    },
+    {
+      "name" : "Beverages",
+      "items" : [
+        "minecraft:brewing_stand",
+        "minecraft:glass_bottle",
+        "minecraft:potion",
+        "minecraft:splash_potion",
+        "minecraft:lingering_potion",
+        "minecraft:experience_bottle"
+      ]
+    }
+  ]
+}

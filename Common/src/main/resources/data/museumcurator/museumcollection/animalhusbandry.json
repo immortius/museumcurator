@@ -1,0 +1,53 @@
+{
+  "name" : "Animal Husbandry",
+  "exhibits" : [
+    {
+      "name": "Bees",
+      "items" : [
+        "minecraft:beehive",
+        "minecraft:bee_nest",
+        "minecraft:honey_bottle",
+        "minecraft:honey_block",
+        "minecraft:honeycomb",
+        "minecraft:honeycomb_block"
+      ]
+    },
+    {
+      "name" : "Produce",
+      "items" : [
+        "minecraft:beef",
+        "minecraft:leather",
+        "minecraft:milk_bucket",
+        "minecraft:chicken",
+        "minecraft:feather",
+        "minecraft:egg",
+        "minecraft:mutton",
+        "minecraft:porkchop",
+        "minecraft:rabbit",
+        "minecraft:rabbit_hide",
+        "minecraft:rabbit_foot",
+        "minecraft:phantom_membrane",
+        "minecraft:slime_ball",
+        "minecraft:slime_block",
+        "minecraft:spider_eye",
+        "minecraft:cobweb",
+        "minecraft:bone_meal",
+        "minecraft:bone",
+        "minecraft:bone_block",
+        "minecraft:rotten_flesh",
+        "minecraft:creeper_head",
+        "minecraft:skeleton_skull",
+        "minecraft:zombie_head"
+      ]
+    },
+    {
+      "name" : "Tools",
+      "items" : [
+        "minecraft:fishing_rod",
+        "minecraft:lead",
+        "minecraft:name_tag",
+        "minecraft:shears"
+      ]
+    }
+  ]
+}

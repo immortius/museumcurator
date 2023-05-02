@@ -7,11 +7,12 @@ import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.TooltipFlag;
 import xyz.immortius.museumcurator.client.screens.AbstractChecklistScreen;
-import xyz.immortius.museumcurator.client.screens.ChecklistCollectionScreen;
 import xyz.immortius.museumcurator.common.data.MuseumExhibit;
+
+import java.util.List;
 
 public class ChecklistExhibitWidget extends AbstractWidget {
 
@@ -23,7 +24,7 @@ public class ChecklistExhibitWidget extends AbstractWidget {
         this.exhibit = exhibit;
     }
 
-    public Component getTooltip(int mouseX, int mouseY) {
+    public List<Component> getTooltip(int mouseX, int mouseY) {
         if (mouseY < y + TITLE_HEIGHT) {
             return null;
         }
@@ -36,7 +37,8 @@ public class ChecklistExhibitWidget extends AbstractWidget {
         int itemsPerRow = itemsPerRow();
         int index = itemsPerRow * row + column;
         if (index >= 0 && index < exhibit.getItems().size()) {
-            return exhibit.getItems().get(index).getName(exhibit.getItems().get(index).getDefaultInstance());
+            Item item = exhibit.getItems().get(index);
+            return item.getDefaultInstance().getTooltipLines(Minecraft.getInstance().player, TooltipFlag.Default.NORMAL);
         }
         return null;
     }

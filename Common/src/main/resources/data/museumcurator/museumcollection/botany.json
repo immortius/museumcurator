@@ -30,17 +30,17 @@
       ]
     },
     {
-      "name" : "Spruce Tree",
+      "name" : "Acacia Tree",
       "items" : [
-        "minecraft:spruce_sapling",
-        "minecraft:spruce_leaves",
-        "minecraft:spruce_log",
-        "minecraft:stripped_spruce_log",
-        "minecraft:spruce_wood",
-        "minecraft:stripped_spruce_wood",
-        "minecraft:spruce_planks",
-        "minecraft:spruce_slab",
-        "minecraft:spruce_stairs"
+        "minecraft:acacia_sapling",
+        "minecraft:acacia_leaves",
+        "minecraft:acacia_log",
+        "minecraft:stripped_acacia_log",
+        "minecraft:acacia_wood",
+        "minecraft:stripped_acacia_wood",
+        "minecraft:acacia_planks",
+        "minecraft:acacia_slab",
+        "minecraft:acacia_stairs"
       ]
     },
     {
@@ -68,41 +68,33 @@
         "minecraft:stripped_jungle_wood",
         "minecraft:jungle_planks",
         "minecraft:jungle_slab",
-        "minecraft:jungle_stairs"
+        "minecraft:jungle_stairs",
+        "minecraft:vine"
       ]
     },
     {
-      "name" : "Acacia Tree",
+      "name" : "Spruce Tree",
       "items" : [
-        "minecraft:acacia_sapling",
-        "minecraft:acacia_leaves",
-        "minecraft:acacia_log",
-        "minecraft:stripped_acacia_log",
-        "minecraft:acacia_wood",
-        "minecraft:stripped_acacia_wood",
-        "minecraft:acacia_planks",
-        "minecraft:acacia_slab",
-        "minecraft:acacia_stairs"
+        "minecraft:spruce_sapling",
+        "minecraft:spruce_leaves",
+        "minecraft:spruce_log",
+        "minecraft:stripped_spruce_log",
+        "minecraft:spruce_wood",
+        "minecraft:stripped_spruce_wood",
+        "minecraft:spruce_planks",
+        "minecraft:spruce_slab",
+        "minecraft:spruce_stairs"
       ]
     },
     {
-      "name" : "Azalea",
-      "items" : [
-        "minecraft:azalea",
-        "minecraft:azalea_leaves",
-        "minecraft:flowering_azalea",
-        "minecraft:flowering_azalea_leaves",
-        "minecraft:hanging_roots"
-      ]
-    },
-    {
-      "name" : "Ground Covers",
+      "name" : "Shrubbery",
       "items" : [
         "minecraft:grass",
+        "minecraft:tall_grass",
         "minecraft:fern",
+        "minecraft:large_fern",
         "minecraft:dead_bush",
-        "minecraft:moss_carpet",
-        "minecraft:moss_block"
+        "minecraft:lily_pad"
       ]
     },
     {
@@ -120,28 +112,69 @@
         "minecraft:oxeye_daisy",
         "minecraft:cornflower",
         "minecraft:lily_of_the_valley",
-        "minecraft:spore_blossom"
+        "minecraft:lilac",
+        "minecraft:sunflower",
+        "minecraft:rose_bush",
+        "minecraft:peony",
+        "minecraft:wither_rose"
       ]
     },
     {
-      "name" : "Plants",
+      "name" : "Seeds",
       "items" : [
+        "minecraft:beetroot_seeds",
+        "minecraft:cocoa_beans",
+        "minecraft:pumpkin_seeds",
+        "minecraft:melon_seeds",
+        "minecraft:wheat_seeds"
+      ]
+    },
+    {
+      "name" : "Agricultural",
+      "items" : [
+        "minecraft:beetroot",
+        "minecraft:carrot",
+        "minecraft:potato",
+        "minecraft:poisonous_potato",
+        "minecraft:wheat",
+        "minecraft:hay_block",
+        "minecraft:apple",
+        "minecraft:sweet_berries",
+        "minecraft:melon_slice",
+        "minecraft:melon",
+        "minecraft:pumpkin",
+        "minecraft:carved_pumpkin",
+        "minecraft:jack_o_lantern",
+        "minecraft:bamboo",
+        "minecraft:cactus",
+        "minecraft:sugar_cane"
+      ]
+    },
+    {
+      "name" : "Underground",
+      "items" : [
+        "minecraft:glow_lichen",
+        "minecraft:azalea",
+        "minecraft:azalea_leaves",
+        "minecraft:flowering_azalea",
+        "minecraft:flowering_azalea_leaves",
+        "minecraft:spore_blossom",
+        "minecraft:hanging_roots",
         "minecraft:small_dripleaf",
-        "minecraft:big_dripleaf"
+        "minecraft:big_dripleaf",
+        "minecraft:glow_berries",
+        "minecraft:moss_carpet",
+        "minecraft:moss_block"
       ]
     },
     {
       "name" : "Fungi",
       "items" : [
         "minecraft:brown_mushroom",
-        "minecraft:red_mushroom"
-      ]
-    },
-    {
-      "name" : "Agricultural",
-      "items" : [
-        "minecraft:sugar_cane",
-        "minecraft:bamboo"
+        "minecraft:brown_mushroom_block",
+        "minecraft:red_mushroom",
+        "minecraft:red_mushroom_block",
+        "minecraft:mushroom_stem"
       ]
     }
   ]
