@@ -1,10 +1,7 @@
 package xyz.immortius.museumcurator.server;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
-import com.google.gson.stream.JsonReader;
-import com.mojang.serialization.DataResult;
 import com.mojang.serialization.JsonOps;
 import net.minecraft.Util;
 import net.minecraft.resources.ResourceLocation;
@@ -14,18 +11,16 @@ import net.minecraft.world.level.storage.LevelResource;
 import xyz.immortius.museumcurator.common.MuseumCuratorConstants;
 import xyz.immortius.museumcurator.common.data.MuseumCollection;
 import xyz.immortius.museumcurator.common.data.MuseumCollections;
-import xyz.immortius.museumcurator.common.data.MuseumExhibit;
 import xyz.immortius.museumcurator.config.MuseumCuratorConfig;
 import xyz.immortius.museumcurator.config.system.ConfigSystem;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Server event handlers for events triggered server-side
+ * Server event handlers for events triggered server-side. Primarily loads the collection data
  */
 public final class ServerEventHandler {
 
@@ -45,10 +40,11 @@ public final class ServerEventHandler {
     }
 
     /**
-     * Event when the server has started. Loads/synchs the server config and spawns the initial chunk if needed.
+     * Event when the server has started.
      * @param server The minecraft server that has started
      */
     public static void onServerStarted(MinecraftServer server) {
+
     }
 
     public static void onResourceManagerReload(ResourceManager resourceManager) {

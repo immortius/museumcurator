@@ -1,9 +1,9 @@
 {
-  "name" : "The Nether",
-  "exhibits" : [
+  "name": "museumcurator.collection.thenether",
+  "exhibits": [
     {
-      "name" : "Crimson Botany",
-      "items" : [
+      "name": "museumcurator.thenether.crimsonbotany",
+      "items": [
         "minecraft:nether_wart",
         "minecraft:crimson_nylium",
         "minecraft:crimson_roots",
@@ -21,8 +21,8 @@
       ]
     },
     {
-      "name" : "Warped Botany",
-      "items" : [
+      "name": "museumcurator.thenether.warpedbotany",
+      "items": [
         "minecraft:nether_sprouts",
         "minecraft:warped_nylium",
         "minecraft:warped_roots",
@@ -39,8 +39,8 @@
       ]
     },
     {
-      "name" : "Creature Samples",
-      "items" : [
+      "name": "museumcurator.thenether.creaturesamples",
+      "items": [
         "minecraft:blaze_powder",
         "minecraft:blaze_rod",
         "minecraft:ghast_tear",
@@ -49,16 +49,16 @@
       ]
     },
     {
-      "name" : "Basalt",
-      "items" : [
+      "name": "museumcurator.thenether.basalt",
+      "items": [
         "minecraft:basalt",
         "minecraft:polished_basalt",
         "minecraft:smooth_basalt"
       ]
     },
     {
-      "name" : "Blackstone",
-      "items" : [
+      "name": "museumcurator.thenether.blackstone",
+      "items": [
         "minecraft:blackstone",
         "minecraft:gilded_blackstone",
         "minecraft:blackstone_slab",
@@ -77,8 +77,8 @@
       ]
     },
     {
-      "name" : "Netherrack",
-      "items" : [
+      "name": "museumcurator.thenether.netherrack",
+      "items": [
         "minecraft:netherrack",
         "minecraft:nether_quartz_ore",
         "minecraft:nether_gold_ore",
@@ -96,8 +96,8 @@
       ]
     },
     {
-      "name" : "Quartz",
-      "items" : [
+      "name": "museumcurator.thenether.quartz",
+      "items": [
         "minecraft:quartz",
         "minecraft:quartz_block",
         "minecraft:quartz_bricks",
@@ -111,8 +111,8 @@
       ]
     },
     {
-      "name" : "Netherite",
-      "items" : [
+      "name": "museumcurator.thenether.netherite",
+      "items": [
         "minecraft:ancient_debris",
         "minecraft:netherite_scrap",
         "minecraft:netherite_ingot",
@@ -120,15 +120,15 @@
       ]
     },
     {
-      "name" : "Soil",
-      "items" : [
+      "name": "museumcurator.thenether.soil",
+      "items": [
         "minecraft:soul_sand",
         "minecraft:soul_soil"
       ]
     },
     {
-      "name" : "Glowstone",
-      "items" : [
+      "name": "museumcurator.thenether.glowstone",
+      "items": [
         "minecraft:glowstone_dust",
         "minecraft:glowstone"
       ]

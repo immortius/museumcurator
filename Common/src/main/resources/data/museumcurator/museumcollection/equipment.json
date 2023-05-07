@@ -1,9 +1,9 @@
 {
-  "name" : "Equipment",
-  "exhibits" : [
+  "name": "museumcurator.collection.equipment",
+  "exhibits": [
     {
-      "name" : "Axes",
-      "items" : [
+      "name": "museumcurator.equipment.axes",
+      "items": [
         "minecraft:wooden_axe",
         "minecraft:stone_axe",
         "minecraft:iron_axe",
@@ -13,8 +13,8 @@
       ]
     },
     {
-      "name" : "Hoes",
-      "items" : [
+      "name": "museumcurator.equipment.hoes",
+      "items": [
         "minecraft:wooden_hoe",
         "minecraft:stone_hoe",
         "minecraft:iron_hoe",
@@ -24,8 +24,8 @@
       ]
     },
     {
-      "name" : "Pickaxes",
-      "items" : [
+      "name": "museumcurator.equipment.pickaxes",
+      "items": [
         "minecraft:wooden_pickaxe",
         "minecraft:stone_pickaxe",
         "minecraft:iron_pickaxe",
@@ -35,8 +35,8 @@
       ]
     },
     {
-      "name" : "Shovels",
-      "items" : [
+      "name": "museumcurator.equipment.shovels",
+      "items": [
         "minecraft:wooden_shovel",
         "minecraft:stone_shovel",
         "minecraft:iron_shovel",
@@ -46,8 +46,8 @@
       ]
     },
     {
-      "name" : "Swords",
-      "items" : [
+      "name": "museumcurator.equipment.swords",
+      "items": [
         "minecraft:stick",
         "minecraft:wooden_sword",
         "minecraft:stone_sword",
@@ -58,8 +58,8 @@
       ]
     },
     {
-      "name" : "Archery",
-      "items" : [
+      "name": "museumcurator.equipment.archery",
+      "items": [
         "minecraft:fletching_table",
         "minecraft:target",
         "minecraft:bow",
@@ -71,8 +71,8 @@
       ]
     },
     {
-      "name" : "Gunpowder",
-      "items" : [
+      "name": "museumcurator.equipment.gunpowder",
+      "items": [
         "minecraft:gunpowder",
         "minecraft:firework_star",
         "minecraft:firework_rocket",
@@ -80,8 +80,8 @@
       ]
     },
     {
-      "name" : "Armour",
-      "items" : [
+      "name": "museumcurator.equipment.armour",
+      "items": [
         "minecraft:shield",
         "minecraft:leather_helmet",
         "minecraft:leather_chestplate",
@@ -111,8 +111,8 @@
       ]
     },
     {
-      "name" : "Horsemanship",
-      "items" : [
+      "name": "museumcurator.equipment.horsemanship",
+      "items": [
         "minecraft:saddle",
         "minecraft:leather_horse_armor",
         "minecraft:iron_horse_armor",

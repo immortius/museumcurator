@@ -1,9 +1,9 @@
 {
-  "name": "Metallurgy",
+  "name": "museumcurator.collection.metallurgy",
   "exhibits": [
     {
-      "name" : "Copper",
-      "items" : [
+      "name": "museumcurator.metallurgy.copper",
+      "items": [
         "minecraft:copper_ore",
         "minecraft:deepslate_copper_ore",
         "minecraft:raw_copper",
@@ -44,8 +44,8 @@
       ]
     },
     {
-      "name" : "Iron",
-      "items" : [
+      "name": "museumcurator.metallurgy.iron",
+      "items": [
         "minecraft:iron_ore",
         "minecraft:deepslate_iron_ore",
         "minecraft:raw_iron",
@@ -56,8 +56,8 @@
       ]
     },
     {
-      "name" : "Gold",
-      "items" : [
+      "name": "museumcurator.metallurgy.gold",
+      "items": [
         "minecraft:gold_ore",
         "minecraft:deepslate_gold_ore",
         "minecraft:raw_gold",

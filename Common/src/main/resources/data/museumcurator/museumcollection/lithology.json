@@ -1,9 +1,9 @@
 {
-  "name" : "Lithology",
-  "exhibits" : [
+  "name": "museumcurator.collection.lithology",
+  "exhibits": [
     {
-      "name" : "Stone",
-      "items" : [
+      "name": "museumcurator.lithology.stone",
+      "items": [
         "minecraft:cobblestone",
         "minecraft:cobblestone_slab",
         "minecraft:cobblestone_stairs",
@@ -30,8 +30,8 @@
       ]
     },
     {
-      "name" : "Deepslate",
-      "items" : [
+      "name": "museumcurator.lithology.deepslate",
+      "items": [
         "minecraft:cobbled_deepslate",
         "minecraft:cobbled_deepslate_stairs",
         "minecraft:cobbled_deepslate_slab",
@@ -55,8 +55,8 @@
       ]
     },
     {
-      "name" : "Andesite",
-      "items" : [
+      "name": "museumcurator.lithology.andesite",
+      "items": [
         "minecraft:andesite",
         "minecraft:andesite_slab",
         "minecraft:andesite_stairs",
@@ -67,8 +67,8 @@
       ]
     },
     {
-      "name" : "Diorite",
-      "items" : [
+      "name": "museumcurator.lithology.diorite",
+      "items": [
         "minecraft:diorite",
         "minecraft:diorite_slab",
         "minecraft:diorite_stairs",
@@ -79,8 +79,8 @@
       ]
     },
     {
-      "name" : "Granite",
-      "items" : [
+      "name": "museumcurator.lithology.granite",
+      "items": [
         "minecraft:granite",
         "minecraft:granite_slab",
         "minecraft:granite_stairs",
@@ -91,8 +91,8 @@
       ]
     },
     {
-      "name" : "Sand",
-      "items" : [
+      "name": "museumcurator.lithology.sand",
+      "items": [
         "minecraft:sand",
         "minecraft:sandstone",
         "minecraft:sandstone_slab",
@@ -107,8 +107,8 @@
       ]
     },
     {
-      "name" : "Red Sand",
-      "items" : [
+      "name": "museumcurator.lithology.redsand",
+      "items": [
         "minecraft:red_sand",
         "minecraft:red_sandstone",
         "minecraft:red_sandstone_slab",
@@ -123,8 +123,8 @@
       ]
     },
     {
-      "name" : "Prismarine",
-      "items" : [
+      "name": "museumcurator.lithology.prismarine",
+      "items": [
         "minecraft:prismarine_crystals",
         "minecraft:prismarine_shard",
         "minecraft:prismarine",
@@ -140,8 +140,8 @@
       ]
     },
     {
-      "name" : "Terracotta",
-      "items" : [
+      "name": "museumcurator.lithology.terracotta",
+      "items": [
         "minecraft:clay_ball",
         "minecraft:clay",
         "minecraft:terracotta",
@@ -180,8 +180,8 @@
       ]
     },
     {
-      "name" : "Brick",
-      "items" : [
+      "name": "museumcurator.lithology.brick",
+      "items": [
         "minecraft:brick",
         "minecraft:bricks",
         "minecraft:brick_slab",
@@ -190,8 +190,8 @@
       ]
     },
     {
-      "name" : "Dirt",
-      "items" : [
+      "name": "museumcurator.lithology.dirt",
+      "items": [
         "minecraft:dirt",
         "minecraft:coarse_dirt",
         "minecraft:rooted_dirt",
@@ -203,8 +203,8 @@
       ]
     },
     {
-      "name" : "Coal",
-      "items" : [
+      "name": "museumcurator.lithology.coal",
+      "items": [
         "minecraft:coal_ore",
         "minecraft:deepslate_coal_ore",
         "minecraft:charcoal",
@@ -213,8 +213,8 @@
       ]
     },
     {
-      "name" : "Concrete",
-      "items" : [
+      "name": "museumcurator.lithology.concrete",
+      "items": [
         "minecraft:white_concrete_powder",
         "minecraft:white_concrete",
         "minecraft:light_gray_concrete_powder",
@@ -250,16 +250,16 @@
       ]
     },
     {
-      "name" : "Limestone",
-      "items" : [
+      "name": "museumcurator.lithology.limestone",
+      "items": [
         "minecraft:dripstone_block",
         "minecraft:pointed_dripstone",
         "minecraft:calcite"
       ]
     },
     {
-      "name" : "Volcanic",
-      "items" : [
+      "name": "museumcurator.lithology.volcanic",
+      "items": [
         "minecraft:tuff",
         "minecraft:lava_bucket",
         "minecraft:magma_block",

@@ -1,9 +1,9 @@
 {
-  "name" : "Architecture",
-  "exhibits" : [
+  "name": "museumcurator.collection.architecture",
+  "exhibits": [
     {
-      "name" : "Doors",
-      "items" : [
+      "name": "museumcurator.architecture.doors",
+      "items": [
         "minecraft:oak_door",
         "minecraft:dark_oak_door",
         "minecraft:acacia_door",
@@ -16,8 +16,8 @@
       ]
     },
     {
-      "name" : "Glass",
-      "items" : [
+      "name": "museumcurator.architecture.glass",
+      "items": [
         "minecraft:glass",
         "minecraft:tinted_glass",
         "minecraft:white_stained_glass",
@@ -56,8 +56,8 @@
       ]
     },
     {
-      "name" : "Trapdoors",
-      "items" : [
+      "name": "museumcurator.architecture.trapdoors",
+      "items": [
         "minecraft:oak_trapdoor",
         "minecraft:dark_oak_trapdoor",
         "minecraft:acacia_trapdoor",
@@ -70,8 +70,8 @@
       ]
     },
     {
-      "name" : "Signs",
-      "items" : [
+      "name": "museumcurator.architecture.signs",
+      "items": [
         "minecraft:oak_sign",
         "minecraft:dark_oak_sign",
         "minecraft:acacia_sign",
@@ -83,8 +83,8 @@
       ]
     },
     {
-      "name" : "Fences",
-      "items" : [
+      "name": "museumcurator.architecture.fences",
+      "items": [
         "minecraft:oak_fence",
         "minecraft:oak_fence_gate",
         "minecraft:dark_oak_fence",
@@ -105,8 +105,8 @@
       ]
     },
     {
-      "name" : "Displays",
-      "items" : [
+      "name": "museumcurator.architecture.displays",
+      "items": [
         "minecraft:armor_stand",
         "minecraft:flower_pot",
         "minecraft:item_frame",
@@ -114,8 +114,8 @@
       ]
     },
     {
-      "name" : "Containers",
-      "items" : [
+      "name": "museumcurator.architecture.containers",
+      "items": [
         "minecraft:bucket",
         "minecraft:barrel",
         "minecraft:chest",
@@ -124,8 +124,8 @@
       ]
     },
     {
-      "name": "Candles",
-      "items" : [
+      "name": "museumcurator.architecture.candles",
+      "items": [
         "minecraft:candle",
         "minecraft:white_candle",
         "minecraft:light_gray_candle",
@@ -146,8 +146,8 @@
       ]
     },
     {
-      "name" : "Lights",
-      "items" : [
+      "name": "museumcurator.architecture.lights",
+      "items": [
         "minecraft:flint_and_steel",
         "minecraft:fire_charge",
         "minecraft:torch",
@@ -160,8 +160,8 @@
       ]
     },
     {
-      "name" : "Fittings and Decorations",
-      "items" : [
+      "name": "museumcurator.architecture.fittingsanddecorations",
+      "items": [
         "minecraft:bell",
         "minecraft:chain",
         "minecraft:iron_bars",

@@ -3,7 +3,6 @@ package xyz.immortius.museumcurator.client.uielements;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.Widget;
 import net.minecraft.client.gui.components.events.AbstractContainerEventHandler;
 import net.minecraft.client.gui.components.events.GuiEventListener;
@@ -12,14 +11,15 @@ import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
-import xyz.immortius.museumcurator.common.data.MuseumCollection;
-import xyz.immortius.museumcurator.common.data.MuseumExhibit;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Scroll container is a scrollable area for entries of variable height.
+ */
 public class ScrollContainerWidget extends AbstractContainerEventHandler implements Widget, NarratableEntry {
 
     private static final int SCROLLBAR_WIDTH = 6;

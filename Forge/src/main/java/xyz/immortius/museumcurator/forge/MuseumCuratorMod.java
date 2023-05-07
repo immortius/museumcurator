@@ -1,20 +1,26 @@
 package xyz.immortius.museumcurator.forge;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.ResourceManagerReloadListener;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.server.ServerAboutToStartEvent;
 import net.minecraftforge.event.server.ServerStartedEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -25,17 +31,23 @@ import net.minecraftforge.network.simple.SimpleChannel;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+import xyz.immortius.museumcurator.client.network.ChecklistUpdateReceiver;
+import xyz.immortius.museumcurator.client.network.LogonReceiver;
 import xyz.immortius.museumcurator.client.screens.ChecklistOverviewScreen;
 import xyz.immortius.museumcurator.common.MuseumCuratorConstants;
-import xyz.immortius.museumcurator.common.commands.ItemDumpCommand;
-import xyz.immortius.museumcurator.common.data.MuseumCollection;
 import xyz.immortius.museumcurator.common.data.MuseumCollections;
 import xyz.immortius.museumcurator.common.items.MuseumChecklist;
 import xyz.immortius.museumcurator.common.menus.MuseumChecklistMenu;
+import xyz.immortius.museumcurator.common.network.ChecklistChangeRequest;
+import xyz.immortius.museumcurator.common.network.ChecklistUpdateMessage;
 import xyz.immortius.museumcurator.common.network.LogOnMessage;
 import xyz.immortius.museumcurator.config.MuseumCuratorConfig;
 import xyz.immortius.museumcurator.config.system.ConfigSystem;
+import xyz.immortius.museumcurator.server.ChecklistState;
 import xyz.immortius.museumcurator.server.ServerEventHandler;
+import xyz.immortius.museumcurator.server.commands.ChecklistCommands;
+import xyz.immortius.museumcurator.server.commands.ItemDumpCommand;
+import xyz.immortius.museumcurator.server.network.ServerChecklistUpdateReceiver;
 
 import java.nio.file.Paths;
 import java.util.Optional;
@@ -47,12 +59,15 @@ import java.util.Optional;
 public class MuseumCuratorMod {
 
     private static final String PROTOCOL_VERSION = "1";
-    public static final SimpleChannel CONFIG_CHANNEL = NetworkRegistry.newSimpleChannel(new ResourceLocation(MuseumCuratorConstants.MOD_ID, "configchannel"), () -> PROTOCOL_VERSION, PROTOCOL_VERSION::equals, PROTOCOL_VERSION::equals);
+    public static final SimpleChannel MESSAGE_CHANNEL = NetworkRegistry.newSimpleChannel(new ResourceLocation(MuseumCuratorConstants.MOD_ID, "messagechannel"), () -> PROTOCOL_VERSION, PROTOCOL_VERSION::equals, PROTOCOL_VERSION::equals);
 
     private static final DeferredRegister<MenuType<?>> CONTAINERS = DeferredRegister.create(ForgeRegistries.CONTAINERS, MuseumCuratorConstants.MOD_ID);
     private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MuseumCuratorConstants.MOD_ID);
+    private static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, MuseumCuratorConstants.MOD_ID);
 
     public static final RegistryObject<Item> MUSEUM_CHECKLIST = ITEMS.register("museumchecklist", () -> new MuseumChecklist(new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
+
+    public static final RegistryObject<SoundEvent> WRITING_SOUND = SOUNDS.register("writing", () -> new SoundEvent(MuseumCuratorConstants.WRITING_SOUND_ID));
 
     public static final RegistryObject<MenuType<MuseumChecklistMenu>> MUSEUM_CHECKLIST_MENU = CONTAINERS.register("worldforgemenu", () -> new MenuType<>(MuseumChecklistMenu::new));
 
@@ -61,26 +76,46 @@ public class MuseumCuratorMod {
 
         ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
         CONTAINERS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        SOUNDS.register(FMLJavaModLoadingContext.get().getModEventBus());
 
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
 
         MinecraftForge.EVENT_BUS.register(this);
 
         int packetId = 1;
-        CONFIG_CHANNEL.registerMessage(packetId++, LogOnMessage.class,
+        MESSAGE_CHANNEL.registerMessage(packetId++, LogOnMessage.class,
                 (msg, friendlyByteBuf) -> {
                     friendlyByteBuf.writeWithCodec(LogOnMessage.CODEC, msg);
                 },
                 friendlyByteBuf -> friendlyByteBuf.readWithCodec(LogOnMessage.CODEC),
                 (msg, contextSupplier) -> {
-                    MuseumCollections.setCollections(msg.getCollections());
+                    DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> LogonReceiver.receive(msg));
                     contextSupplier.get().setPacketHandled(true);
                 },
                 Optional.of(NetworkDirection.PLAY_TO_CLIENT));
+        MESSAGE_CHANNEL.registerMessage(packetId++, ChecklistUpdateMessage.class,
+                (msg, friendlyByteBuf) -> {
+                    friendlyByteBuf.writeWithCodec(ChecklistUpdateMessage.CODEC, msg);
+                },
+                friendlyByteBuf -> friendlyByteBuf.readWithCodec(ChecklistUpdateMessage.CODEC),
+                (msg, contextSupplier) -> {
+                    DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> contextSupplier.get().enqueueWork(() -> ChecklistUpdateReceiver.receive(Minecraft.getInstance().player, msg)));
+                    contextSupplier.get().setPacketHandled(true);
+                },
+                Optional.of(NetworkDirection.PLAY_TO_CLIENT));
+        MESSAGE_CHANNEL.registerMessage(packetId++, ChecklistChangeRequest.class,
+                (msg, friendlyByteBuf) -> {
+                    friendlyByteBuf.writeWithCodec(ChecklistChangeRequest.CODEC, msg);
+                },
+                friendlyByteBuf -> friendlyByteBuf.readWithCodec(ChecklistChangeRequest.CODEC),
+                (msg, contextSupplier) -> {
+                    ServerChecklistUpdateReceiver.receive(contextSupplier.get().getSender().getServer(), contextSupplier.get().getSender(), msg);
+                    contextSupplier.get().setPacketHandled(true);
+                },
+                Optional.of(NetworkDirection.PLAY_TO_SERVER));
     }
 
     private void clientSetup(final FMLClientSetupEvent event) {
-
         event.enqueueWork(() -> {
             MuseumCuratorClientMod.registerConfigScreen();
             MenuScreens.register(MUSEUM_CHECKLIST_MENU.get(), ChecklistOverviewScreen::new);
@@ -104,8 +139,33 @@ public class MuseumCuratorMod {
     }
 
     @SubscribeEvent
+    public void onEntityInteract(PlayerInteractEvent.EntityInteract event) {
+        if (!event.getPlayer().isSecondaryUseActive()) {
+            return;
+        }
+        if (event.getItemStack().getItem() instanceof MuseumChecklist mc) {
+            InteractionResult result = mc.interact(event.getTarget(), event.getWorld(), event.getPlayer());
+            event.setCancellationResult(result);
+            event.setCanceled(true);
+        }
+    }
+
+    @SubscribeEvent
+    public void onLivingEntityInteract(PlayerInteractEvent.EntityInteractSpecific event) {
+        if (!event.getPlayer().isSecondaryUseActive()) {
+            return;
+        }
+        if (event.getItemStack().getItem() instanceof MuseumChecklist mc) {
+            InteractionResult result = mc.interact(event.getTarget(), event.getWorld(), event.getPlayer());
+            event.setCancellationResult(result);
+            event.setCanceled(true);
+        }
+    }
+
+    @SubscribeEvent
     public void registerCommands(RegisterCommandsEvent event) {
         ItemDumpCommand.register(event.getDispatcher());
+        ChecklistCommands.register(event.getDispatcher());
     }
 
     @SubscribeEvent
@@ -120,7 +180,7 @@ public class MuseumCuratorMod {
 
     @SubscribeEvent
     public void onServerLogin(PlayerEvent.PlayerLoggedInEvent event) {
-        CONFIG_CHANNEL.send(PacketDistributor.PLAYER.with(() -> (ServerPlayer)(event.getEntity())), new LogOnMessage(MuseumCollections.getCollections()));
+        MESSAGE_CHANNEL.send(PacketDistributor.PLAYER.with(() -> (ServerPlayer)(event.getEntity())), new LogOnMessage(MuseumCollections.getCollections(), ChecklistState.get(event.getPlayer().getServer()).getCheckedItems()));
     }
 
 }

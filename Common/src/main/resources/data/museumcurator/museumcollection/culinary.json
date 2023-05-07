@@ -1,9 +1,9 @@
 {
-  "name" : "Culinary",
-  "exhibits" : [
+  "name": "museumcurator.collection.culinary",
+  "exhibits": [
     {
-      "name" : "Ingredients",
-      "items" : [
+      "name": "museumcurator.culinary.ingredients",
+      "items": [
         "minecraft:sugar",
         "minecraft:fermented_spider_eye",
         "minecraft:glistering_melon_slice",
@@ -11,8 +11,8 @@
       ]
     },
     {
-      "name" : "Soups and Stews",
-      "items" : [
+      "name": "museumcurator.culinary.soupsandstews",
+      "items": [
         "minecraft:bowl",
         "minecraft:beetroot_soup",
         "minecraft:mushroom_stew",
@@ -21,8 +21,8 @@
       ]
     },
     {
-      "name" : "Baked",
-      "items" : [
+      "name": "museumcurator.culinary.baked",
+      "items": [
         "minecraft:smoker",
         "minecraft:bread",
         "minecraft:baked_potato",
@@ -36,8 +36,8 @@
       ]
     },
     {
-      "name" : "Desserts",
-      "items" : [
+      "name": "museumcurator.culinary.desserts",
+      "items": [
         "minecraft:cookie",
         "minecraft:cake",
         "minecraft:pumpkin_pie",
@@ -47,8 +47,8 @@
       ]
     },
     {
-      "name" : "Beverages",
-      "items" : [
+      "name": "museumcurator.culinary.beverages",
+      "items": [
         "minecraft:brewing_stand",
         "minecraft:glass_bottle",
         "minecraft:potion",

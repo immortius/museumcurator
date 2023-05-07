@@ -1,9 +1,9 @@
 {
-  "name" : "Art",
-  "exhibits" : [
+  "name": "museumcurator.collection.arts",
+  "exhibits": [
     {
-      "name" : "Literature",
-      "items" : [
+      "name": "museumcurator.arts.literature",
+      "items": [
         "minecraft:paper",
         "minecraft:book",
         "minecraft:enchanted_book",
@@ -15,8 +15,8 @@
       ]
     },
     {
-      "name" : "Music",
-      "items" : [
+      "name": "museumcurator.arts.music",
+      "items": [
         "minecraft:music_disc_13",
         "minecraft:music_disc_cat",
         "minecraft:music_disc_blocks",
@@ -35,8 +35,8 @@
       ]
     },
     {
-      "name" : "Paintings",
-      "items" : [
+      "name": "museumcurator.arts.paintings",
+      "items": [
         "minecraft:painting"
       ]
     }

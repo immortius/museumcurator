@@ -1,9 +1,9 @@
 {
-  "name" : "Animal Husbandry",
-  "exhibits" : [
+  "name": "museumcurator.collection.animalhusbandry",
+  "exhibits": [
     {
-      "name": "Bees",
-      "items" : [
+      "name": "museumcurator.animalhusbandry.bees",
+      "items": [
         "minecraft:beehive",
         "minecraft:bee_nest",
         "minecraft:honey_bottle",
@@ -13,8 +13,8 @@
       ]
     },
     {
-      "name" : "Produce",
-      "items" : [
+      "name": "museumcurator.animalhusbandry.produce",
+      "items": [
         "minecraft:beef",
         "minecraft:leather",
         "minecraft:milk_bucket",
@@ -41,8 +41,8 @@
       ]
     },
     {
-      "name" : "Tools",
-      "items" : [
+      "name": "museumcurator.animalhusbandry.tools",
+      "items": [
         "minecraft:fishing_rod",
         "minecraft:lead",
         "minecraft:name_tag",

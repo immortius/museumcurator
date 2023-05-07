@@ -12,10 +12,10 @@ displayName="Museum Curator"
 # A URL to query for updates for this mod. See the JSON update specification https://mcforge.readthedocs.io/en/latest/gettingstarted/autoupdate/
 updateJSONURL="https://immortius.xyz/museumcurator/updates.json"
 displayURL="https://immortius.xyz/museumcurator"
-logoFile="logo.png"
+logoFile="museumcuratorlogo.png"
 authors="Immortius"
 description='''
-This mod provides assistance with building a minecraft museum display every item available in Minecraft.
+This mod provides assistance with building a minecraft museum display of every item available in Minecraft.
 '''
 [[dependencies.museumcurator]]
     modId="forge"

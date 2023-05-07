@@ -7,6 +7,9 @@ import net.minecraft.network.chat.TranslatableComponent;
 import xyz.immortius.museumcurator.client.uielements.SettingListWidget;
 import xyz.immortius.museumcurator.common.util.ConfigUtil;
 
+/**
+ * Configuration screen for the mod menu
+ */
 public class MuseumCuratorConfigScreen extends Screen {
     private final Screen lastScreen;
     private SettingListWidget settingsList;

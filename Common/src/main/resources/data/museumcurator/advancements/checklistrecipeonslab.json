@@ -1,0 +1,15 @@
+{
+  "criteria" : {
+    "obtainslab" : {
+      "trigger" : "minecraft:inventory_changed",
+      "conditions" : {
+        "items" : [{
+          "tag" : "museumcurator:wooden_slab"
+        }]
+      }
+    }
+  },
+  "rewards" : {
+    "recipes" : ["museumcurator:museumchecklist"]
+  }
+}

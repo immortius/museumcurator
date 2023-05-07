@@ -1,4 +1,4 @@
-package xyz.immortius.museumcurator.common.commands;
+package xyz.immortius.museumcurator.server.commands;
 
 import com.google.common.collect.Sets;
 import com.google.gson.Gson;
@@ -21,6 +21,9 @@ import java.nio.file.Paths;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/**
+ * Commands for dumping out lists of items
+ */
 public class ItemDumpCommand {
 
     private static final SimpleCommandExceptionType FAILED_TO_DUMP = new SimpleCommandExceptionType(new TranslatableComponent("commands.museumcurator.dumperror"));

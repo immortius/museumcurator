@@ -1,0 +1,15 @@
+{
+  "criteria" : {
+    "obtainpaper" : {
+      "trigger" : "minecraft:inventory_changed",
+      "conditions" : {
+        "items" : [{
+          "items" : ["minecraft:paper"]
+        }]
+      }
+    }
+  },
+  "rewards" : {
+    "recipes" : ["museumcurator:museumchecklist"]
+  }
+}

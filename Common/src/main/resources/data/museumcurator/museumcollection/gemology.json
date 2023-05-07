@@ -1,9 +1,9 @@
 {
-  "name" : "Gemology",
-  "exhibits" : [
+  "name": "museumcurator.collection.gemology",
+  "exhibits": [
     {
-      "name": "Amethyst",
-      "items" : [
+      "name": "museumcurator.gemology.amethyst",
+      "items": [
         "minecraft:small_amethyst_bud",
         "minecraft:medium_amethyst_bud",
         "minecraft:large_amethyst_bud",
@@ -13,8 +13,8 @@
       ]
     },
     {
-      "name": "Diamond",
-      "items" : [
+      "name": "museumcurator.gemology.diamond",
+      "items": [
         "minecraft:diamond_ore",
         "minecraft:deepslate_diamond_ore",
         "minecraft:diamond",
@@ -22,8 +22,8 @@
       ]
     },
     {
-      "name": "Emerald",
-      "items" : [
+      "name": "museumcurator.gemology.emerald",
+      "items": [
         "minecraft:emerald_ore",
         "minecraft:deepslate_emerald_ore",
         "minecraft:emerald",
@@ -31,18 +31,17 @@
       ]
     },
     {
-      "name" : "Lapis Lazuli",
-      "items" : [
+      "name": "museumcurator.gemology.lapislazuli",
+      "items": [
         "minecraft:lapis_ore",
         "minecraft:deepslate_lapis_ore",
         "minecraft:lapis_lazuli",
         "minecraft:lapis_block"
-
       ]
     },
     {
-      "name" : "Redstone",
-      "items" : [
+      "name": "museumcurator.gemology.redstone",
+      "items": [
         "minecraft:redstone_ore",
         "minecraft:deepslate_redstone_ore",
         "minecraft:redstone",

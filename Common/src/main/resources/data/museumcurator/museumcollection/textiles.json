@@ -1,9 +1,9 @@
 {
-  "name" : "Textiles",
-  "exhibits" : [
+  "name": "museumcurator.collection.textiles",
+  "exhibits": [
     {
-      "name" : "Dyes",
-      "items" : [
+      "name": "museumcurator.textiles.dyes",
+      "items": [
         "minecraft:white_dye",
         "minecraft:light_gray_dye",
         "minecraft:gray_dye",
@@ -23,8 +23,8 @@
       ]
     },
     {
-      "name" : "Wool",
-      "items" : [
+      "name": "museumcurator.textiles.wool",
+      "items": [
         "minecraft:string",
         "minecraft:white_wool",
         "minecraft:orange_wool",
@@ -45,8 +45,8 @@
       ]
     },
     {
-      "name" : "Carpet",
-      "items" : [
+      "name": "museumcurator.textiles.carpet",
+      "items": [
         "minecraft:white_carpet",
         "minecraft:light_gray_carpet",
         "minecraft:gray_carpet",
@@ -66,8 +66,8 @@
       ]
     },
     {
-      "name" : "Beds",
-      "items" : [
+      "name": "museumcurator.textiles.beds",
+      "items": [
         "minecraft:white_bed",
         "minecraft:light_gray_bed",
         "minecraft:gray_bed",
@@ -87,8 +87,8 @@
       ]
     },
     {
-      "name" : "Banners",
-      "items" : [
+      "name": "museumcurator.textiles.banners",
+      "items": [
         "minecraft:loom",
         "minecraft:white_banner",
         "minecraft:light_gray_banner",

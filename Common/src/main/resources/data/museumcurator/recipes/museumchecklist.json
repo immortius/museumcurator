@@ -1,0 +1,19 @@
+{
+  "type" : "minecraft:crafting_shaped",
+  "pattern": [
+    "p",
+    "s"
+  ],
+  "key" : {
+    "p" : {
+      "item": "minecraft:paper"
+    },
+    "s" : {
+      "tag": "museumcurator:wooden_slab"
+    }
+  },
+  "result" : {
+    "item" : "museumcurator:museumchecklist",
+    "count" : 1
+  }
+}

@@ -1,9 +1,9 @@
 {
-  "name" : "Machinery",
-  "exhibits" : [
+  "name": "museumcurator.collection.machinery",
+  "exhibits": [
     {
-      "name" : "Buttons",
-      "items" : [
+      "name": "museumcurator.machinery.buttons",
+      "items": [
         "minecraft:oak_button",
         "minecraft:dark_oak_button",
         "minecraft:acacia_button",
@@ -17,8 +17,8 @@
       ]
     },
     {
-      "name" : "Pressure Plates",
-      "items" : [
+      "name": "museumcurator.machinery.pressureplates",
+      "items": [
         "minecraft:oak_pressure_plate",
         "minecraft:dark_oak_pressure_plate",
         "minecraft:acacia_pressure_plate",
@@ -34,8 +34,8 @@
       ]
     },
     {
-      "name" : "Minecarts",
-      "items" : [
+      "name": "museumcurator.machinery.minecarts",
+      "items": [
         "minecraft:rail",
         "minecraft:powered_rail",
         "minecraft:activator_rail",
@@ -48,8 +48,8 @@
       ]
     },
     {
-      "name" : "Redstone Mechanisms",
-      "items" : [
+      "name": "museumcurator.machinery.redstonemechanisms",
+      "items": [
         "minecraft:lever",
         "minecraft:redstone_torch",
         "minecraft:repeater",
@@ -65,14 +65,13 @@
       ]
     },
     {
-      "name" : "Gadgets",
-      "items" : [
+      "name": "museumcurator.machinery.gadgets",
+      "items": [
         "minecraft:clock",
         "minecraft:lightning_rod",
         "minecraft:spyglass",
         "minecraft:tripwire_hook"
       ]
     }
-
   ]
 }

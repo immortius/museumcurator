@@ -1,9 +1,9 @@
 {
-  "name" : "Oceanography",
-  "exhibits" : [
+  "name": "museumcurator.collection.oceanography",
+  "exhibits": [
     {
-      "name" : "Water",
-      "items" : [
+      "name": "museumcurator.oceanography.water",
+      "items": [
         "minecraft:water_bucket",
         "minecraft:snowball",
         "minecraft:snow",
@@ -15,8 +15,8 @@
       ]
     },
     {
-      "name" : "Ocean plants",
-      "items" : [
+      "name": "museumcurator.oceanography.oceanplants",
+      "items": [
         "minecraft:seagrass",
         "minecraft:kelp",
         "minecraft:dried_kelp",
@@ -24,8 +24,8 @@
       ]
     },
     {
-      "name" : "Coral",
-      "items" : [
+      "name": "museumcurator.oceanography.coral",
+      "items": [
         "minecraft:brain_coral_fan",
         "minecraft:dead_brain_coral_fan",
         "minecraft:brain_coral",
@@ -59,8 +59,8 @@
       ]
     },
     {
-      "name" : "Aquatic Zoology",
-      "items" : [
+      "name": "museumcurator.oceanography.aquaticzoology",
+      "items": [
         "minecraft:wet_sponge",
         "minecraft:sponge",
         "minecraft:sea_pickle",

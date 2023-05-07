@@ -14,7 +14,7 @@
   },
 
   "license": "MIT License",
-  "icon": "assets/museumcurator/textures/block/curator.png",
+  "icon": "assets/museumcurator/textures/item/museumchecklist.png",
 
   "environment": "*",
   "entrypoints": {
@@ -29,7 +29,6 @@
   "mixins": [
     "museumcurator.mixins.json"
   ],
-  "accessWidener" : "museumcurator.aw",
   "depends": {
     "fabricloader": ">=0.14.6",
     "fabric": "*",

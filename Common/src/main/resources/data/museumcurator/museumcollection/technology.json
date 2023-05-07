@@ -1,9 +1,9 @@
 {
-  "name" : "Technology",
-  "exhibits" : [
+  "name": "museumcurator.collection.technology",
+  "exhibits": [
     {
-      "name" : "Workbenches",
-      "items" : [
+      "name": "museumcurator.technology.workbenches",
+      "items": [
         "minecraft:crafting_table",
         "minecraft:furnace",
         "minecraft:blast_furnace",
@@ -18,8 +18,8 @@
       ]
     },
     {
-      "name" : "Boats",
-      "items" : [
+      "name": "museumcurator.technology.boats",
+      "items": [
         "minecraft:oak_boat",
         "minecraft:dark_oak_boat",
         "minecraft:acacia_boat",
@@ -29,8 +29,8 @@
       ]
     },
     {
-      "name" : "Navigation",
-      "items" : [
+      "name": "museumcurator.technology.navigation",
+      "items": [
         "minecraft:map",
         "minecraft:filled_map",
         "minecraft:cartography_table",
@@ -39,8 +39,8 @@
       ]
     },
     {
-      "name": "Artifacts",
-      "items" : [
+      "name": "museumcurator.technology.artifacts",
+      "items": [
         "minecraft:totem_of_undying",
         "minecraft:respawn_anchor",
         "minecraft:nether_star",

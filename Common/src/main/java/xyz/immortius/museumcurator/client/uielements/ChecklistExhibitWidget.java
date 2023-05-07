@@ -6,14 +6,24 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.TooltipFlag;
 import xyz.immortius.museumcurator.client.screens.AbstractChecklistScreen;
+import xyz.immortius.museumcurator.common.data.MuseumCollections;
 import xyz.immortius.museumcurator.common.data.MuseumExhibit;
+import xyz.immortius.museumcurator.common.network.ChecklistChangeRequest;
+import xyz.immortius.museumcurator.interop.Services;
 
+import java.util.Collections;
 import java.util.List;
 
+/**
+ * Widget for displaying an exhibit, including title and contents. Clicking an item will toggle its checked state
+ */
 public class ChecklistExhibitWidget extends AbstractWidget {
 
     public static final int TITLE_HEIGHT = 12;
@@ -25,6 +35,14 @@ public class ChecklistExhibitWidget extends AbstractWidget {
     }
 
     public List<Component> getTooltip(int mouseX, int mouseY) {
+        Item item = mouseOverItem(mouseX, mouseY);
+        if (item != null) {
+            return item.getDefaultInstance().getTooltipLines(Minecraft.getInstance().player, TooltipFlag.Default.NORMAL);
+        }
+        return null;
+    }
+
+    private Item mouseOverItem(int mouseX, int mouseY) {
         if (mouseY < y + TITLE_HEIGHT) {
             return null;
         }
@@ -37,8 +55,7 @@ public class ChecklistExhibitWidget extends AbstractWidget {
         int itemsPerRow = itemsPerRow();
         int index = itemsPerRow * row + column;
         if (index >= 0 && index < exhibit.getItems().size()) {
-            Item item = exhibit.getItems().get(index);
-            return item.getDefaultInstance().getTooltipLines(Minecraft.getInstance().player, TooltipFlag.Default.NORMAL);
+            return exhibit.getItems().get(index);
         }
         return null;
     }
@@ -54,7 +71,11 @@ public class ChecklistExhibitWidget extends AbstractWidget {
             Minecraft minecraft = Minecraft.getInstance();
             int offsetY = 0;
             int offsetX = 0;
-            minecraft.font.draw(stack, exhibit.getName(), x + offsetX, y + offsetY, 0x404040);
+
+            long checked = MuseumCollections.countChecked(exhibit.getItems());
+            Component title = new TextComponent("").append(exhibit.getName()).append("  (" + checked + " / " + exhibit.getItems().size() + ")");
+            minecraft.font.draw(stack, title, x + offsetX, y + offsetY, 0x404040);
+
             offsetY += TITLE_HEIGHT;
             for (Item item : exhibit.getItems()) {
                 if (offsetX + 18 > width) {
@@ -68,12 +89,34 @@ public class ChecklistExhibitWidget extends AbstractWidget {
                 RenderSystem.setShader(GameRenderer::getPositionTexShader);
                 RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
                 RenderSystem.setShaderTexture(0, AbstractChecklistScreen.CONTAINER_TEXTURE);
-                // TODO
-                boolean unlocked = false;
+
+                boolean unlocked = MuseumCollections.isChecked(item);
                 blit(stack, offsetX + x, offsetY + y, (unlocked) ? 18 : 0, 256, 18, 18, AbstractChecklistScreen.TEXTURE_DIM, AbstractChecklistScreen.TEXTURE_DIM);
                 offsetX += 20;
             }
         }
+    }
+
+    @Override
+    public boolean mouseClicked(double mouseX, double mouseY, int button) {
+        if (button != 0) {
+            return false;
+        }
+        Item item = mouseOverItem((int)mouseX, (int)mouseY);
+        if (item != null) {
+            if (MuseumCollections.isChecked(item)) {
+                MuseumCollections.uncheckItems(Collections.singleton(item));
+                Services.PLATFORM.sendClientChecklistChange(ChecklistChangeRequest.uncheck(item));
+
+            } else {
+                MuseumCollections.checkItems(Collections.singleton(item));
+                Services.PLATFORM.sendClientChecklistChange(ChecklistChangeRequest.check(item));
+            }
+            Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.UI_BUTTON_CLICK, 1.0F));
+            return true;
+        }
+
+        return false;
     }
 
     @Override

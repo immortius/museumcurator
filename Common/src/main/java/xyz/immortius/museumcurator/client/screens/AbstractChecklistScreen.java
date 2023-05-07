@@ -17,6 +17,9 @@ import xyz.immortius.museumcurator.common.menus.MuseumChecklistMenu;
 
 import java.util.Optional;
 
+/**
+ * Shared base for the checklist screens. Includes the common look and feel, and common elements.
+ */
 public abstract class AbstractChecklistScreen extends AbstractContainerScreen<MuseumChecklistMenu> {
     public static final ResourceLocation CONTAINER_TEXTURE = new ResourceLocation(MuseumCuratorConstants.MOD_ID + ":textures/gui/container/checklist.png");
     public static final int TEXTURE_DIM = 512;

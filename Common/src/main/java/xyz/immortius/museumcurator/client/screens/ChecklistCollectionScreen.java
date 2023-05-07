@@ -16,6 +16,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The screen displaying the exhibits for a collection.
+ */
 public class ChecklistCollectionScreen extends AbstractChecklistScreen {
     private final MuseumCollection collection;
     private ScrollContainerWidget containerWidget;
