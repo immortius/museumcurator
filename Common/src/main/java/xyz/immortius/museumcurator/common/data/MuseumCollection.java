@@ -2,7 +2,7 @@ package xyz.immortius.museumcurator.common.data;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
 
 import java.util.List;
 
@@ -12,20 +12,20 @@ import java.util.List;
 public class MuseumCollection {
 
     public static final Codec<MuseumCollection> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            Codec.STRING.fieldOf("name").forGetter(x -> x.getName().getKey()),
+            Codec.STRING.fieldOf("name").forGetter(x -> x.name),
             MuseumExhibit.CODEC.listOf().fieldOf("exhibits").forGetter(MuseumCollection::getExhibits)
     ).apply(instance, MuseumCollection::new));
 
-    private final TranslatableComponent name;
+    private final String name;
     private final List<MuseumExhibit> exhibits;
 
     public MuseumCollection(String name, List<MuseumExhibit> exhibits) {
-        this.name = new TranslatableComponent(name);
+        this.name = name;
         this.exhibits = exhibits;
     }
 
-    public TranslatableComponent getName() {
-        return name;
+    public Component getName() {
+        return Component.translatable(name);
     }
 
     public List<MuseumExhibit> getExhibits() {

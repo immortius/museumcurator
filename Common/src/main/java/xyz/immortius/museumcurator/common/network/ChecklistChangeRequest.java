@@ -3,6 +3,7 @@ package xyz.immortius.museumcurator.common.network;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.Item;
 
 import java.util.ArrayList;
@@ -15,8 +16,8 @@ import java.util.List;
  */
 public class ChecklistChangeRequest {
     public static Codec<ChecklistChangeRequest> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            Registry.ITEM.byNameCodec().listOf().fieldOf("checkedItems").forGetter(ChecklistChangeRequest::getCheckedItems),
-            Registry.ITEM.byNameCodec().listOf().fieldOf("uncheckedItems").forGetter(ChecklistChangeRequest::getUncheckedItems)
+            BuiltInRegistries.ITEM.byNameCodec().listOf().fieldOf("checkedItems").forGetter(ChecklistChangeRequest::getCheckedItems),
+            BuiltInRegistries.ITEM.byNameCodec().listOf().fieldOf("uncheckedItems").forGetter(ChecklistChangeRequest::getUncheckedItems)
     ).apply(instance, ChecklistChangeRequest::new));
 
     private final List<Item> checkedItems;

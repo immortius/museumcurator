@@ -1,8 +1,6 @@
 package xyz.immortius.museumcurator.common.items;
 
-import net.minecraft.client.sounds.SoundManager;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.*;
@@ -21,7 +19,6 @@ import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
-import xyz.immortius.museumcurator.common.MuseumCuratorConstants;
 import xyz.immortius.museumcurator.common.data.MuseumCollections;
 import xyz.immortius.museumcurator.common.menus.MuseumChecklistMenu;
 import xyz.immortius.museumcurator.interop.Services;
@@ -85,7 +82,7 @@ public class MuseumChecklist extends Item implements MenuProvider {
 
     @Override
     public Component getDisplayName() {
-        return new TranslatableComponent("museumcurator.menu.checklist.title");
+        return Component.translatable("museumcurator.menu.checklist.title");
     }
 
     @Nullable

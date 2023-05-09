@@ -6,6 +6,7 @@ import com.mojang.serialization.JsonOps;
 import net.minecraft.Util;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.level.storage.LevelResource;
 import xyz.immortius.museumcurator.common.MuseumCuratorConstants;
@@ -18,6 +19,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Server event handlers for events triggered server-side. Primarily loads the collection data
@@ -49,13 +51,13 @@ public final class ServerEventHandler {
 
     public static void onResourceManagerReload(ResourceManager resourceManager) {
         List<MuseumCollection> collections = new ArrayList<>();
-        for (ResourceLocation location : resourceManager.listResources(MuseumCuratorConstants.COLLECTION_DATA_PATH, r -> !r.isEmpty() && !MuseumCuratorConstants.COLLECTION_DATA_PATH.equals(r))) {
-            try (InputStreamReader reader = new InputStreamReader(resourceManager.getResource(location).getInputStream())) {
+        for (Map.Entry<ResourceLocation, Resource> entry : resourceManager.listResources(MuseumCuratorConstants.COLLECTION_DATA_PATH, r -> true).entrySet()) {
+            try (InputStreamReader reader = new InputStreamReader(entry.getValue().open())) {
                 JsonElement jsonElement = JsonParser.parseReader(reader);
                 MuseumCollection collection = MuseumCollection.CODEC.parse(JsonOps.INSTANCE, jsonElement).getOrThrow(false, Util.prefix("Error parsing museum collection: ", MuseumCuratorConstants.LOGGER::error));
                 collections.add(collection);
-            } catch (IOException e) {
-                MuseumCuratorConstants.LOGGER.error("Failed to read museum collection data '{}'", location, e);
+            } catch (IOException | RuntimeException e) {
+                MuseumCuratorConstants.LOGGER.error("Failed to read museum collection data '{}'", entry.getKey(), e);
             }
         }
         MuseumCollections.setCollections(collections);

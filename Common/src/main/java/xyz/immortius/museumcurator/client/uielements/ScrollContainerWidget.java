@@ -3,7 +3,7 @@ package xyz.immortius.museumcurator.client.uielements;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.components.Widget;
+import net.minecraft.client.gui.components.Renderable;
 import net.minecraft.client.gui.components.events.AbstractContainerEventHandler;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.narration.NarratableEntry;
@@ -20,7 +20,7 @@ import java.util.Objects;
 /**
  * Scroll container is a scrollable area for entries of variable height.
  */
-public class ScrollContainerWidget extends AbstractContainerEventHandler implements Widget, NarratableEntry {
+public class ScrollContainerWidget extends AbstractContainerEventHandler implements Renderable, GuiEventListener, NarratableEntry {
 
     private static final int SCROLLBAR_WIDTH = 6;
     private static final int SCROLLBAR_SPACE = 2;
@@ -76,7 +76,6 @@ public class ScrollContainerWidget extends AbstractContainerEventHandler impleme
         this.renderList(stack, mouseX, mouseY, delta);
         renderScrollbar(tesselator, bufferbuilder);
 
-        RenderSystem.enableTexture();
         RenderSystem.disableBlend();
     }
 
@@ -90,7 +89,6 @@ public class ScrollContainerWidget extends AbstractContainerEventHandler impleme
     private void renderScrollbar(Tesselator tesselator, BufferBuilder bufferbuilder) {
         int maxScroll = this.getMaxScroll();
         if (maxScroll > 0) {
-            RenderSystem.disableTexture();
             RenderSystem.setShader(GameRenderer::getPositionColorShader);
             int scrollerSize = (int)((float)((height) * (height)) / (float)this.getTotalListHeight());
             scrollerSize = Mth.clamp(scrollerSize, 32, height - 8);
