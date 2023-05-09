@@ -35,16 +35,12 @@ public class ChecklistCommands {
     }
 
     private static int checkItem(CommandSourceStack source, MinecraftServer server, ItemInput item) {
-        if (ChecklistState.get(server).check(Collections.singletonList(item.getItem()))) {
-            source.sendSuccess(new TranslatableComponent("commands.museumcurator.checked", item.getItem().getDefaultInstance().getDisplayName()), false);
-        }
+        ChecklistState.get(server).check(Collections.singletonList(item.getItem()));
         return 1;
     }
 
     private static int uncheckItem(CommandSourceStack source, MinecraftServer server, ItemInput item) {
-        if (ChecklistState.get(server).uncheck(Collections.singletonList(item.getItem()))) {
-            source.sendSuccess(new TranslatableComponent("commands.museumcurator.unchecked", item.getItem().getDefaultInstance().getDisplayName()), false);
-        }
+        ChecklistState.get(server).uncheck(Collections.singletonList(item.getItem()));
         return 1;
     }
 
