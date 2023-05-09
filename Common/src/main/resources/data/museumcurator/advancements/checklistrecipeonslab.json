@@ -4,7 +4,7 @@
       "trigger" : "minecraft:inventory_changed",
       "conditions" : {
         "items" : [{
-          "tag" : "museumcurator:wooden_slab"
+          "tag" : "minecraft:wooden_slabs"
         }]
       }
     }

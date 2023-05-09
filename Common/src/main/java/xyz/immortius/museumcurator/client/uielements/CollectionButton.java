@@ -1,7 +1,7 @@
 package xyz.immortius.museumcurator.client.uielements;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.Component;
 import xyz.immortius.museumcurator.common.data.MuseumCollection;
 import xyz.immortius.museumcurator.common.data.MuseumCollections;
 
@@ -14,7 +14,8 @@ public class CollectionButton extends ColorTextButton {
         this.collection = collection;
     }
 
-    public CollectionButton(int x, int y, int width, int height, MuseumCollection collection, OnPress onPress, OnTooltip onTooltip) {
+
+    public CollectionButton(int x, int y, int width, int height, MuseumCollection collection, OnPress onPress, CreateNarration onTooltip) {
         super(x, y, width, height, collection.getName(), onPress, onTooltip);
         this.collection = collection;
     }
@@ -23,7 +24,7 @@ public class CollectionButton extends ColorTextButton {
     public void render(PoseStack stack, int mouseX, int mouseY, float delta) {
         int totalCount = collection.getExhibits().stream().map(x -> x.getItems().size()).reduce(0, Integer::sum);
         int unlockedCount = collection.getExhibits().stream().map(x -> MuseumCollections.countChecked(x.getItems())).reduce(0L, Long::sum).intValue();
-        setMessage(new TextComponent("").append(collection.getName()).append(" (" + unlockedCount + " / " + totalCount + ")"));
+        setMessage(Component.literal("").append(collection.getName()).append(" (" + unlockedCount + " / " + totalCount + ")"));
         setActiveTextColor((unlockedCount == totalCount) ? 0xFFDD00 : 0xFFFFFF);
         super.render(stack, mouseX, mouseY, delta);
     }

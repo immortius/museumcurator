@@ -230,6 +230,12 @@
         {
           "id" : "minecraft:enchanted_book",
           "tags" : {
+            "StoredEnchantments" : [{"lvl": 3, "id" : "minecraft:swift_sneak"}]
+          }
+        },
+        {
+          "id" : "minecraft:enchanted_book",
+          "tags" : {
             "StoredEnchantments" : [{"lvl": 3, "id" : "minecraft:thorns"}]
           }
         },
@@ -258,9 +264,65 @@
         "minecraft:music_disc_wait",
         "minecraft:music_disc_pigstep",
         "minecraft:music_disc_otherside",
+        "minecraft:disc_fragment_5",
+        "minecraft:music_disc_5",
         "minecraft:jukebox"
       ]
     },
+    {
+      "name": "museumcurator.arts.instruments",
+      "items": [
+        {
+          "id" : "minecraft:goat_horn",
+          "tags" : {
+            "instrument" : "minecraft:ponder_goat_horn"
+          }
+        },
+        {
+          "id" : "minecraft:goat_horn",
+          "tags" : {
+            "instrument" : "minecraft:sing_goat_horn"
+          }
+        },
+        {
+          "id" : "minecraft:goat_horn",
+          "tags" : {
+            "instrument" : "minecraft:seek_goat_horn"
+          }
+        },
+        {
+          "id" : "minecraft:goat_horn",
+          "tags" : {
+            "instrument" : "minecraft:feel_goat_horn"
+          }
+        },
+        {
+          "id" : "minecraft:goat_horn",
+          "tags" : {
+            "instrument" : "minecraft:admire_goat_horn"
+          }
+        },
+        {
+          "id" : "minecraft:goat_horn",
+          "tags" : {
+            "instrument" : "minecraft:call_goat_horn"
+          }
+        },
+        {
+          "id" : "minecraft:goat_horn",
+          "tags" : {
+            "instrument" : "minecraft:yearn_goat_horn"
+          }
+        },
+        {
+          "id" : "minecraft:goat_horn",
+          "tags" : {
+            "instrument" : "minecraft:dream_goat_horn"
+          }
+        }
+      ]
+    },
+
     {
       "name": "museumcurator.arts.paintings",
       "items": [

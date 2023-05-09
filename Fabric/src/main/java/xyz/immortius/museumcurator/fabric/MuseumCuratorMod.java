@@ -1,9 +1,10 @@
 package xyz.immortius.museumcurator.fabric;
 
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
+import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
@@ -11,6 +12,9 @@ import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
 import net.fabricmc.fabric.api.screenhandler.v1.ScreenHandlerRegistry;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.nbt.NbtOps;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
@@ -18,7 +22,9 @@ import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import xyz.immortius.museumcurator.common.MuseumCuratorConstants;
@@ -49,7 +55,7 @@ public class MuseumCuratorMod implements ModInitializer {
     public static final ResourceLocation CHECKLIST_UPDATE = new ResourceLocation(MuseumCuratorConstants.MOD_ID, "checklistupdate");
 
     public static Item MUSEUM_CHECKLIST;
-    public static SoundEvent WRITING_SOUND = new SoundEvent(MuseumCuratorConstants.WRITING_SOUND_ID);
+    public static SoundEvent WRITING_SOUND = SoundEvent.createVariableRangeEvent(MuseumCuratorConstants.WRITING_SOUND_ID);
 
     public static MenuType<MuseumChecklistMenu> MUSEUM_CHECKLIST_MENU;
 
@@ -76,28 +82,31 @@ public class MuseumCuratorMod implements ModInitializer {
 
         ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
             FriendlyByteBuf buffer = PacketByteBufs.create();
-            buffer.writeWithCodec(LogOnMessage.CODEC, new LogOnMessage(MuseumCollections.getCollections(), ChecklistState.get(server).getCheckedItems()));
+            buffer.writeWithCodec(NbtOps.INSTANCE, LogOnMessage.CODEC, new LogOnMessage(MuseumCollections.getCollections(), ChecklistState.get(server).getCheckedItems()));
             ServerPlayNetworking.send(handler.getPlayer(), LOG_ON_MESSAGE, buffer);
         });
 
-        CommandRegistrationCallback.EVENT.register(((dispatcher, dedicated) -> {
+        CommandRegistrationCallback.EVENT.register((dispatcher, context, environment) -> {
             ItemDumpCommand.register(dispatcher);
-            ChecklistCommands.register(dispatcher);
-        }));
+            ChecklistCommands.register(dispatcher, context);
+        });
 
-        MUSEUM_CHECKLIST = Registry.register(Registry.ITEM, createId("museumchecklist"), new MuseumChecklist(new FabricItemSettings().tab(CreativeModeTab.TAB_MISC)));
+        MUSEUM_CHECKLIST = Registry.register(BuiltInRegistries.ITEM, createId("museumchecklist"), new MuseumChecklist(new FabricItemSettings()));
+
+        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.TOOLS_AND_UTILITIES).register(content -> {
+            content.addAfter(Items.MUSIC_DISC_PIGSTEP, MUSEUM_CHECKLIST);
+        });
 
         MUSEUM_CHECKLIST_MENU = ScreenHandlerRegistry.registerSimple(createId("museumchecklistmenu"), MuseumChecklistMenu::new);
 
         ServerPlayNetworking.registerGlobalReceiver(MuseumCuratorMod.CHECKLIST_UPDATE, (server, serverPlayer, listener, buf, responseSender) -> {
-            ChecklistChangeRequest updateMessage = buf.readWithCodec(ChecklistChangeRequest.CODEC);
+            ChecklistChangeRequest updateMessage = buf.readWithCodec(NbtOps.INSTANCE, ChecklistChangeRequest.CODEC);
             ServerChecklistUpdateReceiver.receive(server, serverPlayer, updateMessage);
         });
 
-        Registry.register(Registry.SOUND_EVENT, MuseumCuratorConstants.WRITING_SOUND_ID, WRITING_SOUND);
+        Registry.register(BuiltInRegistries.SOUND_EVENT, MuseumCuratorConstants.WRITING_SOUND_ID, WRITING_SOUND);
 
         setupConfig();
-
 
     }
 

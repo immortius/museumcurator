@@ -1,7 +1,6 @@
 package xyz.immortius.museumcurator.common.items;
 
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.*;
@@ -83,7 +82,7 @@ public class MuseumChecklist extends Item implements MenuProvider {
 
     @Override
     public Component getDisplayName() {
-        return new TranslatableComponent("museumcurator.menu.checklist.title");
+        return Component.translatable("museumcurator.menu.checklist.title");
     }
 
     @Nullable
