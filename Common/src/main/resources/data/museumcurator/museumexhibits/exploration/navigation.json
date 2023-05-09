@@ -14,6 +14,8 @@
     },
     "minecraft:cartography_table",
     "minecraft:compass",
-    "minecraft:lodestone"
+    "minecraft:lodestone",
+    "minecraft:echo_shard",
+    "minecraft:recovery_compass"
   ]
 }

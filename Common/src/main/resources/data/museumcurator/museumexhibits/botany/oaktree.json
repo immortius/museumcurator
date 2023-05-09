@@ -1,7 +1,7 @@
 {
   "collection": "museumcurator.collection.botany",
   "name": "museumcurator.botany.oaktree",
-  "relativeTo": "museumcurator.botany.jungletree",
+  "relativeTo": "museumcurator.botany.mangrovetree",
   "items": [
     "minecraft:oak_sapling",
     "minecraft:oak_leaves",

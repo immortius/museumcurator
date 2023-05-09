@@ -2,11 +2,12 @@ package xyz.immortius.museumcurator.server.commands;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.item.ItemArgument;
 import net.minecraft.commands.arguments.item.ItemInput;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import xyz.immortius.museumcurator.server.ChecklistState;
@@ -18,28 +19,27 @@ import java.util.Collections;
  */
 public class ChecklistCommands {
 
-    public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
+    public static void register(CommandDispatcher<CommandSourceStack> dispatcher, CommandBuildContext context) {
         dispatcher.register(Commands.literal("museumcommand:checkItem")
-                .then(Commands.argument("item", ItemArgument.item())
-                .executes((context) -> checkItem(context.getSource(), context.getSource().getServer(), ItemArgument.getItem(context, "item")))));
+                .then(Commands.argument("item", ItemArgument.item(context))
+                .executes((ctx) -> checkItem(ctx.getSource(), ctx.getSource().getServer(), ItemArgument.getItem(ctx, "item")))));
         dispatcher.register(Commands.literal("museumcommand:uncheckItem")
-                .then(Commands.argument("item", ItemArgument.item())
-                .executes((context) -> uncheckItem(context.getSource(), context.getSource().getServer(), ItemArgument.getItem(context, "item")))));
+                .then(Commands.argument("item", ItemArgument.item(context))
+                .executes((ctx) -> uncheckItem(ctx.getSource(), ctx.getSource().getServer(), ItemArgument.getItem(ctx, "item")))));
         dispatcher.register(Commands.literal("museumcommand:uncheckAllItems")
                 .requires(x -> x.hasPermission(2))
-                .executes((context) -> uncheckAllItems(context.getSource(), context.getSource().getServer())));
+                .executes((ctx) -> uncheckAllItems(ctx.getSource(), ctx.getSource().getServer())));
     }
 
     private static int uncheckAllItems(CommandSourceStack source, MinecraftServer server) {
         try {
             ServerPlayer player = source.getPlayerOrException();
             ChecklistState.get(server, player).uncheckAll();
-            source.sendSuccess(new TranslatableComponent("commands.museumcurator.uncheckedAll"), true);
+            source.sendSuccess(Component.translatable("commands.museumcurator.uncheckedAll"), true);
             return 1;
         } catch (CommandSyntaxException e) {
             return 0;
         }
-
     }
 
     private static int checkItem(CommandSourceStack source, MinecraftServer server, ItemInput item) {

@@ -4,7 +4,7 @@ import com.google.common.collect.ImmutableMap;
 import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -23,18 +23,18 @@ public class RawExhibit {
     private List<ItemGroup> insertGroups;
 
     public static final Codec<ItemStack> TAGGED_ITEM_STACK = RecordCodecBuilder.create(instance -> instance.group(
-            Codec.STRING.fieldOf("id").forGetter(x -> Registry.ITEM.getKey(x.getItem()).toString()),
+            Codec.STRING.fieldOf("id").forGetter(x -> BuiltInRegistries.ITEM.getKey(x.getItem()).toString()),
             CompoundTag.CODEC.fieldOf("tags").forGetter(ItemStack::getTag)
     ).apply(instance, (id, tags) -> {
-        ItemStack itemStack = Registry.ITEM.get(new ResourceLocation(id)).getDefaultInstance().copy();
+        ItemStack itemStack = BuiltInRegistries.ITEM.get(new ResourceLocation(id)).getDefaultInstance().copy();
         itemStack.setTag(tags);
         return itemStack;
     }));
 
     public static final Codec<ItemGroup> ITEM_GROUP_CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            Codec.either(TAGGED_ITEM_STACK, Registry.ITEM.byNameCodec().xmap(Item::getDefaultInstance, ItemStack::getItem)).optionalFieldOf("relativeTo", Either.left(null)).forGetter(x -> Either.left(x.relativeTo)),
+            Codec.either(TAGGED_ITEM_STACK, BuiltInRegistries.ITEM.byNameCodec().xmap(Item::getDefaultInstance, ItemStack::getItem)).optionalFieldOf("relativeTo", Either.left(null)).forGetter(x -> Either.left(x.relativeTo)),
             Codec.STRING.optionalFieldOf("placement", Placement.After.getId()).forGetter(x -> (x.placement() != null) ? x.placement().getId() : ""),
-            Codec.either(TAGGED_ITEM_STACK, Registry.ITEM.byNameCodec().xmap(Item::getDefaultInstance, ItemStack::getItem)).listOf().fieldOf("items").forGetter((x) ->
+            Codec.either(TAGGED_ITEM_STACK, BuiltInRegistries.ITEM.byNameCodec().xmap(Item::getDefaultInstance, ItemStack::getItem)).listOf().fieldOf("items").forGetter((x) ->
                     x.items.stream().<Either<ItemStack, ItemStack>>map(Either::left).toList()
             )
     ).apply(instance, (relativeTo, positioning, items) -> new ItemGroup(
@@ -51,7 +51,7 @@ public class RawExhibit {
             Codec.STRING.fieldOf("name").forGetter(x -> x.name),
             Codec.STRING.optionalFieldOf("relativeTo", "").forGetter(x -> x.relativeTo),
             Codec.STRING.optionalFieldOf("placement", Placement.After.getId()).forGetter(x -> (x.placement != null) ? x.placement.getId() : ""),
-            Codec.either(TAGGED_ITEM_STACK, Registry.ITEM.byNameCodec().xmap(Item::getDefaultInstance, ItemStack::getItem)).listOf().optionalFieldOf("items", Collections.emptyList()).forGetter((x) ->
+            Codec.either(TAGGED_ITEM_STACK, BuiltInRegistries.ITEM.byNameCodec().xmap(Item::getDefaultInstance, ItemStack::getItem)).listOf().optionalFieldOf("items", Collections.emptyList()).forGetter((x) ->
                     x.items.stream().<Either<ItemStack, ItemStack>>map(Either::left).toList()
             ),
             ITEM_GROUP_CODEC.listOf().optionalFieldOf("insertGroups", Collections.emptyList()).forGetter(x -> x.insertGroups)

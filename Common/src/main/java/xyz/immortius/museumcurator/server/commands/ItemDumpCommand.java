@@ -9,7 +9,8 @@ import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.core.Registry;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import xyz.immortius.museumcurator.common.data.MuseumCollections;
@@ -26,7 +27,7 @@ import java.util.stream.Collectors;
  */
 public class ItemDumpCommand {
 
-    private static final SimpleCommandExceptionType FAILED_TO_DUMP = new SimpleCommandExceptionType(new TranslatableComponent("commands.museumcurator.dumperror"));
+    private static final SimpleCommandExceptionType FAILED_TO_DUMP = new SimpleCommandExceptionType(Component.translatable("commands.museumcurator.dumperror"));
 
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(Commands.literal("museumcommand:itemDump")
@@ -38,7 +39,7 @@ public class ItemDumpCommand {
     }
 
     private static int nonCollectionItemDump(CommandContext<CommandSourceStack> cmd) throws CommandSyntaxException {
-        Registry<Item> registry = cmd.getSource().getServer().registryAccess().registry(Registry.ITEM_REGISTRY).get();
+        Registry<Item> registry = cmd.getSource().getServer().registryAccess().registry(Registries.ITEM).get();
 
         Set<ResourceLocation> collectionItems = MuseumCollections.getAllCollectionItems().stream().map(x -> registry.getKey(x.getItem())).collect(Collectors.toSet());
         Set<ResourceLocation> missingItems = Sets.difference(registry.keySet(), collectionItems);
@@ -55,7 +56,7 @@ public class ItemDumpCommand {
 
     private static int itemDump(CommandContext<CommandSourceStack> cmd) throws CommandSyntaxException {
 
-        Registry<Item> registry = cmd.getSource().getServer().registryAccess().registry(Registry.ITEM_REGISTRY).get();
+        Registry<Item> registry = cmd.getSource().getServer().registryAccess().registry(Registries.ITEM).get();
 
         try (BufferedWriter writer = Files.newBufferedWriter(Paths.get("items.json"))) {
             Gson gson = new Gson();
