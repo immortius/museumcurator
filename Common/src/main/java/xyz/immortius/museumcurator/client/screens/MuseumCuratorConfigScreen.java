@@ -3,7 +3,7 @@ package xyz.immortius.museumcurator.client.screens;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
 import xyz.immortius.museumcurator.client.uielements.SettingListWidget;
 import xyz.immortius.museumcurator.common.util.ConfigUtil;
 
@@ -18,7 +18,7 @@ public class MuseumCuratorConfigScreen extends Screen {
     private Button saveButton;
 
     public MuseumCuratorConfigScreen(Screen lastScreen) {
-        super(new TranslatableComponent("config.museumcurator.title"));
+        super(Component.translatable("config.museumcurator.title"));
         this.lastScreen = lastScreen;
     }
 
@@ -27,17 +27,17 @@ public class MuseumCuratorConfigScreen extends Screen {
         settingsList = new SettingListWidget(minecraft, this, width, 22, height - 44, (int) (0.9f * width));
 
         int w = (width / 3 - 60) / 2;
-        resetButton = new Button(w, height - 32, 60, 20, new TranslatableComponent("controls.reset"), button -> {
+        resetButton = Button.builder(Component.translatable("controls.reset"), button -> {
             settingsList.reset();
-        });
-        cancelButton = new Button(width / 3 + w, height - 32, 60, 20, new TranslatableComponent("gui.cancel"), button -> {
+        }).bounds(w, height - 32, 60, 20).build();
+        cancelButton = Button.builder(Component.translatable("gui.cancel"), button -> {
             ConfigUtil.loadDefaultConfig();
             this.minecraft.setScreen(lastScreen);
-        });
-        saveButton = new Button(2 * width / 3 + w, height - 32, 60, 20, new TranslatableComponent("selectWorld.edit.save"), button -> {
+        }).bounds(width / 3 + w, height - 32, 60, 20).build();
+        saveButton = Button.builder(Component.translatable("selectWorld.edit.save"), button -> {
             ConfigUtil.saveDefaultConfig();
             this.minecraft.setScreen(lastScreen);
-        });
+        }).bounds(2 * width / 3 + w, height - 32, 60, 20).build();
 
         this.addWidget(settingsList);
         this.addWidget(cancelButton);

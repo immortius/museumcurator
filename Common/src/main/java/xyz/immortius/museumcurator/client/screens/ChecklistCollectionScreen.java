@@ -72,8 +72,8 @@ public class ChecklistCollectionScreen extends AbstractChecklistScreen {
 
         @Override
         public void render(PoseStack stack, int top, int left, int width, int height, int mouseX, int mouseY, boolean hovered, float delta) {
-            sectionWidget.x = left;
-            sectionWidget.y = top;
+            sectionWidget.setX(left);
+            sectionWidget.setY(top);
             sectionWidget.setWidth(width);
             sectionWidget.render(stack, mouseX, mouseY, delta);
         }
@@ -87,6 +87,16 @@ public class ChecklistCollectionScreen extends AbstractChecklistScreen {
         @Override
         public boolean mouseClicked(double mouseX, double mouseY, int button) {
             return sectionWidget.mouseClicked(mouseX, mouseY, button);
+        }
+
+        @Override
+        public void setFocused(boolean var1) {
+
+        }
+
+        @Override
+        public boolean isFocused() {
+            return false;
         }
 
         @Override
