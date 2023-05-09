@@ -1,8 +1,8 @@
 package xyz.immortius.museumcurator.client.network;
 
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.network.chat.Component;
 import xyz.immortius.museumcurator.common.data.MuseumCollections;
 import xyz.immortius.museumcurator.common.network.ChecklistUpdateMessage;
 
@@ -17,10 +17,10 @@ public class ChecklistUpdateReceiver {
         MuseumCollections.uncheckItems(msg.getUncheckedItems());
         MuseumCollections.checkItems(msg.getCheckedItems());
         for (ItemStack item : msg.getCheckedItems()) {
-            player.sendMessage(new TranslatableComponent("commands.museumcurator.checked", item.getDisplayName()), null);
+            player.sendSystemMessage(Component.translatable("commands.museumcurator.checked", item.getDisplayName()));
         }
         for (ItemStack item : msg.getUncheckedItems()) {
-            player.sendMessage(new TranslatableComponent("commands.museumcurator.unchecked", item.getDisplayName()), null);
+            player.sendSystemMessage(Component.translatable("commands.museumcurator.unchecked", item.getDisplayName()));
         }
     }
 }

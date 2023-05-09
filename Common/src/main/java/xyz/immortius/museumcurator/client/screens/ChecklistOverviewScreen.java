@@ -2,9 +2,9 @@ package xyz.immortius.museumcurator.client.screens;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.entity.player.Inventory;
 import xyz.immortius.museumcurator.client.uielements.ColorTextButton;
 import xyz.immortius.museumcurator.client.uielements.ScrollContainerEntry;
@@ -48,11 +48,11 @@ public class ChecklistOverviewScreen extends AbstractChecklistScreen {
 
         @Override
         public void render(PoseStack stack, int top, int left, int width, int height, int mouseX, int mouseY, boolean hovered, float delta) {
-            button.x = left + width / 2 - 96;
-            button.y = top + 2;
+            button.setX(left + width / 2 - 96);
+            button.setY(top + 2);
             int totalCount = collection.getExhibits().stream().map(x -> x.getItems().size()).reduce(0, Integer::sum);
             int unlockedCount = collection.getExhibits().stream().map(x -> MuseumCollections.countChecked(x.getItems())).reduce(0L, Long::sum).intValue();
-            button.setMessage(new TextComponent("").append(collection.getName()).append(" (" + unlockedCount + " / " + totalCount + ")"));
+            button.setMessage(Component.literal("").append(collection.getName()).append(" (" + unlockedCount + " / " + totalCount + ")"));
             button.setActiveTextColor((unlockedCount == totalCount) ? 0xFFDD00 : 0xFFFFFF);
             button.render(stack, mouseX, mouseY, delta);
         }
@@ -60,6 +60,16 @@ public class ChecklistOverviewScreen extends AbstractChecklistScreen {
         @Override
         public boolean mouseClicked(double mouseX, double mouseY, int mouseButton) {
             return button.mouseClicked(mouseX, mouseY, mouseButton);
+        }
+
+        @Override
+        public void setFocused(boolean var1) {
+
+        }
+
+        @Override
+        public boolean isFocused() {
+            return false;
         }
 
         @Override
