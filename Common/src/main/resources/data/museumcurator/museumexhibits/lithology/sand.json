@@ -1,7 +1,7 @@
 {
   "collection": "museumcurator.collection.lithology",
   "name": "museumcurator.lithology.sand",
-  "relativeTo": "museumcurator.lithology.dirt",
+  "relativeTo": "museumcurator.lithology.mud",
   "items": [
     "minecraft:sand",
     "minecraft:sandstone",

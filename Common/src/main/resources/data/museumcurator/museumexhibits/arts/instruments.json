@@ -1,0 +1,55 @@
+{
+  "collection": "museumcurator.collection.arts",
+  "name": "museumcurator.arts.instruments",
+  "relativeTo": "museumcurator.arts.literature",
+  "items": [
+    {
+      "id": "minecraft:goat_horn",
+      "tags": {
+        "instrument": "minecraft:ponder_goat_horn"
+      }
+    },
+    {
+      "id": "minecraft:goat_horn",
+      "tags": {
+        "instrument": "minecraft:sing_goat_horn"
+      }
+    },
+    {
+      "id": "minecraft:goat_horn",
+      "tags": {
+        "instrument": "minecraft:seek_goat_horn"
+      }
+    },
+    {
+      "id": "minecraft:goat_horn",
+      "tags": {
+        "instrument": "minecraft:feel_goat_horn"
+      }
+    },
+    {
+      "id": "minecraft:goat_horn",
+      "tags": {
+        "instrument": "minecraft:admire_goat_horn"
+      }
+    },
+    {
+      "id": "minecraft:goat_horn",
+      "tags": {
+        "instrument": "minecraft:call_goat_horn"
+      }
+    },
+    {
+      "id": "minecraft:goat_horn",
+      "tags": {
+        "instrument": "minecraft:yearn_goat_horn"
+      }
+    },
+    {
+      "id": "minecraft:goat_horn",
+      "tags": {
+        "instrument": "minecraft:dream_goat_horn"
+      }
+    }
+  ]
+}

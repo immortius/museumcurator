@@ -1,0 +1,11 @@
+{
+  "collection": "museumcurator.collection.botany",
+  "name": "museumcurator.botany.sculk",
+  "items": [
+    "minecraft:sculk_vein",
+    "minecraft:sculk",
+    "minecraft:sculk_sensor",
+    "minecraft:sculk_catalyst",
+    "minecraft:sculk_shrieker"
+  ]
+}

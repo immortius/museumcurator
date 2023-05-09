@@ -5,7 +5,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.ClickType;
 import xyz.immortius.museumcurator.client.uielements.CollectionButton;
@@ -53,8 +52,8 @@ public class ChecklistOverviewScreen extends AbstractChecklistScreen {
                     Minecraft.getInstance().setScreen(new ChecklistCollectionScreen(menu, playerInventory, collection.getName(), collection, this))));
         }
 
-        prevButton = new ShapedButton(leftPos + 14, topPos + 226, 8, 13, TextComponent.EMPTY, AbstractChecklistScreen.CONTAINER_TEXTURE, AbstractChecklistScreen.TEXTURE_DIM, 54, 256, 54, 269, (b) -> currentPage--);
-        nextButton = new ShapedButton(leftPos + 232, topPos + 226, 8, 13, TextComponent.EMPTY, AbstractChecklistScreen.CONTAINER_TEXTURE, AbstractChecklistScreen.TEXTURE_DIM, 62, 256, 62, 269, (b) -> currentPage++);
+        prevButton = new ShapedButton(leftPos + 14, topPos + 226, 8, 13, Component.empty(), AbstractChecklistScreen.CONTAINER_TEXTURE, AbstractChecklistScreen.TEXTURE_DIM, 54, 256, 54, 269, (b) -> currentPage--);
+        nextButton = new ShapedButton(leftPos + 232, topPos + 226, 8, 13, Component.empty(), AbstractChecklistScreen.CONTAINER_TEXTURE, AbstractChecklistScreen.TEXTURE_DIM, 62, 256, 62, 269, (b) -> currentPage++);
     }
 
     @Override
@@ -65,10 +64,10 @@ public class ChecklistOverviewScreen extends AbstractChecklistScreen {
         }
 
         if (currentPage > 0) {
-            prevButton.renderButton(stack, mouseX, mouseY, delta);
+            prevButton.render(stack, mouseX, mouseY, delta);
         }
         if ((currentPage + 1) * ITEMS_PER_PAGE < collectionButtons.size()) {
-            nextButton.renderButton(stack, mouseX, mouseY, delta);
+            nextButton.render(stack, mouseX, mouseY, delta);
         }
     }
 

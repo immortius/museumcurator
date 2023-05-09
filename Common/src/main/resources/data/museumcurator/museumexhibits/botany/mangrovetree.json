@@ -1,0 +1,18 @@
+{
+  "collection": "museumcurator.collection.botany",
+  "name": "museumcurator.botany.mangrovetree",
+  "relativeTo": "museumcurator.botany.jungletree",
+  "items": [
+    "minecraft:mangrove_propagule",
+    "minecraft:mangrove_leaves",
+    "minecraft:mangrove_log",
+    "minecraft:stripped_mangrove_log",
+    "minecraft:mangrove_wood",
+    "minecraft:stripped_mangrove_wood",
+    "minecraft:mangrove_planks",
+    "minecraft:mangrove_slab",
+    "minecraft:mangrove_stairs",
+    "minecraft:mangrove_roots",
+    "minecraft:muddy_mangrove_roots"
+  ]
+}
