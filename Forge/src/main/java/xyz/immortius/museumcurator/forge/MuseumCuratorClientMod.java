@@ -1,6 +1,6 @@
 package xyz.immortius.museumcurator.forge;
 
-import net.minecraftforge.client.ConfigGuiHandler;
+import net.minecraftforge.client.ConfigScreenHandler;
 import net.minecraftforge.fml.ModLoadingContext;
 import xyz.immortius.museumcurator.client.screens.MuseumCuratorConfigScreen;
 
@@ -10,6 +10,6 @@ public final class MuseumCuratorClientMod {
     }
 
     public static void registerConfigScreen() {
-        ModLoadingContext.get().registerExtensionPoint(ConfigGuiHandler.ConfigGuiFactory.class, () -> new ConfigGuiHandler.ConfigGuiFactory((minecraft, screen) -> new MuseumCuratorConfigScreen(screen)));
+        ModLoadingContext.get().registerExtensionPoint(ConfigScreenHandler.ConfigScreenFactory.class, () -> new ConfigScreenHandler.ConfigScreenFactory((minecraft, screen) -> new MuseumCuratorConfigScreen(screen)));
     }
 }

@@ -74,6 +74,22 @@
       ]
     },
     {
+      "name": "museumcurator.botany.mangrovetree",
+      "items": [
+        "minecraft:mangrove_propagule",
+        "minecraft:mangrove_leaves",
+        "minecraft:mangrove_log",
+        "minecraft:stripped_mangrove_log",
+        "minecraft:mangrove_wood",
+        "minecraft:stripped_mangrove_wood",
+        "minecraft:mangrove_planks",
+        "minecraft:mangrove_slab",
+        "minecraft:mangrove_stairs",
+        "minecraft:mangrove_roots",
+        "minecraft:muddy_mangrove_roots"
+      ]
+    },
+    {
       "name": "museumcurator.botany.sprucetree",
       "items": [
         "minecraft:spruce_sapling",
@@ -177,6 +193,17 @@
         "minecraft:red_mushroom_block",
         "minecraft:mushroom_stem"
       ]
+    },
+    {
+      "name": "museumcurator.botany.sculk",
+      "items": [
+        "minecraft:sculk_vein",
+        "minecraft:sculk",
+        "minecraft:sculk_sensor",
+        "minecraft:sculk_catalyst",
+        "minecraft:sculk_shrieker"
+      ]
     }
+
   ]
 }

@@ -8,7 +8,6 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import org.jetbrains.annotations.Nullable;
@@ -42,9 +41,9 @@ public abstract class AbstractChecklistScreen extends AbstractContainerScreen<Mu
     protected void init() {
         super.init();
 
-        Button closeButton = new Button((width - imageWidth) / 2 + 96, topPos + 222, 64, 20, new TranslatableComponent("gui.back"), button -> {
+        Button closeButton = Button.builder(Component.translatable("gui.back"), button -> {
             this.minecraft.setScreen(lastScreen);
-        });
+        }).bounds((width - imageWidth) / 2 + 96, topPos + 222, 64, 20).build();
         addRenderableWidget(closeButton);
     }
 
@@ -70,7 +69,7 @@ public abstract class AbstractChecklistScreen extends AbstractContainerScreen<Mu
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         RenderSystem.setShaderTexture(0, CONTAINER_TEXTURE);
-        this.blit(stack, leftPos, topPos, 0, 0, imageWidth, imageHeight);
+        this.blit(stack, leftPos, topPos, 0, 0, imageWidth, imageHeight, TEXTURE_DIM, TEXTURE_DIM);
     }
 
     @Override
@@ -112,16 +111,5 @@ public abstract class AbstractChecklistScreen extends AbstractContainerScreen<Mu
     public void magicalSpecialHackyFocus(@Nullable GuiEventListener $$0) {
         super.magicalSpecialHackyFocus($$0);
     }
-
-    @Override
-    public boolean changeFocus(boolean $$0) {
-        return super.changeFocus($$0);
-    }
-
-    @Override
-    public void blit(PoseStack stack, int screenX, int screenY, int texX, int texY, int pixelWidth, int pixelHeight) {
-        blit(stack, screenX, screenY, getBlitOffset(), (float) texX, (float) texY, pixelWidth, pixelHeight, TEXTURE_DIM, TEXTURE_DIM);
-    }
-
 
 }
