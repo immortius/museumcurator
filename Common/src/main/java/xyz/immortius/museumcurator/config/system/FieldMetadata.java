@@ -2,7 +2,6 @@ package xyz.immortius.museumcurator.config.system;
 
 import com.google.common.base.Strings;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import xyz.immortius.museumcurator.common.MuseumCuratorConstants;
 
 import java.lang.reflect.Field;
@@ -23,7 +22,7 @@ public abstract class FieldMetadata<T> {
         this.field.setAccessible(true);
         this.name = name;
         this.comment = comment;
-        this.displayName = new TranslatableComponent("config." + MuseumCuratorConstants.MOD_ID + ".option." + field.getName());
+        this.displayName = Component.translatable("config." + MuseumCuratorConstants.MOD_ID + ".option." + field.getName());
     }
 
     public String getName() {

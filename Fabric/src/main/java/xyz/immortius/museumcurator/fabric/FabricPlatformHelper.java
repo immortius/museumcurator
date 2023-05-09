@@ -3,6 +3,7 @@ package xyz.immortius.museumcurator.fabric;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.nbt.NbtOps;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
@@ -25,7 +26,7 @@ public final class FabricPlatformHelper implements MCPlatformHelper {
 
     public void broadcastChecklistUpdate(MinecraftServer server, ChecklistUpdateMessage msg) {
         FriendlyByteBuf buffer = PacketByteBufs.create();
-        buffer.writeWithCodec(ChecklistUpdateMessage.CODEC, msg);
+        buffer.writeWithCodec(NbtOps.INSTANCE, ChecklistUpdateMessage.CODEC, msg);
         for (ServerPlayer player : server.getPlayerList().getPlayers()) {
             ServerPlayNetworking.send(player, MuseumCuratorMod.CHECKLIST_UPDATE, buffer);
         }
@@ -34,14 +35,14 @@ public final class FabricPlatformHelper implements MCPlatformHelper {
     @Override
     public void sendChecklistUpdate(MinecraftServer server, ServerPlayer player, ChecklistUpdateMessage msg) {
         FriendlyByteBuf buffer = PacketByteBufs.create();
-        buffer.writeWithCodec(ChecklistUpdateMessage.CODEC, msg);
+        buffer.writeWithCodec(NbtOps.INSTANCE, ChecklistUpdateMessage.CODEC, msg);
         ServerPlayNetworking.send(player, MuseumCuratorMod.CHECKLIST_UPDATE, buffer);
     }
 
     @Override
     public void sendClientChecklistChange(ChecklistChangeRequest msg) {
         FriendlyByteBuf buffer = PacketByteBufs.create();
-        buffer.writeWithCodec(ChecklistChangeRequest.CODEC, msg);
+        buffer.writeWithCodec(NbtOps.INSTANCE, ChecklistChangeRequest.CODEC, msg);
         ClientPlayNetworking.send(MuseumCuratorMod.CHECKLIST_UPDATE, buffer);
     }
 

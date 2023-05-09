@@ -32,7 +32,7 @@ public class ShapedButton extends AbstractWidget {
     }
 
     @Override
-    public void renderButton(PoseStack stack, int mouseX, int mouseY, float delta) {
+    public void renderWidget(PoseStack stack, int mouseX, int mouseY, float delta) {
         int texX, texY;
         if (isMouseOver(mouseX, mouseY)) {
             texX = overX;
@@ -44,19 +44,17 @@ public class ShapedButton extends AbstractWidget {
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         RenderSystem.setShaderTexture(0, texture);
-        blit(stack, x, y, texX, texY, getWidth(), getHeight(), textureDim, textureDim);
+        blit(stack, getX(), getY(), texX, texY, getWidth(), getHeight(), textureDim, textureDim);
     }
-
-    @Override
-    public void updateNarration(NarrationElementOutput var1) {
-
-    }
-
-
 
     @Override
     public void onClick(double mouseX, double mouseY) {
         onClickHandler.accept(this);
+    }
+
+    @Override
+    protected void updateWidgetNarration(NarrationElementOutput var1) {
+
     }
 
 

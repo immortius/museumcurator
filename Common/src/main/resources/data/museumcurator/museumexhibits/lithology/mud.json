@@ -1,0 +1,13 @@
+{
+  "collection": "museumcurator.collection.lithology",
+  "name": "museumcurator.lithology.mud",
+  "relativeTo": "museumcurator.lithology.dirt",
+  "items": [
+    "minecraft:mud",
+    "minecraft:packed_mud",
+    "minecraft:mud_bricks",
+    "minecraft:mud_brick_slab",
+    "minecraft:mud_brick_stairs",
+    "minecraft:mud_brick_wall"
+  ]
+}

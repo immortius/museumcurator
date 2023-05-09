@@ -411,6 +411,17 @@
         "StoredEnchantments": [
           {
             "lvl": 3,
+            "id": "minecraft:swift_sneak"
+          }
+        ]
+      }
+    },
+    {
+      "id": "minecraft:enchanted_book",
+      "tags": {
+        "StoredEnchantments": [
+          {
+            "lvl": 3,
             "id": "minecraft:thorns"
           }
         ]
