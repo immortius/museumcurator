@@ -2,22 +2,6 @@
   "name": "museumcurator.collection.technology",
   "exhibits": [
     {
-      "name": "museumcurator.technology.workbenches",
-      "items": [
-        "minecraft:crafting_table",
-        "minecraft:furnace",
-        "minecraft:blast_furnace",
-        "minecraft:smithing_table",
-        "minecraft:anvil",
-        "minecraft:chipped_anvil",
-        "minecraft:damaged_anvil",
-        "minecraft:grindstone",
-        "minecraft:stonecutter",
-        "minecraft:cauldron",
-        "minecraft:composter"
-      ]
-    },
-    {
       "name": "museumcurator.technology.boats",
       "items": [
         "minecraft:oak_boat",
