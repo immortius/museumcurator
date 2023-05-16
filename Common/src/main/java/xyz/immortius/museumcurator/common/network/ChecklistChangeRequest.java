@@ -2,8 +2,7 @@ package xyz.immortius.museumcurator.common.network;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.core.Registry;
-import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -15,39 +14,39 @@ import java.util.List;
  */
 public class ChecklistChangeRequest {
     public static Codec<ChecklistChangeRequest> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            Registry.ITEM.byNameCodec().listOf().fieldOf("checkedItems").forGetter(ChecklistChangeRequest::getCheckedItems),
-            Registry.ITEM.byNameCodec().listOf().fieldOf("uncheckedItems").forGetter(ChecklistChangeRequest::getUncheckedItems)
+            ItemStack.CODEC.listOf().fieldOf("checkedItems").forGetter(ChecklistChangeRequest::getCheckedItems),
+            ItemStack.CODEC.listOf().fieldOf("uncheckedItems").forGetter(ChecklistChangeRequest::getUncheckedItems)
     ).apply(instance, ChecklistChangeRequest::new));
 
-    private final List<Item> checkedItems;
-    private final List<Item> uncheckedItems;
+    private final List<ItemStack> checkedItems;
+    private final List<ItemStack> uncheckedItems;
 
-    public static ChecklistChangeRequest check(Item item) {
+    public static ChecklistChangeRequest check(ItemStack item) {
         return new ChecklistChangeRequest(Collections.singletonList(item), Collections.emptyList());
     }
 
-    public static ChecklistChangeRequest check(Collection<Item> items) {
+    public static ChecklistChangeRequest check(Collection<ItemStack> items) {
         return new ChecklistChangeRequest(new ArrayList<>(items), Collections.emptyList());
     }
 
-    public static ChecklistChangeRequest uncheck(Item item) {
+    public static ChecklistChangeRequest uncheck(ItemStack item) {
         return new ChecklistChangeRequest(Collections.emptyList(), Collections.singletonList(item));
     }
 
-    public static ChecklistChangeRequest uncheck(Collection<Item> items) {
+    public static ChecklistChangeRequest uncheck(Collection<ItemStack> items) {
         return new ChecklistChangeRequest(Collections.emptyList(), new ArrayList<>(items));
     }
 
-    private ChecklistChangeRequest(List<Item> checked, List<Item> unchecked) {
+    private ChecklistChangeRequest(List<ItemStack> checked, List<ItemStack> unchecked) {
         this.checkedItems = checked;
         this.uncheckedItems = unchecked;
     }
 
-    public List<Item> getCheckedItems() {
+    public List<ItemStack> getCheckedItems() {
         return checkedItems;
     }
 
-    public List<Item> getUncheckedItems() {
+    public List<ItemStack> getUncheckedItems() {
         return uncheckedItems;
     }
 

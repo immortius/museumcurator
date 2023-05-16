@@ -1,6 +1,5 @@
 package xyz.immortius.museumcurator.common.items;
 
-import net.minecraft.client.sounds.SoundManager;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerLevel;
@@ -21,7 +20,6 @@ import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
-import xyz.immortius.museumcurator.common.MuseumCuratorConstants;
 import xyz.immortius.museumcurator.common.data.MuseumCollections;
 import xyz.immortius.museumcurator.common.menus.MuseumChecklistMenu;
 import xyz.immortius.museumcurator.interop.Services;
@@ -60,23 +58,23 @@ public class MuseumChecklist extends Item implements MenuProvider {
         }
         ServerLevel serverLevel = (ServerLevel) context.getLevel();
         BlockState targetBlock = context.getLevel().getBlockState(context.getClickedPos());
-        List<Item> items = new ArrayList<>();
-        if (MuseumCollections.getAllCollectionItems().contains(targetBlock.getBlock().asItem())) {
-            items.add(targetBlock.getBlock().asItem());
+        List<ItemStack> items = new ArrayList<>();
+        if (MuseumCollections.isValidCollectionItem(targetBlock.getBlock().asItem().getDefaultInstance())) {
+            items.add(targetBlock.getBlock().asItem().getDefaultInstance());
         }
 
         BlockEntity blockEntity = serverLevel.getBlockEntity(context.getClickedPos());
         if (blockEntity instanceof Container container) {
             for (int i = 0; i < container.getContainerSize(); i++) {
                 ItemStack content = container.getItem(i);
-                if (MuseumCollections.getAllCollectionItems().contains(content.getItem())) {
-                    items.add(content.getItem());
+                if (MuseumCollections.isValidCollectionItem(content)) {
+                    items.add(content);
                 }
             }
         }
         if (targetBlock.getBlock() instanceof FlowerPotBlock pot) {
-            items.add(pot.getContent().asItem());
-            items.add(Items.FLOWER_POT);
+            items.add(pot.getContent().asItem().getDefaultInstance());
+            items.add(Items.FLOWER_POT.getDefaultInstance());
         }
         ChecklistState.get(serverLevel.getServer()).check(items);
         return InteractionResult.CONSUME;
@@ -99,22 +97,24 @@ public class MuseumChecklist extends Item implements MenuProvider {
             level.playSound(player, entity.blockPosition(), Services.PLATFORM.writingSound(), SoundSource.PLAYERS, 1.0f, 1.f);
             return InteractionResult.SUCCESS;
         }
-        List<Item> items = new ArrayList<>();
+        List<ItemStack> items = new ArrayList<>();
         if (entity instanceof Container container) {
-            items.add(level.getBlockState(entity.blockPosition()).getBlock().asItem());
+            items.add(level.getBlockState(entity.blockPosition()).getBlock().asItem().getDefaultInstance());
             for (int i = 0; i < container.getContainerSize(); i++) {
                 ItemStack content = container.getItem(i);
-                if (MuseumCollections.getAllCollectionItems().contains(content.getItem())) {
-                    items.add(content.getItem());
+                if (MuseumCollections.isValidCollectionItem(content)) {
+                    items.add(content);
                 }
             }
         } else if (entity instanceof ItemFrame itemFrame) {
-            items.add(itemFrame.getItem().getItem());
+            items.add(itemFrame.getItem());
         } else if (entity instanceof ArmorStand armorStand) {
             for (ItemStack armorSlot : armorStand.getArmorSlots()) {
-                items.add(armorSlot.getItem());
+                if (MuseumCollections.isValidCollectionItem(armorSlot)) {
+                    items.add(armorSlot);
+                }
             }
-            items.add(Items.ARMOR_STAND);
+            items.add(Items.ARMOR_STAND.getDefaultInstance());
         }
         ChecklistState.get(((ServerLevel)level).getServer()).check(items);
         return InteractionResult.CONSUME;

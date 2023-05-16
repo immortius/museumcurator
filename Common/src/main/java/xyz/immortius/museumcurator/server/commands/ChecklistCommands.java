@@ -35,12 +35,12 @@ public class ChecklistCommands {
     }
 
     private static int checkItem(CommandSourceStack source, MinecraftServer server, ItemInput item) {
-        ChecklistState.get(server).check(Collections.singletonList(item.getItem()));
+        ChecklistState.get(server).check(Collections.singletonList(item.getItem().getDefaultInstance()));
         return 1;
     }
 
     private static int uncheckItem(CommandSourceStack source, MinecraftServer server, ItemInput item) {
-        ChecklistState.get(server).uncheck(Collections.singletonList(item.getItem()));
+        ChecklistState.get(server).uncheck(Collections.singletonList(item.getItem().getDefaultInstance()));
         return 1;
     }
 

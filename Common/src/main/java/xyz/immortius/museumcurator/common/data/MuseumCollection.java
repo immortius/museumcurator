@@ -11,9 +11,14 @@ import java.util.List;
  */
 public class MuseumCollection {
 
-    public static final Codec<MuseumCollection> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+    public static final Codec<MuseumCollection> FILE_CODEC = RecordCodecBuilder.create(instance -> instance.group(
             Codec.STRING.fieldOf("name").forGetter(x -> x.getName().getKey()),
-            MuseumExhibit.CODEC.listOf().fieldOf("exhibits").forGetter(MuseumCollection::getExhibits)
+            MuseumExhibit.FILE_CODEC.listOf().fieldOf("exhibits").forGetter(MuseumCollection::getExhibits)
+    ).apply(instance, MuseumCollection::new));
+
+    public static final Codec<MuseumCollection> NET_CODEC = RecordCodecBuilder.create(instance -> instance.group(
+            Codec.STRING.fieldOf("name").forGetter(x -> x.getName().getKey()),
+            MuseumExhibit.NET_CODEC.listOf().fieldOf("exhibits").forGetter(MuseumCollection::getExhibits)
     ).apply(instance, MuseumCollection::new));
 
     private final TranslatableComponent name;

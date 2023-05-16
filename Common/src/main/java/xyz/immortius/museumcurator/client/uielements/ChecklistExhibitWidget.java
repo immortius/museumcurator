@@ -10,7 +10,7 @@ import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import xyz.immortius.museumcurator.client.screens.AbstractChecklistScreen;
 import xyz.immortius.museumcurator.common.data.MuseumCollections;
@@ -35,14 +35,14 @@ public class ChecklistExhibitWidget extends AbstractWidget {
     }
 
     public List<Component> getTooltip(int mouseX, int mouseY) {
-        Item item = mouseOverItem(mouseX, mouseY);
+        ItemStack item = mouseOverItem(mouseX, mouseY);
         if (item != null) {
-            return item.getDefaultInstance().getTooltipLines(Minecraft.getInstance().player, TooltipFlag.Default.NORMAL);
+            return item.getTooltipLines(Minecraft.getInstance().player, TooltipFlag.Default.NORMAL);
         }
         return null;
     }
 
-    private Item mouseOverItem(int mouseX, int mouseY) {
+    private ItemStack mouseOverItem(int mouseX, int mouseY) {
         if (mouseY < y + TITLE_HEIGHT) {
             return null;
         }
@@ -77,12 +77,12 @@ public class ChecklistExhibitWidget extends AbstractWidget {
             minecraft.font.draw(stack, title, x + offsetX, y + offsetY, 0x404040);
 
             offsetY += TITLE_HEIGHT;
-            for (Item item : exhibit.getItems()) {
+            for (ItemStack item : exhibit.getItems()) {
                 if (offsetX + 18 > width) {
                     offsetX = 0;
                     offsetY += 20;
                 }
-                minecraft.getItemRenderer().renderGuiItem(item.getDefaultInstance(), x + offsetX + 1, y + offsetY + 1);
+                minecraft.getItemRenderer().renderGuiItem(item, x + offsetX + 1, y + offsetY + 1);
                 RenderSystem.disableDepthTest();
                 RenderSystem.enableBlend();
 
@@ -102,7 +102,7 @@ public class ChecklistExhibitWidget extends AbstractWidget {
         if (button != 0) {
             return false;
         }
-        Item item = mouseOverItem((int)mouseX, (int)mouseY);
+        ItemStack item = mouseOverItem((int)mouseX, (int)mouseY);
         if (item != null) {
             if (MuseumCollections.isChecked(item)) {
                 MuseumCollections.uncheckItems(Collections.singleton(item));

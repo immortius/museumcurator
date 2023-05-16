@@ -52,6 +52,114 @@
         "minecraft:brewing_stand",
         "minecraft:glass_bottle",
         "minecraft:potion",
+        {
+          "id" : "minecraft:potion",
+          "tags" : {
+            "Potion" : "minecraft:mundane"
+          }
+        },
+        {
+          "id" : "minecraft:potion",
+          "tags" : {
+            "Potion" : "minecraft:thick"
+          }
+        },
+        {
+          "id" : "minecraft:potion",
+          "tags" : {
+            "Potion" : "minecraft:awkward"
+          }
+        },
+        {
+          "id" : "minecraft:potion",
+          "tags" : {
+            "Potion" : "minecraft:night_vision"
+          }
+        },
+        {
+          "id" : "minecraft:potion",
+          "tags" : {
+            "Potion" : "minecraft:invisibility"
+          }
+        },
+        {
+          "id" : "minecraft:potion",
+          "tags" : {
+            "Potion" : "minecraft:leaping"
+          }
+        },
+        {
+          "id" : "minecraft:potion",
+          "tags" : {
+            "Potion" : "minecraft:fire_resistance"
+          }
+        },
+        {
+          "id" : "minecraft:potion",
+          "tags" : {
+            "Potion" : "minecraft:swiftness"
+          }
+        },
+        {
+          "id" : "minecraft:potion",
+          "tags" : {
+            "Potion" : "minecraft:slowness"
+          }
+        },
+        {
+          "id" : "minecraft:potion",
+          "tags" : {
+            "Potion" : "minecraft:turtle_master"
+          }
+        },
+        {
+          "id" : "minecraft:potion",
+          "tags" : {
+            "Potion" : "minecraft:water_breathing"
+          }
+        },
+        {
+          "id" : "minecraft:potion",
+          "tags" : {
+            "Potion" : "minecraft:healing"
+          }
+        },
+        {
+          "id" : "minecraft:potion",
+          "tags" : {
+            "Potion" : "minecraft:harming"
+          }
+        },
+        {
+          "id" : "minecraft:potion",
+          "tags" : {
+            "Potion" : "minecraft:poison"
+          }
+        },
+        {
+          "id" : "minecraft:potion",
+          "tags" : {
+            "Potion" : "minecraft:regeneration"
+          }
+        },
+        {
+          "id" : "minecraft:potion",
+          "tags" : {
+            "Potion" : "minecraft:strength"
+          }
+        },
+        {
+          "id" : "minecraft:potion",
+          "tags" : {
+            "Potion" : "minecraft:weakness"
+          }
+        },
+        {
+          "id" : "minecraft:potion",
+          "tags" : {
+            "Potion" : "minecraft:slow_falling"
+          }
+        },
         "minecraft:splash_potion",
         "minecraft:lingering_potion",
         "minecraft:experience_bottle"

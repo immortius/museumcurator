@@ -52,7 +52,7 @@ public final class ServerEventHandler {
         for (ResourceLocation location : resourceManager.listResources(MuseumCuratorConstants.COLLECTION_DATA_PATH, r -> !r.isEmpty() && !MuseumCuratorConstants.COLLECTION_DATA_PATH.equals(r))) {
             try (InputStreamReader reader = new InputStreamReader(resourceManager.getResource(location).getInputStream())) {
                 JsonElement jsonElement = JsonParser.parseReader(reader);
-                MuseumCollection collection = MuseumCollection.CODEC.parse(JsonOps.INSTANCE, jsonElement).getOrThrow(false, Util.prefix("Error parsing museum collection: ", MuseumCuratorConstants.LOGGER::error));
+                MuseumCollection collection = MuseumCollection.FILE_CODEC.parse(JsonOps.INSTANCE, jsonElement).getOrThrow(false, Util.prefix("Error parsing museum collection: ", MuseumCuratorConstants.LOGGER::error));
                 collections.add(collection);
             } catch (IOException e) {
                 MuseumCuratorConstants.LOGGER.error("Failed to read museum collection data '{}'", location, e);

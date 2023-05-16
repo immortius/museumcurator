@@ -33,6 +33,14 @@
       "items": [
         "minecraft:map",
         "minecraft:filled_map",
+        {
+          "id" : "minecraft:map",
+          "tags" : {
+            "display" : {
+              "Name" : "{\"translate\":\"filled_map.buried_treasure\"}"
+            }
+          }
+        },
         "minecraft:cartography_table",
         "minecraft:compass",
         "minecraft:lodestone"
