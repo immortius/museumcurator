@@ -3,6 +3,8 @@ package xyz.immortius.museumcurator.client.uielements;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.renderer.GameRenderer;
@@ -60,7 +62,7 @@ public class ChecklistExhibitWidget extends AbstractWidget {
     }
 
     @Override
-    public void render(PoseStack stack, int mouseX, int mouseY, float delta) {
+    public void render(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
         if (visible) {
             Minecraft minecraft = Minecraft.getInstance();
             int offsetY = 0;
@@ -68,7 +70,7 @@ public class ChecklistExhibitWidget extends AbstractWidget {
 
             long checked = MuseumCollections.countChecked(exhibit.getItems());
             Component title = Component.literal("").append(exhibit.getName()).append("  (" + checked + " / " + exhibit.getItems().size() + ")");
-            minecraft.font.draw(stack, title, getX() + offsetX, getY() + offsetY, 0x404040);
+            graphics.drawString(minecraft.font, title, getX() + offsetX, getY() + offsetY, 0x404040, false);
 
             offsetY += TITLE_HEIGHT;
             for (ItemStack item : exhibit.getItems()) {
@@ -76,7 +78,7 @@ public class ChecklistExhibitWidget extends AbstractWidget {
                     offsetX = 0;
                     offsetY += 20;
                 }
-                minecraft.getItemRenderer().renderGuiItem(stack, item, getX() + offsetX + 1, getY() + offsetY + 1);
+                graphics.renderItem(item, getX() + offsetX + 1, getY() + offsetY + 1);
                 RenderSystem.disableDepthTest();
                 RenderSystem.enableBlend();
 
@@ -85,14 +87,14 @@ public class ChecklistExhibitWidget extends AbstractWidget {
                 RenderSystem.setShaderTexture(0, AbstractChecklistScreen.CONTAINER_TEXTURE);
 
                 boolean unlocked = MuseumCollections.isChecked(item);
-                blit(stack, offsetX + getX(), offsetY + getY(), (unlocked) ? 18 : 0, 256, 18, 18, AbstractChecklistScreen.TEXTURE_DIM, AbstractChecklistScreen.TEXTURE_DIM);
+                graphics.blit(AbstractChecklistScreen.CONTAINER_TEXTURE, offsetX + getX(), offsetY + getY(), (unlocked) ? 18 : 0, 256, 18, 18, AbstractChecklistScreen.TEXTURE_DIM, AbstractChecklistScreen.TEXTURE_DIM);
                 offsetX += 20;
             }
         }
     }
 
     @Override
-    public void renderWidget(PoseStack var1, int var2, int var3, float var4) {
+    public void renderWidget(GuiGraphics var1, int var2, int var3, float var4) {
 
     }
 

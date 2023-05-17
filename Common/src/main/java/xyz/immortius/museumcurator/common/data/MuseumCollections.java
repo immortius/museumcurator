@@ -138,8 +138,8 @@ public final class MuseumCollections {
         return items.stream().map(MuseumCollections::getCollectionItemStack).filter(MuseumCollections::isChecked).count();
     }
 
-    public static Set<ItemStack> getAllCollectionItems() {
-        return checkedItems;
+    public static Set<Item> getAllCollectionItems() {
+        return collectionItems.keySet();
     }
 
     private static class ComparingTagVisitor implements TagVisitor {

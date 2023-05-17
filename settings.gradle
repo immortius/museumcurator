@@ -13,4 +13,4 @@ pluginManagement {
 }
 
 rootProject.name = 'museumcurator'
-include("Common", "Fabric", "Forge")
+include("Common", "Fabric")

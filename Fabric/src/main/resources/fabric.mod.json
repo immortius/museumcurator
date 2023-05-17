@@ -32,11 +32,8 @@
   "depends": {
     "fabricloader": ">=0.14.19",
     "fabric": "*",
-    "minecraft": ">=1.19.4",
+    "minecraft": ">1.19.99",
     "java": ">=17"
-  },
-  "suggests" : {
-    "modmenu" : ">=6.1.0"
   }
 }
   

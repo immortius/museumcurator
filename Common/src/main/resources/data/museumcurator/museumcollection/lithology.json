@@ -123,23 +123,6 @@
       ]
     },
     {
-      "name": "museumcurator.lithology.prismarine",
-      "items": [
-        "minecraft:prismarine_crystals",
-        "minecraft:prismarine_shard",
-        "minecraft:prismarine",
-        "minecraft:prismarine_slab",
-        "minecraft:prismarine_stairs",
-        "minecraft:prismarine_wall",
-        "minecraft:prismarine_bricks",
-        "minecraft:prismarine_brick_slab",
-        "minecraft:prismarine_brick_stairs",
-        "minecraft:dark_prismarine",
-        "minecraft:dark_prismarine_slab",
-        "minecraft:dark_prismarine_stairs"
-      ]
-    },
-    {
       "name": "museumcurator.lithology.terracotta",
       "items": [
         "minecraft:clay_ball",
@@ -180,27 +163,6 @@
       ]
     },
     {
-      "name": "museumcurator.lithology.brick",
-      "items": [
-        "minecraft:brick",
-        "minecraft:bricks",
-        "minecraft:brick_slab",
-        "minecraft:brick_stairs",
-        "minecraft:brick_wall"
-      ]
-    },
-    {
-      "name": "museumcurator.lithology.mud",
-      "items": [
-        "minecraft:mud",
-        "minecraft:packed_mud",
-        "minecraft:mud_bricks",
-        "minecraft:mud_brick_slab",
-        "minecraft:mud_brick_stairs",
-        "minecraft:mud_brick_wall"
-      ]
-    },
-    {
       "name": "museumcurator.lithology.dirt",
       "items": [
         "minecraft:dirt",
@@ -224,40 +186,30 @@
       ]
     },
     {
-      "name": "museumcurator.lithology.concrete",
+      "name": "museumcurator.lithology.gemstones",
       "items": [
-        "minecraft:white_concrete_powder",
-        "minecraft:white_concrete",
-        "minecraft:light_gray_concrete_powder",
-        "minecraft:light_gray_concrete",
-        "minecraft:gray_concrete_powder",
-        "minecraft:gray_concrete",
-        "minecraft:black_concrete_powder",
-        "minecraft:black_concrete",
-        "minecraft:light_blue_concrete_powder",
-        "minecraft:light_blue_concrete",
-        "minecraft:cyan_concrete_powder",
-        "minecraft:cyan_concrete",
-        "minecraft:blue_concrete_powder",
-        "minecraft:blue_concrete",
-        "minecraft:lime_concrete_powder",
-        "minecraft:lime_concrete",
-        "minecraft:green_concrete_powder",
-        "minecraft:green_concrete",
-        "minecraft:yellow_concrete_powder",
-        "minecraft:yellow_concrete",
-        "minecraft:orange_concrete_powder",
-        "minecraft:orange_concrete",
-        "minecraft:red_concrete_powder",
-        "minecraft:red_concrete",
-        "minecraft:pink_concrete_powder",
-        "minecraft:pink_concrete",
-        "minecraft:magenta_concrete_powder",
-        "minecraft:magenta_concrete",
-        "minecraft:purple_concrete_powder",
-        "minecraft:purple_concrete",
-        "minecraft:brown_concrete_powder",
-        "minecraft:brown_concrete"
+        "minecraft:small_amethyst_bud",
+        "minecraft:medium_amethyst_bud",
+        "minecraft:large_amethyst_bud",
+        "minecraft:amethyst_cluster",
+        "minecraft:amethyst_shard",
+        "minecraft:amethyst_block",
+        "minecraft:diamond_ore",
+        "minecraft:deepslate_diamond_ore",
+        "minecraft:diamond",
+        "minecraft:diamond_block",
+        "minecraft:emerald_ore",
+        "minecraft:deepslate_emerald_ore",
+        "minecraft:emerald",
+        "minecraft:emerald_block",
+        "minecraft:lapis_ore",
+        "minecraft:deepslate_lapis_ore",
+        "minecraft:lapis_lazuli",
+        "minecraft:lapis_block",
+        "minecraft:redstone_ore",
+        "minecraft:deepslate_redstone_ore",
+        "minecraft:redstone",
+        "minecraft:redstone_block"
       ]
     },
     {

@@ -1,6 +1,7 @@
 package xyz.immortius.museumcurator.client.screens;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
@@ -38,11 +39,11 @@ public class ChecklistCollectionScreen extends AbstractChecklistScreen {
     }
 
     @Override
-    protected void renderTooltip(PoseStack stack, int mouseX, int mouseY) {
+    protected void renderTooltip(GuiGraphics graphics, int mouseX, int mouseY) {
         if (containerWidget.isMouseOver(mouseX, mouseY)) {
             List<Component> tooltip = containerWidget.getTooltip(mouseX, mouseY);
             if (tooltip != null && !tooltip.isEmpty()) {
-                renderTooltip(stack, tooltip, Optional.empty(), mouseX, mouseY);
+                graphics.renderTooltip(this.font, tooltip, Optional.empty(), mouseX, mouseY);
             }
         }
     }
@@ -71,11 +72,11 @@ public class ChecklistCollectionScreen extends AbstractChecklistScreen {
         }
 
         @Override
-        public void render(PoseStack stack, int top, int left, int width, int height, int mouseX, int mouseY, boolean hovered, float delta) {
+        public void render(GuiGraphics graphics, int top, int left, int width, int height, int mouseX, int mouseY, boolean hovered, float delta) {
             sectionWidget.setX(left);
             sectionWidget.setY(top);
             sectionWidget.setWidth(width);
-            sectionWidget.render(stack, mouseX, mouseY, delta);
+            sectionWidget.render(graphics, mouseX, mouseY, delta);
         }
 
         @Override

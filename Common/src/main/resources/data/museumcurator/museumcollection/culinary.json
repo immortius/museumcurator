@@ -49,6 +49,7 @@
     {
       "name": "museumcurator.culinary.beverages",
       "items": [
+        "minecraft:cauldron",
         "minecraft:brewing_stand",
         "minecraft:glass_bottle",
         "minecraft:potion",
