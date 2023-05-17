@@ -1,6 +1,7 @@
 package xyz.immortius.museumcurator.client.screens;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
@@ -58,16 +59,16 @@ public class MuseumCuratorConfigScreen extends Screen {
     }
 
     @Override
-    public void render(PoseStack stack, int mouseX, int mouseY, float delta) {
-        this.renderBackground(stack);
-        this.settingsList.render(stack, mouseX, mouseY, delta);
+    public void render(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
+        this.renderBackground(graphics);
+        this.settingsList.render(graphics, mouseX, mouseY, delta);
 
         int titleWidth = font.width(title);
         int titleX = (width - titleWidth) / 2;
-        font.drawShadow(stack, title, titleX, 8, 0xFFFFFF);
-        this.cancelButton.render(stack, mouseX, mouseY, delta);
-        this.saveButton.render(stack, mouseX, mouseY, delta);
-        this.resetButton.render(stack, mouseX, mouseY, delta);
-        super.render(stack, mouseX, mouseY, delta);
+        graphics.drawString(this.font, title, titleX, 8, 0xFFFFFF, true);
+        this.cancelButton.render(graphics, mouseX, mouseY, delta);
+        this.saveButton.render(graphics, mouseX, mouseY, delta);
+        this.resetButton.render(graphics, mouseX, mouseY, delta);
+        super.render(graphics, mouseX, mouseY, delta);
     }
 }

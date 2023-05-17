@@ -10,6 +10,7 @@
         "minecraft:written_book",
         "minecraft:lectern",
         "minecraft:bookshelf",
+        "minecraft:chiseled_bookshelf",
         "minecraft:enchanting_table",
         {
           "id" : "minecraft:enchanted_book",
@@ -264,6 +265,7 @@
         "minecraft:music_disc_wait",
         "minecraft:music_disc_pigstep",
         "minecraft:music_disc_otherside",
+        "minecraft:music_disc_relic",
         "minecraft:disc_fragment_5",
         "minecraft:music_disc_5",
         "minecraft:jukebox"

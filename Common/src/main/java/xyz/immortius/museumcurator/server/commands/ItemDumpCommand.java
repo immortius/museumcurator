@@ -41,7 +41,7 @@ public class ItemDumpCommand {
     private static int nonCollectionItemDump(CommandContext<CommandSourceStack> cmd) throws CommandSyntaxException {
         Registry<Item> registry = cmd.getSource().getServer().registryAccess().registry(Registries.ITEM).get();
 
-        Set<ResourceLocation> collectionItems = MuseumCollections.getAllCollectionItems().stream().map(x -> registry.getKey(x.getItem())).collect(Collectors.toSet());
+        Set<ResourceLocation> collectionItems = MuseumCollections.getAllCollectionItems().stream().map(registry::getKey).collect(Collectors.toSet());
         Set<ResourceLocation> missingItems = Sets.difference(registry.keySet(), collectionItems);
 
         try (BufferedWriter writer = Files.newBufferedWriter(Paths.get("missingitems.json"))) {

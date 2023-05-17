@@ -2,6 +2,18 @@
   "name": "museumcurator.collection.metallurgy",
   "exhibits": [
     {
+      "name" : "museumcurator.metallurgy.forging",
+      "items" : [
+        "minecraft:furnace",
+        "minecraft:blast_furnace",
+        "minecraft:smithing_table",
+        "minecraft:anvil",
+        "minecraft:chipped_anvil",
+        "minecraft:damaged_anvil",
+        "minecraft:grindstone"
+      ]
+    },
+    {
       "name": "museumcurator.metallurgy.copper",
       "items": [
         "minecraft:copper_ore",

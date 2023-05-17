@@ -10,8 +10,12 @@
         "minecraft:dark_oak_chest_boat",
         "minecraft:acacia_boat",
         "minecraft:acacia_chest_boat",
+        "minecraft:bamboo_raft",
+        "minecraft:bamboo_chest_raft",
         "minecraft:birch_boat",
         "minecraft:birch_chest_boat",
+        "minecraft:cherry_boat",
+        "minecraft:cherry_chest_boat",
         "minecraft:jungle_boat",
         "minecraft:jungle_chest_boat",
         "minecraft:mangrove_boat",
@@ -39,6 +43,43 @@
         "minecraft:echo_shard",
         "minecraft:recovery_compass"
       ]
+    },
+    {
+      "name": "museumcurator.technology.archaeology",
+      "items": [
+        "minecraft:brush",
+        "minecraft:suspicious_gravel",
+        "minecraft:suspicious_sand",
+        "minecraft:angler_pottery_sherd",
+        "minecraft:archer_pottery_sherd",
+        "minecraft:arms_up_pottery_sherd",
+        "minecraft:blade_pottery_sherd",
+        "minecraft:brewer_pottery_sherd",
+        "minecraft:burn_pottery_sherd",
+        "minecraft:danger_pottery_sherd",
+        "minecraft:explorer_pottery_sherd",
+        "minecraft:friend_pottery_sherd",
+        "minecraft:heart_pottery_sherd",
+        "minecraft:heartbreak_pottery_sherd",
+        "minecraft:howl_pottery_sherd",
+        "minecraft:miner_pottery_sherd",
+        "minecraft:mourner_pottery_sherd",
+        "minecraft:plenty_pottery_sherd",
+        "minecraft:prize_pottery_sherd",
+        "minecraft:sheaf_pottery_sherd",
+        "minecraft:shelter_pottery_sherd",
+        "minecraft:skull_pottery_sherd",
+        "minecraft:snort_pottery_sherd",
+        "minecraft:decorated_pot"
+      ]
+    },
+    {
+      "name": "museumcurator.technology.trophies",
+      "items" : [
+        "minecraft:creeper_head",
+        "minecraft:skeleton_skull",
+        "minecraft:zombie_head",
+        "minecraft:piglin_head"      ]
     },
     {
       "name": "museumcurator.technology.artifacts",
