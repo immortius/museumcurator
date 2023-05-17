@@ -1,7 +1,7 @@
 {
   "collection": "museumcurator.collection.technology",
   "name": "museumcurator.technology.artifacts",
-  "relativeTo": "museumcurator.technology.navigation",
+  "relativeTo": "museumcurator.technology.trophies",
   "items": [
     "minecraft:totem_of_undying",
     "minecraft:respawn_anchor",

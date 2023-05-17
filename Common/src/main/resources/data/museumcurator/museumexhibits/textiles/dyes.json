@@ -1,6 +1,8 @@
 {
   "collection": "museumcurator.collection.textiles",
   "name": "museumcurator.textiles.dyes",
+  "relativeTo": "museumcurator.textiles.banners",
+  "placement": "before",
   "items": [
     "minecraft:white_dye",
     "minecraft:light_gray_dye",

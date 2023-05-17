@@ -1,7 +1,6 @@
 {
-  "collection": "museumcurator.collection.lithology",
+  "collection": "museumcurator.collection.architecture",
   "name": "museumcurator.lithology.brick",
-  "relativeTo": "museumcurator.lithology.redsand",
   "items": [
     "minecraft:brick",
     "minecraft:bricks",

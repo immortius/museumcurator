@@ -8,6 +8,7 @@
     "minecraft:chicken",
     "minecraft:feather",
     "minecraft:egg",
+    "minecraft:sniffer_egg",
     "minecraft:mutton",
     "minecraft:porkchop",
     "minecraft:rabbit",
@@ -21,9 +22,6 @@
     "minecraft:bone_meal",
     "minecraft:bone",
     "minecraft:bone_block",
-    "minecraft:rotten_flesh",
-    "minecraft:creeper_head",
-    "minecraft:skeleton_skull",
-    "minecraft:zombie_head"
+    "minecraft:rotten_flesh"
   ]
 }

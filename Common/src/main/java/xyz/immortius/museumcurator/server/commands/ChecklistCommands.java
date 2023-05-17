@@ -35,7 +35,7 @@ public class ChecklistCommands {
         try {
             ServerPlayer player = source.getPlayerOrException();
             ChecklistState.get(server, player).uncheckAll();
-            source.sendSuccess(Component.translatable("commands.museumcurator.uncheckedAll"), true);
+            source.sendSuccess(() -> Component.translatable("commands.museumcurator.uncheckedAll"), true);
             return 1;
         } catch (CommandSyntaxException e) {
             return 0;

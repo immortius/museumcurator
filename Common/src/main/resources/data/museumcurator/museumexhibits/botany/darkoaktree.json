@@ -1,7 +1,7 @@
 {
   "collection": "museumcurator.collection.botany",
   "name": "museumcurator.botany.darkoaktree",
-  "relativeTo": "museumcurator.botany.birchtree",
+  "relativeTo": "museumcurator.botany.cherrytree",
   "items": [
     "minecraft:dark_oak_sapling",
     "minecraft:dark_oak_leaves",

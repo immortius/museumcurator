@@ -120,7 +120,7 @@ public class RawExhibit {
     }
 
     private boolean matchItems(ItemStack a, ItemStack b) {
-        if (!a.sameItem(b)) {
+        if (!ItemStack.isSameItem(a, b)) {
             return false;
         }
         if (a.getTag() != null) {

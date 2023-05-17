@@ -2,6 +2,7 @@ package xyz.immortius.museumcurator.client.uielements;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.renderer.GameRenderer;
@@ -32,7 +33,7 @@ public class ShapedButton extends AbstractWidget {
     }
 
     @Override
-    public void renderWidget(PoseStack stack, int mouseX, int mouseY, float delta) {
+    public void renderWidget(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
         int texX, texY;
         if (isMouseOver(mouseX, mouseY)) {
             texX = overX;
@@ -41,10 +42,7 @@ public class ShapedButton extends AbstractWidget {
             texX = normalX;
             texY = normalY;
         }
-        RenderSystem.setShader(GameRenderer::getPositionTexShader);
-        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-        RenderSystem.setShaderTexture(0, texture);
-        blit(stack, getX(), getY(), texX, texY, getWidth(), getHeight(), textureDim, textureDim);
+        graphics.blit(texture, getX(), getY(), texX, texY, getWidth(), getHeight(), textureDim, textureDim);
     }
 
     @Override

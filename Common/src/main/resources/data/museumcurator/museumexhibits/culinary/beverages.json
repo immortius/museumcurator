@@ -3,6 +3,7 @@
   "name": "museumcurator.culinary.beverages",
   "relativeTo": "museumcurator.culinary.desserts",
   "items": [
+    "minecraft:cauldron",
     "minecraft:brewing_stand",
     "minecraft:glass_bottle",
     "minecraft:potion",

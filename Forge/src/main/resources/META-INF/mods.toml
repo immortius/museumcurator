@@ -1,7 +1,7 @@
 # Find more information on toml format here:  https://github.com/toml-lang/toml
 # ModLoader settings
 modLoader="javafml"
-loaderVersion="[44,)"
+loaderVersion="[47,)"
 license="MIT License"
 #issueTrackerURL="https://change.me.to.your.issue.tracker.example.invalid/"
 # A list of mods - how many allowed here is determined by the individual mod loader
@@ -20,12 +20,12 @@ This mod provides assistance with building a minecraft museum display of every i
 [[dependencies.museumcurator]]
     modId="forge"
     mandatory=true
-    versionRange="[45.0.0,)"
+    versionRange="[47.0.0,)"
     ordering="NONE"
     side="BOTH"
 [[dependencies.museumcurator]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.19.4,1.20)"
+    versionRange="[1.20.1,1.21)"
     ordering="NONE"
     side="BOTH"

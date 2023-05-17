@@ -1,7 +1,7 @@
 {
   "collection": "museumcurator.collection.botany",
   "name": "museumcurator.botany.birchtree",
-  "relativeTo": "museumcurator.botany.acaciatree",
+  "relativeTo": "museumcurator.botany.bamboo",
   "items": [
     "minecraft:birch_sapling",
     "minecraft:birch_leaves",

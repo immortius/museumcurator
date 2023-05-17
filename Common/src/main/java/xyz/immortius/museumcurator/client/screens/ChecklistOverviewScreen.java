@@ -1,22 +1,16 @@
 package xyz.immortius.museumcurator.client.screens;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.components.Button;
-import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.inventory.ClickType;
 import xyz.immortius.museumcurator.client.uielements.CollectionButton;
-import xyz.immortius.museumcurator.client.uielements.ColorTextButton;
-import xyz.immortius.museumcurator.client.uielements.ScrollContainerEntry;
 import xyz.immortius.museumcurator.client.uielements.ShapedButton;
 import xyz.immortius.museumcurator.common.data.MuseumCollection;
 import xyz.immortius.museumcurator.common.data.MuseumCollections;
 import xyz.immortius.museumcurator.common.menus.MuseumChecklistMenu;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -57,7 +51,7 @@ public class ChecklistOverviewScreen extends AbstractChecklistScreen {
     }
 
     @Override
-    public void render(PoseStack stack, int mouseX, int mouseY, float delta) {
+    public void render(GuiGraphics stack, int mouseX, int mouseY, float delta) {
         super.render(stack, mouseX, mouseY, delta);
         for (int i = currentPage * ITEMS_PER_PAGE; i < Math.min(collectionButtons.size(), (currentPage + 1) * ITEMS_PER_PAGE); i++) {
             collectionButtons.get(i).render(stack, mouseX, mouseY, delta);

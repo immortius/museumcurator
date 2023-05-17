@@ -18,7 +18,7 @@ import net.minecraft.world.item.Item;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.AddReloadListenerEvent;
-import net.minecraftforge.event.CreativeModeTabEvent;
+import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -121,8 +121,8 @@ public class MuseumCuratorMod {
                 Optional.of(NetworkDirection.PLAY_TO_SERVER));
     }
 
-    public void updateCreativeTabs(CreativeModeTabEvent.BuildContents e) {
-        if (e.getTab().getType() == CreativeModeTab.Type.CATEGORY && e.getTab() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
+    public void updateCreativeTabs(BuildCreativeModeTabContentsEvent e) {
+        if (e.getTab().getType() == CreativeModeTab.Type.CATEGORY && e.getTabKey().equals(CreativeModeTabs.TOOLS_AND_UTILITIES)) {
             e.getEntries().put(MUSEUM_CHECKLIST.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
         }
     }

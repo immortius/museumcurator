@@ -1,6 +1,7 @@
 {
   "collection": "museumcurator.collection.architecture",
   "name": "museumcurator.architecture.glass",
+  "relativeTo": "museumcurator.lithology.concrete",
   "items": [
     "minecraft:glass",
     "minecraft:tinted_glass",
