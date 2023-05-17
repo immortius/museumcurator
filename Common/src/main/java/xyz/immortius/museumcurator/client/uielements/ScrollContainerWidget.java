@@ -3,6 +3,7 @@ package xyz.immortius.museumcurator.client.uielements;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Renderable;
 import net.minecraft.client.gui.components.events.AbstractContainerEventHandler;
 import net.minecraft.client.gui.components.events.GuiEventListener;
@@ -67,13 +68,13 @@ public class ScrollContainerWidget extends AbstractContainerEventHandler impleme
     }
 
     @Override
-    public void render(PoseStack stack, int mouseX, int mouseY, float delta) {
+    public void render(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
         Tesselator tesselator = Tesselator.getInstance();
         BufferBuilder bufferbuilder = tesselator.getBuilder();
         RenderSystem.setShader(GameRenderer::getPositionTexColorShader);
         this.hovered = this.isMouseOver(mouseX, mouseY) ? this.getEntryAtPosition(mouseX, mouseY) : null;
 
-        this.renderList(stack, mouseX, mouseY, delta);
+        this.renderList(graphics, mouseX, mouseY, delta);
         renderScrollbar(tesselator, bufferbuilder);
 
         RenderSystem.disableBlend();
@@ -125,14 +126,14 @@ public class ScrollContainerWidget extends AbstractContainerEventHandler impleme
         return children.stream().map(x -> x.getHeight(width)).reduce(0, Integer::sum);
     }
 
-    protected void renderList(PoseStack stack, int mouseX, int mouseY, float delta) {
+    protected void renderList(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
         double scale = Minecraft.getInstance().getWindow().getGuiScale();
         RenderSystem.enableScissor((int) (scale * x), (int) (scale * (Minecraft.getInstance().getWindow().getGuiScaledHeight() - height - y)), (int) (scale * width), (int) (scale * height));
         int absoluteY = 0;
         for (ScrollContainerEntry child : children) {
             int rowBottom = absoluteY + child.getHeight(width - SCROLLBAR_WIDTH - SCROLLBAR_SPACE);
             if (rowBottom >= scrollAmount && absoluteY <= scrollAmount + height) {
-                child.render(stack, y + absoluteY - (int) scrollAmount, x, width - SCROLLBAR_WIDTH - SCROLLBAR_SPACE, rowBottom - absoluteY, mouseX, mouseY, Objects.equals(this.hovered, child), delta);
+                child.render(graphics, y + absoluteY - (int) scrollAmount, x, width - SCROLLBAR_WIDTH - SCROLLBAR_SPACE, rowBottom - absoluteY, mouseX, mouseY, Objects.equals(this.hovered, child), delta);
             }
             absoluteY = rowBottom;
         }

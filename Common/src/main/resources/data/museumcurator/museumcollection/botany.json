@@ -59,6 +59,20 @@
       ]
     },
     {
+      "name": "museumcurator.botany.cherrytree",
+      "items" : [
+        "minecraft:cherry_sapling",
+        "minecraft:cherry_leaves",
+        "minecraft:cherry_log",
+        "minecraft:stripped_cherry_log",
+        "minecraft:cherry_wood",
+        "minecraft:stripped_cherry_wood",
+        "minecraft:cherry_planks",
+        "minecraft:cherry_slab",
+        "minecraft:cherry_stairs"
+      ]
+    },
+    {
       "name": "museumcurator.botany.jungletree",
       "items": [
         "minecraft:jungle_sapling",
@@ -104,6 +118,20 @@
       ]
     },
     {
+      "name": "museumcurator.botany.bamboo",
+      "items" : [
+        "minecraft:bamboo",
+        "minecraft:bamboo_block",
+        "minecraft:stripped_bamboo_block",
+        "minecraft:bamboo_planks",
+        "minecraft:bamboo_slab",
+        "minecraft:bamboo_stairs",
+        "minecraft:bamboo_mosaic",
+        "minecraft:bamboo_mosaic_slab",
+        "minecraft:bamboo_mosaic_stairs"
+      ]
+    },
+    {
       "name": "museumcurator.botany.shrubbery",
       "items": [
         "minecraft:grass",
@@ -117,6 +145,7 @@
     {
       "name": "museumcurator.botany.flowers",
       "items": [
+        "minecraft:pink_petals",
         "minecraft:dandelion",
         "minecraft:poppy",
         "minecraft:blue_orchid",
@@ -131,8 +160,10 @@
         "minecraft:lily_of_the_valley",
         "minecraft:lilac",
         "minecraft:sunflower",
+        "minecraft:torchflower",
         "minecraft:rose_bush",
         "minecraft:peony",
+        "minecraft:pitcher_plant",
         "minecraft:wither_rose"
       ]
     },
@@ -141,14 +172,17 @@
       "items": [
         "minecraft:beetroot_seeds",
         "minecraft:cocoa_beans",
+        "minecraft:pitcher_pod",
         "minecraft:pumpkin_seeds",
         "minecraft:melon_seeds",
+        "minecraft:torchflower_seeds",
         "minecraft:wheat_seeds"
       ]
     },
     {
       "name": "museumcurator.botany.agricultural",
       "items": [
+        "minecraft:composter",
         "minecraft:beetroot",
         "minecraft:carrot",
         "minecraft:potato",
@@ -162,7 +196,6 @@
         "minecraft:pumpkin",
         "minecraft:carved_pumpkin",
         "minecraft:jack_o_lantern",
-        "minecraft:bamboo",
         "minecraft:cactus",
         "minecraft:sugar_cane"
       ]
@@ -200,6 +233,7 @@
         "minecraft:sculk_vein",
         "minecraft:sculk",
         "minecraft:sculk_sensor",
+        "minecraft:calibrated_sculk_sensor",
         "minecraft:sculk_catalyst",
         "minecraft:sculk_shrieker"
       ]

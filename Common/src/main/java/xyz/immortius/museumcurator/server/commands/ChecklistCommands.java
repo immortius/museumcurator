@@ -31,7 +31,7 @@ public class ChecklistCommands {
 
     private static int uncheckAllItems(CommandSourceStack source, MinecraftServer server) {
         ChecklistState.get(server).uncheckAll();
-        source.sendSuccess(Component.translatable("commands.museumcurator.uncheckedAll"), true);
+        source.sendSuccess(() -> Component.translatable("commands.museumcurator.uncheckedAll"), true);
         return 1;
     }
 
