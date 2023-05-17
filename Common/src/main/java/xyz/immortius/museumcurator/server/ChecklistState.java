@@ -25,7 +25,7 @@ public class ChecklistState extends SavedData {
     }
 
     private static ChecklistState load(MinecraftServer server, CompoundTag tag) {
-        ListTag items = tag.getList("items", ListTag.TAG_STRING);
+        ListTag items = tag.getList("items", ListTag.TAG_COMPOUND);
         Set<ItemStack> checkedItems = new LinkedHashSet<>();
         for (int i = 0; i < items.size(); i++) {
             ItemStack item = MuseumCollections.getCollectionItemStack(ItemStack.of(items.getCompound(i)));
