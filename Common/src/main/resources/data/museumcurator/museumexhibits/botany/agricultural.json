@@ -2,6 +2,7 @@
   "collection": "museumcurator.collection.botany",
   "name": "museumcurator.botany.agricultural",
   "items": [
+    "minecraft:composter",
     "minecraft:beetroot",
     "minecraft:carrot",
     "minecraft:potato",
@@ -15,7 +16,6 @@
     "minecraft:pumpkin",
     "minecraft:carved_pumpkin",
     "minecraft:jack_o_lantern",
-    "minecraft:bamboo",
     "minecraft:cactus",
     "minecraft:sugar_cane"
   ]

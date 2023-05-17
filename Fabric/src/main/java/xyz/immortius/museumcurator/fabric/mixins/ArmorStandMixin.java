@@ -27,7 +27,7 @@ public abstract class ArmorStandMixin extends LivingEntity {
     @Inject(method="interactAt", at=@At("HEAD"), cancellable = true)
     private void cancelForChecklist(Player player, Vec3 vec3, InteractionHand interactionHand, CallbackInfoReturnable<InteractionResult> returnable) {
         if (player.isSecondaryUseActive() && player.getItemInHand(interactionHand).getItem() instanceof MuseumChecklist mc) {
-            InteractionResult result = mc.interact(this, player.level, player);
+            InteractionResult result = mc.interact(this, player.level(), player);
             returnable.setReturnValue(result);
             returnable.cancel();
         }

@@ -1,6 +1,7 @@
 package xyz.immortius.museumcurator.client.uielements;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.network.chat.Component;
 
@@ -13,7 +14,7 @@ public interface ScrollContainerEntry extends GuiEventListener {
 
     /**
      * Renders the contents of the entry
-     * @param stack
+     * @param graphics
      * @param top
      * @param left
      * @param width
@@ -23,7 +24,7 @@ public interface ScrollContainerEntry extends GuiEventListener {
      * @param hovered
      * @param delta
      */
-    void render(PoseStack stack, int top, int left, int width, int height, int mouseX, int mouseY, boolean hovered, float delta);
+    void render(GuiGraphics graphics, int top, int left, int width, int height, int mouseX, int mouseY, boolean hovered, float delta);
 
     /**
      * @param width The width available to render the entry

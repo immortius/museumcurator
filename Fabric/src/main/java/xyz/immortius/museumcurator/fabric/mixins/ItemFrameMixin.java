@@ -26,7 +26,7 @@ public abstract class ItemFrameMixin extends HangingEntity {
     @Inject(method="interact", at=@At("HEAD"), cancellable = true)
     public void interact(Player player, InteractionHand interactionHand, CallbackInfoReturnable<InteractionResult> returnable) {
         if (player.isSecondaryUseActive() && player.getItemInHand(interactionHand).getItem() instanceof MuseumChecklist mc) {
-            InteractionResult result = mc.interact(this, player.level, player);
+            InteractionResult result = mc.interact(this, player.level(), player);
             returnable.setReturnValue(result);
             returnable.cancel();
         }

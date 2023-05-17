@@ -1,0 +1,10 @@
+{
+  "collection": "museumcurator.collection.technology",
+  "name": "museumcurator.technology.trophies",
+  "items": [
+    "minecraft:creeper_head",
+    "minecraft:skeleton_skull",
+    "minecraft:zombie_head",
+    "minecraft:piglin_head"
+  ]
+}

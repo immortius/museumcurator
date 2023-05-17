@@ -2,6 +2,7 @@
   "collection": "museumcurator.collection.botany",
   "name": "museumcurator.botany.flowers",
   "items": [
+    "minecraft:pink_petals",
     "minecraft:dandelion",
     "minecraft:poppy",
     "minecraft:blue_orchid",
@@ -16,8 +17,10 @@
     "minecraft:lily_of_the_valley",
     "minecraft:lilac",
     "minecraft:sunflower",
+    "minecraft:torchflower",
     "minecraft:rose_bush",
     "minecraft:peony",
+    "minecraft:pitcher_plant",
     "minecraft:wither_rose"
   ]
 }

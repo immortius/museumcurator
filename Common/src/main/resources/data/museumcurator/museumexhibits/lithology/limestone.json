@@ -1,7 +1,7 @@
 {
   "collection": "museumcurator.collection.lithology",
   "name": "museumcurator.lithology.limestone",
-  "relativeTo": "museumcurator.lithology.coal",
+  "relativeTo": "museumcurator.lithology.granite",
   "items": [
     "minecraft:dripstone_block",
     "minecraft:pointed_dripstone",

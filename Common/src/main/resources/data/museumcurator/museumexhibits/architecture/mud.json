@@ -1,7 +1,8 @@
 {
-  "collection": "museumcurator.collection.lithology",
+  "collection": "museumcurator.collection.architecture",
   "name": "museumcurator.lithology.mud",
-  "relativeTo": "museumcurator.lithology.dirt",
+  "relativeTo": "museumcurator.lithology.brick",
+  "placement": "before",
   "items": [
     "minecraft:mud",
     "minecraft:packed_mud",

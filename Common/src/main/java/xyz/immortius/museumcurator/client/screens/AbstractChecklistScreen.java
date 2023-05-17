@@ -1,7 +1,7 @@
 package xyz.immortius.museumcurator.client.screens;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.screens.Screen;
@@ -47,29 +47,29 @@ public abstract class AbstractChecklistScreen extends AbstractContainerScreen<Mu
         addRenderableWidget(closeButton);
     }
 
-    protected void renderLabels(PoseStack stack, int mouseX, int mouseY) {
+    protected void renderLabels(GuiGraphics graphics, int mouseX, int mouseY) {
         int width = this.font.width(this.title);
-        this.font.draw(stack, this.title, (imageWidth - width) / 2.f, (float) this.titleLabelY, 0x404040);
+        graphics.drawString(this.font, this.title, (imageWidth - width) / 2, this.titleLabelY, 0x404040, false);
     }
 
     @Override
-    public void render(PoseStack stack, int mouseX, int mouseY, float delta) {
-        this.renderBackground(stack);
-        super.render(stack, mouseX, mouseY, delta);
-        renderContent(stack, mouseX, mouseY, delta);
-        this.renderTooltip(stack, mouseX, mouseY);
+    public void render(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
+        renderBackground(graphics);
+        super.render(graphics, mouseX, mouseY, delta);
+        renderContent(graphics, mouseX, mouseY, delta);
+        renderTooltip(graphics, mouseX, mouseY);
     }
 
-    public void renderContent(PoseStack stack, int mouseX, int mouseY, float delta) {
+    public void renderContent(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
 
     }
 
     @Override
-    protected void renderBg(PoseStack stack, float delta, int mouseX, int mouseY) {
+    protected void renderBg(GuiGraphics graphics, float delta, int mouseX, int mouseY) {
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         RenderSystem.setShaderTexture(0, CONTAINER_TEXTURE);
-        this.blit(stack, leftPos, topPos, 0, 0, imageWidth, imageHeight, TEXTURE_DIM, TEXTURE_DIM);
+        graphics.blit(CONTAINER_TEXTURE, leftPos, topPos, 0, 0, imageWidth, imageHeight, TEXTURE_DIM, TEXTURE_DIM);
     }
 
     @Override
