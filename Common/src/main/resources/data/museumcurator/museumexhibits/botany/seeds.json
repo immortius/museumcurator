@@ -4,8 +4,10 @@
   "items": [
     "minecraft:beetroot_seeds",
     "minecraft:cocoa_beans",
+    "minecraft:pitcher_pod",
     "minecraft:pumpkin_seeds",
     "minecraft:melon_seeds",
+    "minecraft:torchflower_seeds",
     "minecraft:wheat_seeds"
   ]
 }

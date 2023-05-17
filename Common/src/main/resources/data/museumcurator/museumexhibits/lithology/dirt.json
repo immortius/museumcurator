@@ -1,7 +1,7 @@
 {
   "collection": "museumcurator.collection.lithology",
   "name": "museumcurator.lithology.dirt",
-  "relativeTo": "museumcurator.lithology.volcanic",
+  "relativeTo": "museumcurator.lithology.gemstones",
   "items": [
     "minecraft:dirt",
     "minecraft:coarse_dirt",

@@ -1,6 +1,7 @@
 {
   "collection": "museumcurator.collection.metallurgy",
   "name": "museumcurator.metallurgy.copper",
+  "relativeTo": "museumcurator.metallurgy.forging",
   "items": [
     "minecraft:copper_ore",
     "minecraft:deepslate_copper_ore",

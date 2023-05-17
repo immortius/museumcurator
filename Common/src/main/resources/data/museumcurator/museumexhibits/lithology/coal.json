@@ -1,7 +1,7 @@
 {
   "collection": "museumcurator.collection.lithology",
   "name": "museumcurator.lithology.coal",
-  "relativeTo": "museumcurator.lithology.granite",
+  "relativeTo": "museumcurator.lithology.volcanic",
   "items": [
     "minecraft:coal_ore",
     "minecraft:deepslate_coal_ore",

@@ -8,6 +8,7 @@
     "minecraft:written_book",
     "minecraft:lectern",
     "minecraft:bookshelf",
+    "minecraft:chiseled_bookshelf",
     "minecraft:enchanting_table",
     {
       "id": "minecraft:enchanted_book",

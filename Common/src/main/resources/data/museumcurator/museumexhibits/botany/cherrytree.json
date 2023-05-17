@@ -1,0 +1,16 @@
+{
+  "collection": "museumcurator.collection.botany",
+  "name": "museumcurator.botany.cherrytree",
+  "relativeTo": "museumcurator.botany.birchtree",
+  "items": [
+    "minecraft:cherry_sapling",
+    "minecraft:cherry_leaves",
+    "minecraft:cherry_log",
+    "minecraft:stripped_cherry_log",
+    "minecraft:cherry_wood",
+    "minecraft:stripped_cherry_wood",
+    "minecraft:cherry_planks",
+    "minecraft:cherry_slab",
+    "minecraft:cherry_stairs"
+  ]
+}

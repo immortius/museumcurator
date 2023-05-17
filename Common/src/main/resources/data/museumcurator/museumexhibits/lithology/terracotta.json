@@ -1,7 +1,7 @@
 {
   "collection": "museumcurator.collection.lithology",
   "name": "museumcurator.lithology.terracotta",
-  "relativeTo": "museumcurator.lithology.concrete",
+  "relativeTo": "museumcurator.lithology.redsand",
   "items": [
     "minecraft:clay_ball",
     "minecraft:clay",

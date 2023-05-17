@@ -4,6 +4,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
@@ -24,14 +25,13 @@ public class ColorTextButton extends Button {
         super(x, y, width, height, label, onPress, createNarration);
     }
 
-    public void renderWidget(PoseStack $$0, int $$1, int $$2, float $$3) {
+    public void renderWidget(GuiGraphics $$0, int $$1, int $$2, float $$3) {
         Minecraft $$4 = Minecraft.getInstance();
-        RenderSystem.setShaderTexture(0, WIDGETS_LOCATION);
-        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, this.alpha);
+        $$0.setColor(1.0F, 1.0F, 1.0F, this.alpha);
         RenderSystem.enableBlend();
         RenderSystem.enableDepthTest();
-        blitNineSliced($$0, this.getX(), this.getY(), this.getWidth(), this.getHeight(), 20, 4, 200, 20, 0, this.getTextureY());
-        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+        $$0.blitNineSliced(WIDGETS_LOCATION, this.getX(), this.getY(), this.getWidth(), this.getHeight(), 20, 4, 200, 20, 0, this.getTextureY());
+        $$0.setColor(1.0F, 1.0F, 1.0F, 1.0F);
         int $$5 = this.active ? activeTextColor : textColor;
         this.renderString($$0, $$4.font, $$5 | Mth.ceil(this.alpha * 255.0F) << 24);
     }

@@ -7,8 +7,6 @@
     "minecraft:leather_horse_armor",
     "minecraft:iron_horse_armor",
     "minecraft:golden_horse_armor",
-    "minecraft:diamond_horse_armor",
-    "minecraft:carrot_on_a_stick",
-    "minecraft:warped_fungus_on_a_stick"
+    "minecraft:diamond_horse_armor"
   ]
 }
