@@ -206,10 +206,10 @@ public class ScrollContainerWidget extends AbstractContainerEventHandler impleme
     public boolean keyPressed(int p_93434_, int p_93435_, int p_93436_) {
         if (super.keyPressed(p_93434_, p_93435_, p_93436_)) {
             return true;
-        } else if (p_93434_ == 264) {
+        } else if (Minecraft.getInstance().options.keyUp.matches(p_93434_, p_93435_)) {
             setScrollAmount(scrollAmount - 20);
             return true;
-        } else if (p_93434_ == 265) {
+        } else if (Minecraft.getInstance().options.keyDown.matches(p_93434_, p_93435_)) {
             setScrollAmount(scrollAmount + 20);
             return true;
         } else {
@@ -231,4 +231,11 @@ public class ScrollContainerWidget extends AbstractContainerEventHandler impleme
         return NarrationPriority.NONE;
     }
 
+    public void scrollUp() {
+        setScrollAmount(scrollAmount - 20);
+    }
+
+    public void scrollDown() {
+        setScrollAmount(scrollAmount + 20);
+    }
 }

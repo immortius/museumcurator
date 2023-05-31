@@ -47,6 +47,19 @@ public class ChecklistCollectionScreen extends AbstractChecklistScreen {
         }
     }
 
+    @Override
+    public boolean keyPressed(int $$0, int $$1, int $$2) {
+        if (this.minecraft.options.keyUp.matches($$0, $$1)) {
+            containerWidget.scrollUp();
+            return true;
+        } else if (this.minecraft.options.keyDown.matches($$0, $$1)) {
+            containerWidget.scrollDown();
+            return true;
+        }
+
+        return super.keyPressed($$0, $$1, $$2);
+    }
+
     public static class ChecklistExhibitEntry implements ScrollContainerEntry {
 
         private ChecklistExhibitWidget sectionWidget;
