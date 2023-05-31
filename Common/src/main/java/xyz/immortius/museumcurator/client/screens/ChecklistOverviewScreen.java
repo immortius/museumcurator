@@ -8,6 +8,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.ClickType;
+import xyz.immortius.museumcurator.client.uielements.CollectionButton;
 import xyz.immortius.museumcurator.client.uielements.ColorTextButton;
 import xyz.immortius.museumcurator.client.uielements.ScrollContainerEntry;
 import xyz.immortius.museumcurator.client.uielements.ShapedButton;
@@ -29,7 +30,7 @@ public class ChecklistOverviewScreen extends AbstractChecklistScreen {
     private int pages = 0;
     private int currentPage = 0;
 
-    private List<ColorTextButton> collectionButtons = new ArrayList<>();
+    private List<CollectionButton> collectionButtons = new ArrayList<>();
     private ShapedButton nextButton;
     private ShapedButton prevButton;
 
@@ -47,7 +48,7 @@ public class ChecklistOverviewScreen extends AbstractChecklistScreen {
         collectionButtons.clear();
         int index = 0;
         for (MuseumCollection collection : MuseumCollections.getCollections()) {
-            collectionButtons.add(new ColorTextButton(leftPos + 16 + 226 / 2 - 96, topPos + 46 + 2 + 24 * (index++ % ITEMS_PER_PAGE), 192, 20, collection.getName(), button ->
+            collectionButtons.add(new CollectionButton(leftPos + 16 + 226 / 2 - 96, topPos + 46 + 2 + 24 * (index++ % ITEMS_PER_PAGE), 192, 20, collection, button ->
                     Minecraft.getInstance().setScreen(new ChecklistCollectionScreen(menu, playerInventory, collection.getName(), collection, this))));
         }
 
