@@ -73,95 +73,136 @@
         {
           "id" : "minecraft:potion",
           "tags" : {
-            "Potion" : "minecraft:night_vision"
+            "Potion" : "minecraft:long_night_vision"
           }
         },
         {
           "id" : "minecraft:potion",
           "tags" : {
-            "Potion" : "minecraft:invisibility"
+            "Potion" : "minecraft:long_invisibility"
           }
         },
         {
           "id" : "minecraft:potion",
           "tags" : {
-            "Potion" : "minecraft:leaping"
+            "Potion" : "minecraft:long_leaping"
           }
         },
         {
           "id" : "minecraft:potion",
           "tags" : {
-            "Potion" : "minecraft:fire_resistance"
+            "Potion" : "minecraft:strong_leaping"
           }
         },
         {
           "id" : "minecraft:potion",
           "tags" : {
-            "Potion" : "minecraft:swiftness"
+            "Potion" : "minecraft:long_fire_resistance"
           }
         },
         {
           "id" : "minecraft:potion",
           "tags" : {
-            "Potion" : "minecraft:slowness"
+            "Potion" : "minecraft:long_swiftness"
           }
         },
         {
           "id" : "minecraft:potion",
           "tags" : {
-            "Potion" : "minecraft:turtle_master"
+            "Potion" : "minecraft:strong_swiftness"
           }
         },
         {
           "id" : "minecraft:potion",
           "tags" : {
-            "Potion" : "minecraft:water_breathing"
+            "Potion" : "minecraft:long_slowness"
           }
         },
         {
           "id" : "minecraft:potion",
           "tags" : {
-            "Potion" : "minecraft:healing"
+            "Potion" : "minecraft:strong_slowness"
           }
         },
         {
           "id" : "minecraft:potion",
           "tags" : {
-            "Potion" : "minecraft:harming"
+            "Potion" : "minecraft:long_turtle_master"
           }
         },
         {
           "id" : "minecraft:potion",
           "tags" : {
-            "Potion" : "minecraft:poison"
+            "Potion" : "minecraft:strong_turtle_master"
           }
         },
         {
           "id" : "minecraft:potion",
           "tags" : {
-            "Potion" : "minecraft:regeneration"
+            "Potion" : "minecraft:long_water_breathing"
           }
         },
         {
           "id" : "minecraft:potion",
           "tags" : {
-            "Potion" : "minecraft:strength"
+            "Potion" : "minecraft:strong_healing"
           }
         },
         {
           "id" : "minecraft:potion",
           "tags" : {
-            "Potion" : "minecraft:weakness"
+            "Potion" : "minecraft:strong_harming"
           }
         },
         {
           "id" : "minecraft:potion",
           "tags" : {
-            "Potion" : "minecraft:slow_falling"
+            "Potion" : "minecraft:long_poison"
+          }
+        },
+        {
+          "id" : "minecraft:potion",
+          "tags" : {
+            "Potion" : "minecraft:strong_poison"
+          }
+        },
+        {
+          "id" : "minecraft:potion",
+          "tags" : {
+            "Potion" : "minecraft:long_regeneration"
+          }
+        },
+        {
+          "id" : "minecraft:potion",
+          "tags" : {
+            "Potion" : "minecraft:strong_regeneration"
+          }
+        },
+        {
+          "id" : "minecraft:potion",
+          "tags" : {
+            "Potion" : "minecraft:long_strength"
+          }
+        },
+        {
+          "id" : "minecraft:potion",
+          "tags" : {
+            "Potion" : "minecraft:strong_strength"
+          }
+        },
+        {
+          "id" : "minecraft:potion",
+          "tags" : {
+            "Potion" : "minecraft:long_weakness"
+          }
+        },
+        {
+          "id" : "minecraft:potion",
+          "tags" : {
+            "Potion" : "minecraft:long_slow_falling"
           }
         },
         "minecraft:splash_potion",
-        "minecraft:lingering_potion",
         "minecraft:experience_bottle"
       ]
     }
