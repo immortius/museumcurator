@@ -1,0 +1,11 @@
+{
+  "collection": "museumcurator.collection.architecture",
+  "name": "museumcurator.architecture.containers",
+  "items": [
+    "minecraft:bucket",
+    "minecraft:barrel",
+    "minecraft:chest",
+    "minecraft:trapped_chest",
+    "minecraft:hopper"
+  ]
+}

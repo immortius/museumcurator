@@ -1,0 +1,11 @@
+{
+  "collection": "museumcurator.collection.botany",
+  "name": "museumcurator.botany.seeds",
+  "items": [
+    "minecraft:beetroot_seeds",
+    "minecraft:cocoa_beans",
+    "minecraft:pumpkin_seeds",
+    "minecraft:melon_seeds",
+    "minecraft:wheat_seeds"
+  ]
+}

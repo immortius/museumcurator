@@ -1,0 +1,22 @@
+{
+  "collection": "museumcurator.collection.botany",
+  "name": "museumcurator.botany.agricultural",
+  "items": [
+    "minecraft:beetroot",
+    "minecraft:carrot",
+    "minecraft:potato",
+    "minecraft:poisonous_potato",
+    "minecraft:wheat",
+    "minecraft:hay_block",
+    "minecraft:apple",
+    "minecraft:sweet_berries",
+    "minecraft:melon_slice",
+    "minecraft:melon",
+    "minecraft:pumpkin",
+    "minecraft:carved_pumpkin",
+    "minecraft:jack_o_lantern",
+    "minecraft:bamboo",
+    "minecraft:cactus",
+    "minecraft:sugar_cane"
+  ]
+}

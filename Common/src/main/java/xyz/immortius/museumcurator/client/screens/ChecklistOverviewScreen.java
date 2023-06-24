@@ -18,6 +18,7 @@ import xyz.immortius.museumcurator.common.menus.MuseumChecklistMenu;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -47,7 +48,7 @@ public class ChecklistOverviewScreen extends AbstractChecklistScreen {
 
         collectionButtons.clear();
         int index = 0;
-        for (MuseumCollection collection : MuseumCollections.getCollections()) {
+        for (MuseumCollection collection : MuseumCollections.getCollections().stream().sorted(Comparator.comparing(x -> x.getName().getString())).toList()) {
             collectionButtons.add(new CollectionButton(leftPos + 16 + 226 / 2 - 96, topPos + 46 + 2 + 24 * (index++ % ITEMS_PER_PAGE), 192, 20, collection, button ->
                     Minecraft.getInstance().setScreen(new ChecklistCollectionScreen(menu, playerInventory, collection.getName(), collection, this))));
         }

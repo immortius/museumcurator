@@ -36,7 +36,7 @@ public final class MuseumCollections {
      * Sets the available collections
      * @param newCollections
      */
-    public static void setCollections(List<MuseumCollection> newCollections) {
+    public static void setCollections(Collection<MuseumCollection> newCollections) {
         collections = ImmutableList.copyOf(newCollections);
         ImmutableListMultimap.Builder<Item, ItemStack> builder = ImmutableListMultimap.builder();
         for (MuseumCollection collection : newCollections) {
@@ -138,11 +138,11 @@ public final class MuseumCollections {
         return items.stream().map(MuseumCollections::getCollectionItemStack).filter(MuseumCollections::isChecked).count();
     }
 
-    public static Set<ItemStack> getAllCollectionItems() {
-        return checkedItems;
+    public static Collection<ItemStack> getAllCollectionItems() {
+        return collectionItems.values();
     }
 
-    private static class ComparingTagVisitor implements TagVisitor {
+    public static class ComparingTagVisitor implements TagVisitor {
         private final Tag target;
         private boolean match = false;
 

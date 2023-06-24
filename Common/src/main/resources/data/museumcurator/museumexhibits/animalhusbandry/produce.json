@@ -1,0 +1,29 @@
+{
+  "collection": "museumcurator.collection.animalhusbandry",
+  "name": "museumcurator.animalhusbandry.produce",
+  "items": [
+    "minecraft:beef",
+    "minecraft:leather",
+    "minecraft:milk_bucket",
+    "minecraft:chicken",
+    "minecraft:feather",
+    "minecraft:egg",
+    "minecraft:mutton",
+    "minecraft:porkchop",
+    "minecraft:rabbit",
+    "minecraft:rabbit_hide",
+    "minecraft:rabbit_foot",
+    "minecraft:phantom_membrane",
+    "minecraft:slime_ball",
+    "minecraft:slime_block",
+    "minecraft:spider_eye",
+    "minecraft:cobweb",
+    "minecraft:bone_meal",
+    "minecraft:bone",
+    "minecraft:bone_block",
+    "minecraft:rotten_flesh",
+    "minecraft:creeper_head",
+    "minecraft:skeleton_skull",
+    "minecraft:zombie_head"
+  ]
+}

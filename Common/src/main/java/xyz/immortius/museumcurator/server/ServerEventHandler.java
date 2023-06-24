@@ -1,16 +1,22 @@
 package xyz.immortius.museumcurator.server;
 
+import com.google.common.collect.HashBasedTable;
+import com.google.common.collect.Table;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.mojang.serialization.JsonOps;
+import joptsimple.internal.Strings;
 import net.minecraft.Util;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.level.storage.LevelResource;
+import org.jetbrains.annotations.NotNull;
 import xyz.immortius.museumcurator.common.MuseumCuratorConstants;
 import xyz.immortius.museumcurator.common.data.MuseumCollection;
 import xyz.immortius.museumcurator.common.data.MuseumCollections;
+import xyz.immortius.museumcurator.common.data.MuseumExhibit;
+import xyz.immortius.museumcurator.common.data.RawExhibit;
 import xyz.immortius.museumcurator.config.MuseumCuratorConfig;
 import xyz.immortius.museumcurator.config.system.ConfigSystem;
 
@@ -18,6 +24,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.*;
+import java.util.stream.IntStream;
 
 /**
  * Server event handlers for events triggered server-side. Primarily loads the collection data
@@ -48,18 +56,70 @@ public final class ServerEventHandler {
     }
 
     public static void onResourceManagerReload(ResourceManager resourceManager) {
-        List<MuseumCollection> collections = new ArrayList<>();
-        for (ResourceLocation location : resourceManager.listResources(MuseumCuratorConstants.COLLECTION_DATA_PATH, r -> !r.isEmpty() && !MuseumCuratorConstants.COLLECTION_DATA_PATH.equals(r))) {
+        List<RawExhibit> rawExhibits = new ArrayList<>();
+        for (ResourceLocation location : resourceManager.listResources(MuseumCuratorConstants.EXHIBIT_DATA_PATH, r -> !r.isEmpty() && !MuseumCuratorConstants.EXHIBIT_DATA_PATH.equals(r))) {
             try (InputStreamReader reader = new InputStreamReader(resourceManager.getResource(location).getInputStream())) {
                 JsonElement jsonElement = JsonParser.parseReader(reader);
-                MuseumCollection collection = MuseumCollection.FILE_CODEC.parse(JsonOps.INSTANCE, jsonElement).getOrThrow(false, Util.prefix("Error parsing museum collection: ", MuseumCuratorConstants.LOGGER::error));
-                collections.add(collection);
-            } catch (IOException e) {
+                RawExhibit exhibit = RawExhibit.EXHIBIT_CODEC.parse(JsonOps.INSTANCE, jsonElement).getOrThrow(false, Util.prefix("Error parsing museum collection: ", MuseumCuratorConstants.LOGGER::error));
+                rawExhibits.add(exhibit);
+            } catch (IOException | RuntimeException e) {
                 MuseumCuratorConstants.LOGGER.error("Failed to read museum collection data '{}'", location, e);
             }
         }
+
+        rawExhibits = prepareExhibits(rawExhibits);
+
+        Collection<MuseumCollection> collections = prepareCollections(rawExhibits);
+
         MuseumCollections.setCollections(collections);
-        MuseumCuratorConstants.LOGGER.info("Loaded {} museum collections", collections.size());
+        MuseumCuratorConstants.LOGGER.info("Loaded {} museum exhibits", rawExhibits.size());
+    }
+
+    @NotNull
+    private static Collection<MuseumCollection> prepareCollections(List<RawExhibit> rawExhibits) {
+        boolean ignoreConstraints = false;
+        Map<String, MuseumCollection> collectionsLookup = new LinkedHashMap<>();
+        while (!rawExhibits.isEmpty()) {
+            List<RawExhibit> residual = new ArrayList<>();
+            for (RawExhibit exhibit : rawExhibits) {
+                MuseumCollection collection = collectionsLookup.computeIfAbsent(exhibit.getCollection(), s -> new MuseumCollection(s, Collections.emptyList()));
+                if (ignoreConstraints || Strings.isNullOrEmpty(exhibit.getRelativeTo())) {
+                    collection.getExhibits().add(new MuseumExhibit(exhibit.getName(), exhibit.getItems()));
+                } else {
+                    OptionalInt match = IntStream.range(0, collection.getExhibits().size()).filter(i -> collection.getExhibits().get(i).getRawName().equals(exhibit.getRelativeTo())).findFirst();
+                    if (match.isPresent()) {
+                        collection.getExhibits().add(match.getAsInt() + exhibit.getPlacement().shift(), new MuseumExhibit(exhibit.getName(), exhibit.getItems()));
+                    } else {
+                        residual.add(exhibit);
+                    }
+                }
+            }
+            if (residual.size() == rawExhibits.size()) {
+                ignoreConstraints = true;
+            } else {
+                rawExhibits = residual;
+            }
+        }
+        return collectionsLookup.values();
+    }
+
+    private static List<RawExhibit> prepareExhibits(List<RawExhibit> rawExhibits) {
+        Table<String, String, RawExhibit> exhibitTable = HashBasedTable.create();
+        for (RawExhibit exhibit : rawExhibits) {
+            RawExhibit existingExhibit = exhibitTable.get(exhibit.getCollection(), exhibit.getName());
+            if (existingExhibit != null) {
+                existingExhibit.getInsertGroups().addAll(exhibit.getInsertGroups());
+                existingExhibit.getItems().addAll(exhibit.getItems());
+                if (Strings.isNullOrEmpty(existingExhibit.getRelativeTo())) {
+                    existingExhibit.setRelativeTo(exhibit.getRelativeTo());
+                    existingExhibit.setPlacement(exhibit.getPlacement());
+                }
+            } else {
+                exhibitTable.put(exhibit.getCollection(), exhibit.getName(), exhibit);
+            }
+        }
+        exhibitTable.values().forEach(RawExhibit::applyInserts);
+        return new ArrayList<>(exhibitTable.values());
     }
 
 }

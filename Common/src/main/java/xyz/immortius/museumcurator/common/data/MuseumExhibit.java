@@ -17,27 +17,6 @@ import java.util.List;
  */
 public class MuseumExhibit {
 
-    public static final Codec<ItemStack> TAGGED_ITEM_STACK = RecordCodecBuilder.create(instance -> instance.group(
-            Codec.STRING.fieldOf("id").forGetter(x -> Registry.ITEM.getKey(x.getItem()).toString()),
-            CompoundTag.CODEC.fieldOf("tags").forGetter(ItemStack::getTag)
-    ).apply(instance, (id, tags) -> {
-        ItemStack itemStack = Registry.ITEM.get(new ResourceLocation(id)).getDefaultInstance().copy();
-        itemStack.setTag(tags);
-        return itemStack;
-    }));
-
-    public static final Codec<MuseumExhibit> FILE_CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            Codec.STRING.fieldOf("name").forGetter(x -> x.getName().getKey()),
-            Codec.either(TAGGED_ITEM_STACK, Registry.ITEM.byNameCodec().xmap(Item::getDefaultInstance, ItemStack::getItem)).listOf().fieldOf("items").forGetter((x) ->
-                x.getItems().stream().<Either<ItemStack, ItemStack>>map(Either::left).toList()
-            )
-    ).apply(instance, (name, items) -> new MuseumExhibit(name, items.stream().map(x -> {
-        if (x.left().isPresent()) {
-            return x.left().get();
-        }
-        return x.right().orElseThrow();
-    }).toList())));
-
     public static final Codec<MuseumExhibit> NET_CODEC = RecordCodecBuilder.create(instance -> instance.group(
             Codec.STRING.fieldOf("name").forGetter(x -> x.getName().getKey()),
             ItemStack.CODEC.listOf().fieldOf("items").forGetter(MuseumExhibit::getItems)
@@ -53,6 +32,10 @@ public class MuseumExhibit {
 
     public TranslatableComponent getName() {
         return name;
+    }
+
+    public String getRawName() {
+        return name.getKey();
     }
 
     public List<ItemStack> getItems() {

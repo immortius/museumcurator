@@ -9,7 +9,7 @@ import org.apache.logging.log4j.Logger;
  */
 public final class MuseumCuratorConstants {
 
-    public static final String COLLECTION_DATA_PATH = "museumcollection";
+    public static final String EXHIBIT_DATA_PATH = "museumexhibits";
 
     public static final Logger LOGGER = LogManager.getLogger(MuseumCuratorConstants.MOD_ID);
 
