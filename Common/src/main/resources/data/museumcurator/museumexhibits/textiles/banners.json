@@ -1,6 +1,7 @@
 {
   "collection": "museumcurator.collection.textiles",
   "name": "museumcurator.textiles.banners",
+  "relativeTo": "museumcurator.textiles.beds",
   "items": [
     "minecraft:loom",
     "minecraft:white_banner",

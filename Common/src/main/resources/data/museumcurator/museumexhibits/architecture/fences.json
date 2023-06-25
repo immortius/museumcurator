@@ -1,6 +1,7 @@
 {
   "collection": "museumcurator.collection.architecture",
   "name": "museumcurator.architecture.fences",
+  "relativeTo": "museumcurator.architecture.trapdoors",
   "items": [
     "minecraft:oak_fence",
     "minecraft:oak_fence_gate",

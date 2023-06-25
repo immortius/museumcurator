@@ -1,6 +1,7 @@
 {
   "collection": "museumcurator.collection.architecture",
   "name": "museumcurator.architecture.candles",
+  "relativeTo": "museumcurator.architecture.lights",
   "items": [
     "minecraft:candle",
     "minecraft:white_candle",

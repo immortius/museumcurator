@@ -1,6 +1,7 @@
 {
   "collection": "museumcurator.collection.architecture",
   "name": "museumcurator.architecture.displays",
+  "relativeTo": "museumcurator.architecture.signs",
   "items": [
     "minecraft:armor_stand",
     "minecraft:flower_pot",

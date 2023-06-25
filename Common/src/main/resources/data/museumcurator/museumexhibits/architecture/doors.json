@@ -1,6 +1,7 @@
 {
   "collection": "museumcurator.collection.architecture",
   "name": "museumcurator.architecture.doors",
+  "relativeTo": "museumcurator.architecture.glass",
   "items": [
     "minecraft:oak_door",
     "minecraft:dark_oak_door",

@@ -1,6 +1,7 @@
 {
   "collection": "museumcurator.collection.textiles",
   "name": "museumcurator.textiles.wool",
+  "relativeTo": "museumcurator.textiles.dyes",
   "items": [
     "minecraft:string",
     "minecraft:white_wool",

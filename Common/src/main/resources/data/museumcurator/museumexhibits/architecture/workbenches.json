@@ -1,6 +1,7 @@
 {
   "collection": "museumcurator.collection.architecture",
   "name": "museumcurator.technology.workbenches",
+  "relativeTo": "museumcurator.architecture.fittingsanddecorations",
   "items": [
     "minecraft:crafting_table",
     "minecraft:furnace",

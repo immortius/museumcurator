@@ -1,6 +1,7 @@
 {
   "collection": "museumcurator.collection.architecture",
   "name": "museumcurator.architecture.signs",
+  "relativeTo": "museumcurator.architecture.fences",
   "items": [
     "minecraft:oak_sign",
     "minecraft:dark_oak_sign",

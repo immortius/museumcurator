@@ -1,6 +1,7 @@
 {
   "collection": "museumcurator.collection.textiles",
   "name": "museumcurator.textiles.beds",
+  "relativeTo": "museumcurator.textiles.carpet",
   "items": [
     "minecraft:white_bed",
     "minecraft:light_gray_bed",

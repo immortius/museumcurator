@@ -1,6 +1,7 @@
 {
   "collection": "museumcurator.collection.architecture",
   "name": "museumcurator.architecture.containers",
+  "relativeTo": "museumcurator.architecture.displays",
   "items": [
     "minecraft:bucket",
     "minecraft:barrel",

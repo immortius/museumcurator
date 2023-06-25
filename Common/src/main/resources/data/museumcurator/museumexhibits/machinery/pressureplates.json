@@ -1,6 +1,7 @@
 {
   "collection": "museumcurator.collection.machinery",
   "name": "museumcurator.machinery.pressureplates",
+  "relativeTo": "museumcurator.machinery.buttons",
   "items": [
     "minecraft:oak_pressure_plate",
     "minecraft:dark_oak_pressure_plate",

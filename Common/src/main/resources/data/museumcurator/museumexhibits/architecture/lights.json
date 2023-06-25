@@ -1,6 +1,7 @@
 {
   "collection": "museumcurator.collection.architecture",
   "name": "museumcurator.architecture.lights",
+  "relativeTo": "museumcurator.architecture.containers",
   "items": [
     "minecraft:flint_and_steel",
     "minecraft:fire_charge",
