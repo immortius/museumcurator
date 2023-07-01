@@ -50,6 +50,14 @@ subprojects {
             name = "ModMaven"
             url = "https://modmaven.dev"
         }
+
+        maven {
+            // Location of the maven that hosts Mine and Team Resourceful's files.
+            name = "Resourceful Bees Maven"
+            url = "https://maven.resourcefulbees.com/repository/maven-public/"
+        }
+
+        maven { url 'https://jitpack.io' }
     }
 
     tasks.withType(JavaCompile).configureEach {
