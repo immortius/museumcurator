@@ -19,7 +19,7 @@ dependencies {
 
     modImplementation "net.fabricmc:fabric-loader:${fabric_loader_version}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${fabric_version}"
-    //modImplementation "com.terraformersmc:modmenu:6.1.0-rc.4"
+    modImplementation "com.terraformersmc:modmenu:${modmenu_version}"
 
     modRuntimeOnly "earth.terrarium.argonauts:argonauts-fabric-${argonauts_mc_version}:${argonauts_version}"
 
