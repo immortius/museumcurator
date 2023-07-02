@@ -32,6 +32,13 @@ public final class FabricPlatformHelper implements MCPlatformHelper {
     }
 
     @Override
+    public void sendChecklistUpdate(MinecraftServer server, ServerPlayer player, ChecklistUpdateMessage msg) {
+        FriendlyByteBuf buffer = PacketByteBufs.create();
+        buffer.writeWithCodec(ChecklistUpdateMessage.CODEC, msg);
+        ServerPlayNetworking.send(player, MuseumCuratorMod.CHECKLIST_UPDATE, buffer);
+    }
+
+    @Override
     public void sendClientChecklistChange(ChecklistChangeRequest msg) {
         FriendlyByteBuf buffer = PacketByteBufs.create();
         buffer.writeWithCodec(ChecklistChangeRequest.CODEC, msg);

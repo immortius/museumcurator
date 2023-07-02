@@ -3,11 +3,13 @@ package xyz.immortius.museumcurator.server;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.saveddata.SavedData;
 import xyz.immortius.museumcurator.common.data.MuseumCollections;
 import xyz.immortius.museumcurator.common.network.ChecklistUpdateMessage;
+import xyz.immortius.museumcurator.config.MuseumCuratorConfig;
 import xyz.immortius.museumcurator.interop.Services;
 
 import java.util.*;
@@ -18,10 +20,16 @@ import java.util.stream.Collectors;
  */
 public class ChecklistState extends SavedData {
     private final MinecraftServer server;
+    private final UUID ownerId;
     private final Set<ItemStack> checkedItems = new LinkedHashSet<>();
 
-    public static ChecklistState get(MinecraftServer server) {
-        return server.getLevel(Level.OVERWORLD).getChunkSource().getDataStorage().computeIfAbsent((tag) -> ChecklistState.load(server, tag), () -> new ChecklistState(server), "museumchecklist");
+    public static ChecklistState get(MinecraftServer server, ServerPlayer player) {
+        if (MuseumCuratorConfig.get().gameplayConfig.isIndividualChecklists(MuseumCuratorConfig.get())) {
+            String checklistId = Services.GROUP_HELPER.getLeaderId(player);
+            return server.getLevel(Level.OVERWORLD).getChunkSource().getDataStorage().computeIfAbsent((tag) -> ChecklistState.load(server, tag), () -> new ChecklistState(server, checklistId), "museumchecklist-" + checklistId);
+        } else {
+            return server.getLevel(Level.OVERWORLD).getChunkSource().getDataStorage().computeIfAbsent((tag) -> ChecklistState.load(server, tag), () -> new ChecklistState(server, ""), "museumchecklist");
+        }
     }
 
     private static ChecklistState load(MinecraftServer server, CompoundTag tag) {
@@ -33,15 +41,17 @@ public class ChecklistState extends SavedData {
                 checkedItems.add(item);
             }
         }
-        return new ChecklistState(server, checkedItems);
+        String ownerId = tag.getString("owner");
+        return new ChecklistState(server, ownerId, checkedItems);
     }
 
-    public ChecklistState(MinecraftServer server) {
+    public ChecklistState(MinecraftServer server, String ownerId) {
         this.server = server;
+        this.ownerId = UUID.fromString(ownerId);
     }
 
-    private ChecklistState(MinecraftServer server, Collection<ItemStack> items) {
-        this(server);
+    private ChecklistState(MinecraftServer server, String ownerId, Collection<ItemStack> items) {
+        this(server, ownerId);
         this.checkedItems.addAll(items);
     }
 
@@ -54,6 +64,7 @@ public class ChecklistState extends SavedData {
             listTag.add(itemTag);
         }
         parent.put("items", listTag);
+        parent.putString("owner", ownerId.toString());
         return parent;
     }
 
@@ -61,7 +72,16 @@ public class ChecklistState extends SavedData {
         List<ItemStack> toAdd = items.stream().map(MuseumCollections::getCollectionItemStack).filter(Objects::nonNull).filter(x -> !checkedItems.contains(x)).toList();
         if (!toAdd.isEmpty()) {
             checkedItems.addAll(toAdd);
-            Services.PLATFORM.broadcastChecklistUpdate(server, ChecklistUpdateMessage.check(toAdd));
+            ChecklistUpdateMessage msg = ChecklistUpdateMessage.check(toAdd);
+
+            if (MuseumCuratorConfig.get().gameplayConfig.isIndividualChecklists(MuseumCuratorConfig.get())) {
+                for (ServerPlayer player : Services.GROUP_HELPER.getGroupPlayers(server, ownerId)) {
+                    Services.PLATFORM.sendChecklistUpdate(server, player, msg);
+                }
+            } else {
+                Services.PLATFORM.broadcastChecklistUpdate(server, msg);
+            }
+
             setDirty();
             return true;
         }
@@ -72,7 +92,16 @@ public class ChecklistState extends SavedData {
         Set<ItemStack> toRemove = items.stream().map(MuseumCollections::getCollectionItemStack).filter(Objects::nonNull).filter(checkedItems::contains).collect(Collectors.toSet());
         if (!toRemove.isEmpty()) {
             checkedItems.removeAll(toRemove);
-            Services.PLATFORM.broadcastChecklistUpdate(server, ChecklistUpdateMessage.uncheck(toRemove));
+
+            ChecklistUpdateMessage msg = ChecklistUpdateMessage.uncheck(toRemove);
+
+            if (MuseumCuratorConfig.get().gameplayConfig.isIndividualChecklists(MuseumCuratorConfig.get())) {
+                for (ServerPlayer player : Services.GROUP_HELPER.getGroupPlayers(server, ownerId)) {
+                    Services.PLATFORM.sendChecklistUpdate(server, player, msg);
+                }
+            } else {
+                Services.PLATFORM.broadcastChecklistUpdate(server, msg);
+            }
 
             setDirty();
             return true;
@@ -83,7 +112,16 @@ public class ChecklistState extends SavedData {
     public synchronized void uncheckAll() {
         if (!checkedItems.isEmpty()) {
             checkedItems.clear();
-            Services.PLATFORM.broadcastChecklistUpdate(server, ChecklistUpdateMessage.uncheckAll());
+
+            ChecklistUpdateMessage msg = ChecklistUpdateMessage.uncheckAll();
+
+            if (MuseumCuratorConfig.get().gameplayConfig.isIndividualChecklists(MuseumCuratorConfig.get())) {
+                for (ServerPlayer player : Services.GROUP_HELPER.getGroupPlayers(server, ownerId)) {
+                    Services.PLATFORM.sendChecklistUpdate(server, player, msg);
+                }
+            } else {
+                Services.PLATFORM.broadcastChecklistUpdate(server, msg);
+            }
             setDirty();
         }
     }

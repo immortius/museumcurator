@@ -1,5 +1,5 @@
 /**
- * This package contains a simple configuration system and the ChunkByChunk specific config classes.
+ * This package contains a simple configuration system and the specific config classes.
  * Configuration is defined as a single root class ({@link xyz.immortius.museumcurator.config.MuseumCuratorConfig}) which
  * defines sections by referencing other config classes that contain only values. Annotations are used to define the
  * textual name, comments, and any other restrictions for the values. The default value of the variables in the classes

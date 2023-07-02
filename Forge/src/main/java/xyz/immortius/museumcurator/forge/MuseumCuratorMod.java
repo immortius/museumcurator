@@ -180,7 +180,7 @@ public class MuseumCuratorMod {
 
     @SubscribeEvent
     public void onServerLogin(PlayerEvent.PlayerLoggedInEvent event) {
-        MESSAGE_CHANNEL.send(PacketDistributor.PLAYER.with(() -> (ServerPlayer)(event.getEntity())), new LogOnMessage(MuseumCollections.getCollections(), ChecklistState.get(event.getPlayer().getServer()).getCheckedItems()));
+        MESSAGE_CHANNEL.send(PacketDistributor.PLAYER.with(() -> (ServerPlayer)(event.getEntity())), new LogOnMessage(MuseumCollections.getCollections(), ChecklistState.get(event.getPlayer().getServer(), (ServerPlayer) event.getPlayer()).getCheckedItems()));
     }
 
 }

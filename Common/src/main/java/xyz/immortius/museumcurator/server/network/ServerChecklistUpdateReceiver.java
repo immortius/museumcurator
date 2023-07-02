@@ -11,7 +11,7 @@ import xyz.immortius.museumcurator.server.ChecklistState;
 public class ServerChecklistUpdateReceiver {
 
     public static void receive(MinecraftServer server, ServerPlayer player, ChecklistChangeRequest updateMessage) {
-        ChecklistState.get(server).uncheck(updateMessage.getUncheckedItems());
-        ChecklistState.get(server).check(updateMessage.getCheckedItems());
+        ChecklistState.get(server, player).uncheck(updateMessage.getUncheckedItems());
+        ChecklistState.get(server, player).check(updateMessage.getCheckedItems());
     }
 }

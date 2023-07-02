@@ -57,7 +57,7 @@ public final class ServerEventHandler {
 
     public static void onResourceManagerReload(ResourceManager resourceManager) {
         List<RawExhibit> rawExhibits = new ArrayList<>();
-        for (ResourceLocation location : resourceManager.listResources(MuseumCuratorConstants.EXHIBIT_DATA_PATH, r -> !r.isEmpty() && !MuseumCuratorConstants.EXHIBIT_DATA_PATH.equals(r))) {
+        for (ResourceLocation location : resourceManager.listResources(MuseumCuratorConstants.EXHIBIT_DATA_PATH, r -> r.endsWith(".json"))) {
             try (InputStreamReader reader = new InputStreamReader(resourceManager.getResource(location).getInputStream())) {
                 JsonElement jsonElement = JsonParser.parseReader(reader);
                 RawExhibit exhibit = RawExhibit.EXHIBIT_CODEC.parse(JsonOps.INSTANCE, jsonElement).getOrThrow(false, Util.prefix("Error parsing museum collection: ", MuseumCuratorConstants.LOGGER::error));

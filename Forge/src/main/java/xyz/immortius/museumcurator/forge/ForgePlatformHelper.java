@@ -1,6 +1,7 @@
 package xyz.immortius.museumcurator.forge;
 
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraftforge.network.PacketDistributor;
@@ -22,6 +23,11 @@ public final class ForgePlatformHelper implements MCPlatformHelper {
     @Override
     public void broadcastChecklistUpdate(MinecraftServer server, ChecklistUpdateMessage msg) {
         MuseumCuratorMod.MESSAGE_CHANNEL.send(PacketDistributor.ALL.noArg(), msg);
+    }
+
+    @Override
+    public void sendChecklistUpdate(MinecraftServer server, ServerPlayer player, ChecklistUpdateMessage msg) {
+        MuseumCuratorMod.MESSAGE_CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), msg);
     }
 
     @Override

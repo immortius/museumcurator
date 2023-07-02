@@ -3,6 +3,7 @@ package xyz.immortius.museumcurator.common.items;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.*;
 import net.minecraft.world.entity.Entity;
@@ -76,7 +77,8 @@ public class MuseumChecklist extends Item implements MenuProvider {
             items.add(pot.getContent().asItem().getDefaultInstance());
             items.add(Items.FLOWER_POT.getDefaultInstance());
         }
-        ChecklistState.get(serverLevel.getServer()).check(items);
+        ServerPlayer player = (ServerPlayer) context.getPlayer();
+        ChecklistState.get(serverLevel.getServer(), player).check(items);
         return InteractionResult.CONSUME;
     }
 
@@ -116,7 +118,7 @@ public class MuseumChecklist extends Item implements MenuProvider {
             }
             items.add(Items.ARMOR_STAND.getDefaultInstance());
         }
-        ChecklistState.get(((ServerLevel)level).getServer()).check(items);
+        ChecklistState.get(((ServerLevel)level).getServer(), (ServerPlayer) player).check(items);
         return InteractionResult.CONSUME;
     }
 }

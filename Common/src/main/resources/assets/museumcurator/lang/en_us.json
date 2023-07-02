@@ -1,5 +1,7 @@
 {
   "config.museumcurator.title": "Museum Curator",
+  "config.museumcurator.section.gameplay": "Gameplay",
+  "config.museumcurator.option.individualChecklists": "Individual checklists",
   "commands.museumcurator.dumperror" : "Failed to write item dump",
   "commands.museumcurator.checked" : "Checked off %s",
   "commands.museumcurator.unchecked" : "Unchecked %s",

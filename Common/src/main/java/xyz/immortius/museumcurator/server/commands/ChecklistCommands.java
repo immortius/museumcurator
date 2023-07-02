@@ -1,12 +1,14 @@
 package xyz.immortius.museumcurator.server.commands;
 
 import com.mojang.brigadier.CommandDispatcher;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.item.ItemArgument;
 import net.minecraft.commands.arguments.item.ItemInput;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ServerPlayer;
 import xyz.immortius.museumcurator.server.ChecklistState;
 
 import java.util.Collections;
@@ -29,19 +31,35 @@ public class ChecklistCommands {
     }
 
     private static int uncheckAllItems(CommandSourceStack source, MinecraftServer server) {
-        ChecklistState.get(server).uncheckAll();
-        source.sendSuccess(new TranslatableComponent("commands.museumcurator.uncheckedAll"), true);
-        return 1;
+        try {
+            ServerPlayer player = source.getPlayerOrException();
+            ChecklistState.get(server, player).uncheckAll();
+            source.sendSuccess(new TranslatableComponent("commands.museumcurator.uncheckedAll"), true);
+            return 1;
+        } catch (CommandSyntaxException e) {
+            return 0;
+        }
+
     }
 
     private static int checkItem(CommandSourceStack source, MinecraftServer server, ItemInput item) {
-        ChecklistState.get(server).check(Collections.singletonList(item.getItem().getDefaultInstance()));
-        return 1;
+        try {
+            ServerPlayer player = source.getPlayerOrException();
+            ChecklistState.get(server, player).check(Collections.singletonList(item.getItem().getDefaultInstance()));
+            return 1;
+        } catch (CommandSyntaxException e) {
+            return 0;
+        }
     }
 
     private static int uncheckItem(CommandSourceStack source, MinecraftServer server, ItemInput item) {
-        ChecklistState.get(server).uncheck(Collections.singletonList(item.getItem().getDefaultInstance()));
-        return 1;
+        try {
+            ServerPlayer player = source.getPlayerOrException();
+            ChecklistState.get(server, player).uncheck(Collections.singletonList(item.getItem().getDefaultInstance()));
+            return 1;
+        } catch (CommandSyntaxException e) {
+            return 0;
+        }
     }
 
 }

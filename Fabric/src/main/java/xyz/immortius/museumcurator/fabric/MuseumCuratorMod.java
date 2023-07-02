@@ -76,7 +76,7 @@ public class MuseumCuratorMod implements ModInitializer {
 
         ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
             FriendlyByteBuf buffer = PacketByteBufs.create();
-            buffer.writeWithCodec(LogOnMessage.CODEC, new LogOnMessage(MuseumCollections.getCollections(), ChecklistState.get(server).getCheckedItems()));
+            buffer.writeWithCodec(LogOnMessage.CODEC, new LogOnMessage(MuseumCollections.getCollections(), ChecklistState.get(server, handler.getPlayer()).getCheckedItems()));
             ServerPlayNetworking.send(handler.getPlayer(), LOG_ON_MESSAGE, buffer);
         });
 

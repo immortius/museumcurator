@@ -8,6 +8,8 @@ public class Services {
 
     public static final MCPlatformHelper PLATFORM = load(MCPlatformHelper.class);
 
+    public static GroupHelper GROUP_HELPER = new NoopGroupHelper();
+
     public static <T> T load(Class<T> clazz) {
 
         final T loadedService = ServiceLoader.load(clazz)

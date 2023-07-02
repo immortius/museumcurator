@@ -21,7 +21,7 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 /**
- * A widget providing a scrollable list of configuration options for ChunkByChunk
+ * A widget providing a scrollable list of configuration options for MuseumCurator
  */
 public class SettingListWidget extends ContainerObjectSelectionList<SettingListWidget.SettingEntry> {
 

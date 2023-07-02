@@ -2,6 +2,7 @@ package xyz.immortius.museumcurator.config.system;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
+import xyz.immortius.museumcurator.common.MuseumCuratorConstants;
 
 import java.lang.reflect.Field;
 import java.util.Collection;
@@ -21,7 +22,7 @@ public class SectionMetadata extends ObjectMetadata {
         this.name = name;
         this.sectionField = sectionField;
         this.sectionField.setAccessible(true);
-        this.displayName = new TranslatableComponent("config.chunkbychunk.section." + name.toLowerCase(Locale.ROOT));
+        this.displayName = new TranslatableComponent("config." + MuseumCuratorConstants.MOD_ID + ".section." + name.toLowerCase(Locale.ROOT));
     }
 
     public String getName() {

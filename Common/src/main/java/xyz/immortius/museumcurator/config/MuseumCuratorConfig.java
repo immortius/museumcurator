@@ -1,5 +1,8 @@
 package xyz.immortius.museumcurator.config;
 
+import xyz.immortius.museumcurator.config.system.Comment;
+import xyz.immortius.museumcurator.config.system.Name;
+
 /**
  * Root configuration
  */
@@ -11,4 +14,10 @@ public class MuseumCuratorConfig {
         return instance;
     }
 
+    @Name("Gameplay")
+    public final GameplayConfig gameplayConfig = new GameplayConfig();
+
+    public GameplayConfig getGameplayConfig() {
+        return gameplayConfig;
+    }
 }

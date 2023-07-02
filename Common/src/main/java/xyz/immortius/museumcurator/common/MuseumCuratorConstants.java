@@ -5,7 +5,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 /**
- * Constants for ChunkByChunk - may vary by mod system
+ * Constants for Museum Curator - may vary by mod system
  */
 public final class MuseumCuratorConstants {
 
