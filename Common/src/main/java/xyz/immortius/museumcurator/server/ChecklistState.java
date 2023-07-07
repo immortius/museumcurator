@@ -1,5 +1,6 @@
 package xyz.immortius.museumcurator.server;
 
+import com.google.common.base.Strings;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.server.MinecraftServer;
@@ -26,13 +27,13 @@ public class ChecklistState extends SavedData {
     public static ChecklistState get(MinecraftServer server, ServerPlayer player) {
         if (MuseumCuratorConfig.get().gameplayConfig.isIndividualChecklists(MuseumCuratorConfig.get())) {
             String checklistId = Services.GROUP_HELPER.getLeaderId(player);
-            return server.getLevel(Level.OVERWORLD).getChunkSource().getDataStorage().computeIfAbsent((tag) -> ChecklistState.load(server, tag), () -> new ChecklistState(server, checklistId), "museumchecklist-" + checklistId);
+            return server.getLevel(Level.OVERWORLD).getChunkSource().getDataStorage().computeIfAbsent((tag) -> ChecklistState.load(server, tag, checklistId), () -> new ChecklistState(server, checklistId), "museumchecklist-" + checklistId);
         } else {
-            return server.getLevel(Level.OVERWORLD).getChunkSource().getDataStorage().computeIfAbsent((tag) -> ChecklistState.load(server, tag), () -> new ChecklistState(server, ""), "museumchecklist");
+            return server.getLevel(Level.OVERWORLD).getChunkSource().getDataStorage().computeIfAbsent((tag) -> ChecklistState.load(server, tag, ""), () -> new ChecklistState(server, ""), "museumchecklist");
         }
     }
 
-    private static ChecklistState load(MinecraftServer server, CompoundTag tag) {
+    private static ChecklistState load(MinecraftServer server, CompoundTag tag, String ownerId) {
         ListTag items = tag.getList("items", ListTag.TAG_COMPOUND);
         Set<ItemStack> checkedItems = new LinkedHashSet<>();
         for (int i = 0; i < items.size(); i++) {
@@ -41,13 +42,12 @@ public class ChecklistState extends SavedData {
                 checkedItems.add(item);
             }
         }
-        String ownerId = tag.getString("owner");
         return new ChecklistState(server, ownerId, checkedItems);
     }
 
     public ChecklistState(MinecraftServer server, String ownerId) {
         this.server = server;
-        this.ownerId = UUID.fromString(ownerId);
+        this.ownerId = Strings.isNullOrEmpty(ownerId) ? null : UUID.fromString(ownerId);
     }
 
     private ChecklistState(MinecraftServer server, String ownerId, Collection<ItemStack> items) {
@@ -64,7 +64,9 @@ public class ChecklistState extends SavedData {
             listTag.add(itemTag);
         }
         parent.put("items", listTag);
-        parent.putString("owner", ownerId.toString());
+        if (ownerId != null) {
+            parent.putString("owner", ownerId.toString());
+        }
         return parent;
     }
 
