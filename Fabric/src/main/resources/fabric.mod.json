@@ -36,8 +36,7 @@
     "java": ">=17"
   },
   "suggests" : {
-    "modmenu" : ">=7.1.0",
-    "argonauts" : ">=0.0.0"
+    "modmenu" : ">=7.1.0"
   }
 }
   

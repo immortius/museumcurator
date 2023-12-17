@@ -24,7 +24,7 @@ minecraft {
 
 dependencies {
      compileOnly group:'org.spongepowered', name:'mixin', version:'0.8.5'
-     compileOnly "earth.terrarium.argonauts:argonauts-common-${argonauts_mc_version}:${argonauts_version}"
+     //compileOnly "earth.terrarium.argonauts:argonauts-common-${argonauts_mc_version}:${argonauts_version}"
      implementation group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.1'
 }
 

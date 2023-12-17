@@ -71,8 +71,8 @@ sourceSets.main.resources.srcDir 'src/generated/resources'
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
     compileOnly project(":Common")
-    runtimeOnly fg.deobf("earth.terrarium.argonauts:argonauts-forge-${argonauts_mc_version}:${argonauts_version}")
-    runtimeOnly fg.deobf("com.teamresourceful.resourcefullib:resourcefullib-forge-${argonauts_mc_version}:${resourcefullib_version}")
+    //runtimeOnly fg.deobf("earth.terrarium.argonauts:argonauts-forge-${argonauts_mc_version}:${argonauts_version}")
+    //runtimeOnly fg.deobf("com.teamresourceful.resourcefullib:resourcefullib-forge-${argonauts_mc_version}:${resourcefullib_version}")
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 }
 
