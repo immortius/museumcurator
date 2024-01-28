@@ -1,21 +1,18 @@
 {
   "schemaVersion": 1,
-  "id": "museumcurator",
+  "id": "${mod_id}",
   "version": "${version}",
-
-  "name": "Museum Curator",
-  "description": "This mod provides assistance with building a minecraft museum display every item available in Minecraft.",
+  "name": "${mod_name}",
+  "description": "${description}",
   "authors": [
-    "Immortius"
+    "${mod_author}"
   ],
   "contact": {
     "homepage": "https://immortius.xyz/museumcurator",
     "sources": "https://github.com/immortius/museumcurator"
   },
-
-  "license": "MIT License",
+  "license": "${license}",
   "icon": "assets/museumcurator/textures/item/museumchecklist.png",
-
   "environment": "*",
   "entrypoints": {
     "main": [
@@ -27,16 +24,16 @@
     "modmenu": [ "xyz.immortius.museumcurator.fabric.ModMenuApiImpl" ]
   },
   "mixins": [
-    "museumcurator.mixins.json"
+    "${mod_id}.fabric.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.14.21",
-    "fabric": "*",
-    "minecraft": ">=1.20.1",
+    "fabricloader": ">=${fabric_loader_version}",
+    "fabric-api": "*",
+    "minecraft": "${minecraft_version}",
     "java": ">=17"
   },
   "suggests" : {
-    "modmenu" : ">=7.1.0"
+    "modmenu" : ">=${modmenu_version}"
   }
 }
   

@@ -5,6 +5,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.datafix.DataFixTypes;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.saveddata.SavedData;
@@ -27,9 +28,9 @@ public class ChecklistState extends SavedData {
     public static ChecklistState get(MinecraftServer server, ServerPlayer player) {
         if (MuseumCuratorConfig.get().gameplayConfig.isIndividualChecklists(MuseumCuratorConfig.get())) {
             String checklistId = Services.GROUP_HELPER.getLeaderId(player);
-            return server.getLevel(Level.OVERWORLD).getChunkSource().getDataStorage().computeIfAbsent((tag) -> ChecklistState.load(server, tag, checklistId), () -> new ChecklistState(server, checklistId), "museumchecklist-" + checklistId);
+            return server.getLevel(Level.OVERWORLD).getChunkSource().getDataStorage().computeIfAbsent(new Factory<>(() -> new ChecklistState(server, checklistId), (tag) -> ChecklistState.load(server, tag, checklistId), DataFixTypes.LEVEL), "museumchecklist-" + checklistId);
         } else {
-            return server.getLevel(Level.OVERWORLD).getChunkSource().getDataStorage().computeIfAbsent((tag) -> ChecklistState.load(server, tag, ""), () -> new ChecklistState(server, ""), "museumchecklist");
+            return server.getLevel(Level.OVERWORLD).getChunkSource().getDataStorage().computeIfAbsent(new Factory<>(() -> new ChecklistState(server, ""), (tag) -> ChecklistState.load(server, tag, ""), DataFixTypes.LEVEL), "museumchecklist");
         }
     }
 

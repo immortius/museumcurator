@@ -4,7 +4,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.inventory.MenuType;
-import net.minecraftforge.network.PacketDistributor;
+import net.neoforged.neoforge.network.PacketDistributor;
 import xyz.immortius.museumcurator.common.menus.MuseumChecklistMenu;
 import xyz.immortius.museumcurator.common.network.ChecklistChangeRequest;
 import xyz.immortius.museumcurator.common.network.ChecklistUpdateMessage;
@@ -22,17 +22,17 @@ public final class ForgePlatformHelper implements MCPlatformHelper {
 
     @Override
     public void broadcastChecklistUpdate(MinecraftServer server, ChecklistUpdateMessage msg) {
-        MuseumCuratorMod.MESSAGE_CHANNEL.send(PacketDistributor.ALL.noArg(), msg);
+        PacketDistributor.ALL.noArg().send(new MuseumCuratorMod.ChecklistUpdateMessagePayload(msg));
     }
 
     @Override
     public void sendChecklistUpdate(MinecraftServer server, ServerPlayer player, ChecklistUpdateMessage msg) {
-        MuseumCuratorMod.MESSAGE_CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), msg);
+        PacketDistributor.PLAYER.with(player).send(new MuseumCuratorMod.ChecklistUpdateMessagePayload(msg));
     }
 
     @Override
     public void sendClientChecklistChange(ChecklistChangeRequest msg) {
-        MuseumCuratorMod.MESSAGE_CHANNEL.sendToServer(msg);
+        PacketDistributor.SERVER.noArg().send(new MuseumCuratorMod.ChecklistChangeRequestPayload(msg));
     }
 
     @Override

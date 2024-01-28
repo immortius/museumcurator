@@ -92,7 +92,6 @@ public class ChecklistCollectionScreen extends AbstractChecklistScreen {
 
         @Override
         public void setFocused(boolean var1) {
-
         }
 
         @Override

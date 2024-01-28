@@ -22,11 +22,11 @@ public class CollectionButton extends ColorTextButton {
     }
 
     @Override
-    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float delta) {
+    public void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float delta) {
         int totalCount = collection.getExhibits().stream().map(x -> x.getItems().size()).reduce(0, Integer::sum);
         int unlockedCount = collection.getExhibits().stream().map(x -> MuseumCollections.countChecked(x.getItems())).reduce(0L, Long::sum).intValue();
         setMessage(Component.literal("").append(collection.getName()).append(" (" + unlockedCount + " / " + totalCount + ")"));
         setActiveTextColor((unlockedCount == totalCount) ? 0xFFDD00 : 0xFFFFFF);
-        super.render(guiGraphics, mouseX, mouseY, delta);
+        super.renderWidget(guiGraphics, mouseX, mouseY, delta);
     }
 }

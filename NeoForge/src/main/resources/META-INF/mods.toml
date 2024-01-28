@@ -1,37 +1,29 @@
 # Find more information on toml format here:  https://github.com/toml-lang/toml
 # ModLoader settings
 modLoader="javafml"
-loaderVersion="[47,)"
-license="MIT License"
+loaderVersion="${neoforge_loader_version_range}"
+license="${license}"
 #issueTrackerURL="https://change.me.to.your.issue.tracker.example.invalid/"
 # A list of mods - how many allowed here is determined by the individual mod loader
 [[mods]]
-modId="museumcurator"
-version="${file.jarVersion}"
-displayName="Museum Curator"
+modId="${mod_id}"
+version="${version}"
+displayName="${mod_name}"
 # A URL to query for updates for this mod. See the JSON update specification https://mcforge.readthedocs.io/en/latest/gettingstarted/autoupdate/
 updateJSONURL="https://immortius.xyz/museumcurator/updates.json"
 displayURL="https://immortius.xyz/museumcurator"
 logoFile="museumcuratorlogo.png"
-authors="Immortius"
-description='''
-This mod provides assistance with building a minecraft museum display of every item available in Minecraft.
-'''
-[[dependencies.museumcurator]]
-    modId="forge"
-    mandatory=true
-    versionRange="[47.0.0,)"
+authors="${mod_author}"
+description='''${description}'''
+[[dependencies.${mod_id}]]
+    modId="neoforge"
+    type="required"
+    versionRange="${neoforge_loader_version_range}"
     ordering="NONE"
     side="BOTH"
-[[dependencies.museumcurator]]
+[[dependencies.${mod_id}]]
     modId="minecraft"
-    mandatory=true
-    versionRange="[1.20.1,1.21)"
+    type="required"
+    versionRange="${minecraft_version_range}"
     ordering="NONE"
     side="BOTH"
-# [[dependencies.museumcurator]]
-#     modId="argonauts"
-#     mandatory=false
-#     versionRange="[0.0.0,1.0.0)"
-#     ordering="NONE"
-#     side="BOTH"

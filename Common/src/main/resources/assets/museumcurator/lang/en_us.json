@@ -130,5 +130,6 @@
   "museumcurator.thenether.quartz": "Quartz",
   "museumcurator.thenether.netherite": "Netherite",
   "museumcurator.thenether.soil": "Soil",
-  "museumcurator.thenether.glowstone": "Glowstone"
+  "museumcurator.thenether.glowstone": "Glowstone",
+  "museumcurator.networking.failed" : "Error synching museum collection"
 }

@@ -197,7 +197,7 @@ public class ScrollContainerWidget extends AbstractContainerEventHandler impleme
         }
     }
 
-    public boolean mouseScrolled(double mouseX, double mouseY, double wheelDelta) {
+    public boolean mouseScrolled(double mouseX, double mouseY, double delta, double wheelDelta) {
         setScrollAmount(scrollAmount - wheelDelta * 20);
         return true;
     }

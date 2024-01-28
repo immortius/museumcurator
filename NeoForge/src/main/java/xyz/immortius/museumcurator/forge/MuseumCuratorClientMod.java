@@ -1,7 +1,7 @@
 package xyz.immortius.museumcurator.forge;
 
-import net.minecraftforge.client.ConfigScreenHandler;
-import net.minecraftforge.fml.ModLoadingContext;
+import net.neoforged.fml.ModLoadingContext;
+import net.neoforged.neoforge.client.ConfigScreenHandler;
 import xyz.immortius.museumcurator.client.screens.MuseumCuratorConfigScreen;
 
 public final class MuseumCuratorClientMod {

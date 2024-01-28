@@ -73,7 +73,7 @@ public class MuseumChecklist extends Item implements MenuProvider {
             }
         }
         if (targetBlock.getBlock() instanceof FlowerPotBlock pot) {
-            items.add(pot.getContent().asItem().getDefaultInstance());
+            items.add(pot.getPotted().asItem().getDefaultInstance());
             items.add(Items.FLOWER_POT.getDefaultInstance());
         }
         ServerPlayer player = (ServerPlayer) context.getPlayer();

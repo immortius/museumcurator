@@ -62,40 +62,33 @@ public class ChecklistExhibitWidget extends AbstractWidget {
     }
 
     @Override
-    public void render(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
-        if (visible) {
-            Minecraft minecraft = Minecraft.getInstance();
-            int offsetY = 0;
-            int offsetX = 0;
+    public void renderWidget(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
+        Minecraft minecraft = Minecraft.getInstance();
+        int offsetY = 0;
+        int offsetX = 0;
 
-            long checked = MuseumCollections.countChecked(exhibit.getItems());
-            Component title = Component.literal("").append(exhibit.getName()).append("  (" + checked + " / " + exhibit.getItems().size() + ")");
-            graphics.drawString(minecraft.font, title, getX() + offsetX, getY() + offsetY, 0x404040, false);
+        long checked = MuseumCollections.countChecked(exhibit.getItems());
+        Component title = Component.literal("").append(exhibit.getName()).append("  (" + checked + " / " + exhibit.getItems().size() + ")");
+        graphics.drawString(minecraft.font, title, getX() + offsetX, getY() + offsetY, 0x404040, false);
 
-            offsetY += TITLE_HEIGHT;
-            for (ItemStack item : exhibit.getItems()) {
-                if (offsetX + 18 > width) {
-                    offsetX = 0;
-                    offsetY += 20;
-                }
-                graphics.renderItem(item, getX() + offsetX + 1, getY() + offsetY + 1);
-                RenderSystem.disableDepthTest();
-                RenderSystem.enableBlend();
-
-                RenderSystem.setShader(GameRenderer::getPositionTexShader);
-                RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-                RenderSystem.setShaderTexture(0, AbstractChecklistScreen.CONTAINER_TEXTURE);
-
-                boolean unlocked = MuseumCollections.isChecked(item);
-                graphics.blit(AbstractChecklistScreen.CONTAINER_TEXTURE, offsetX + getX(), offsetY + getY(), (unlocked) ? 18 : 0, 256, 18, 18, AbstractChecklistScreen.TEXTURE_DIM, AbstractChecklistScreen.TEXTURE_DIM);
-                offsetX += 20;
+        offsetY += TITLE_HEIGHT;
+        for (ItemStack item : exhibit.getItems()) {
+            if (offsetX + 18 > width) {
+                offsetX = 0;
+                offsetY += 20;
             }
+            graphics.renderItem(item, getX() + offsetX + 1, getY() + offsetY + 1);
+            RenderSystem.disableDepthTest();
+            RenderSystem.enableBlend();
+
+            RenderSystem.setShader(GameRenderer::getPositionTexShader);
+            RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+            RenderSystem.setShaderTexture(0, AbstractChecklistScreen.CONTAINER_TEXTURE);
+
+            boolean unlocked = MuseumCollections.isChecked(item);
+            graphics.blit(AbstractChecklistScreen.CONTAINER_TEXTURE, offsetX + getX(), offsetY + getY(), (unlocked) ? 18 : 0, 256, 18, 18, AbstractChecklistScreen.TEXTURE_DIM, AbstractChecklistScreen.TEXTURE_DIM);
+            offsetX += 20;
         }
-    }
-
-    @Override
-    public void renderWidget(GuiGraphics var1, int var2, int var3, float var4) {
-
     }
 
     @Override

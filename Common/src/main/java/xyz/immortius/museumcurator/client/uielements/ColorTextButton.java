@@ -6,14 +6,20 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
 /**
  * Slightly modified button that allows text color to be specified.
  */
 public class ColorTextButton extends Button {
+    private static final WidgetSprites SPRITES = new WidgetSprites(
+            new ResourceLocation("widget/button"), new ResourceLocation("widget/button_disabled"), new ResourceLocation("widget/button_highlighted")
+    );
+
     private int activeTextColor = 0xffffff;
     private int textColor = 0xa0a0a0;
 
@@ -30,7 +36,7 @@ public class ColorTextButton extends Button {
         $$0.setColor(1.0F, 1.0F, 1.0F, this.alpha);
         RenderSystem.enableBlend();
         RenderSystem.enableDepthTest();
-        $$0.blitNineSliced(WIDGETS_LOCATION, this.getX(), this.getY(), this.getWidth(), this.getHeight(), 20, 4, 200, 20, 0, this.getTextureY());
+        $$0.blitSprite(SPRITES.get(this.active, this.isHoveredOrFocused()), this.getX(), this.getY(), this.getWidth(), this.getHeight());
         $$0.setColor(1.0F, 1.0F, 1.0F, 1.0F);
         int $$5 = this.active ? activeTextColor : textColor;
         this.renderString($$0, $$4.font, $$5 | Mth.ceil(this.alpha * 255.0F) << 24);

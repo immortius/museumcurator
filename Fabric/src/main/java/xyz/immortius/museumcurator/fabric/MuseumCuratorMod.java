@@ -1,5 +1,7 @@
 package xyz.immortius.museumcurator.fabric;
 
+import io.netty.handler.codec.DecoderException;
+import io.netty.handler.codec.EncoderException;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
@@ -11,10 +13,13 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
 import net.fabricmc.fabric.api.screenhandler.v1.ScreenHandlerRegistry;
+import net.minecraft.Util;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.nbt.NbtAccounter;
 import net.minecraft.nbt.NbtOps;
+import net.minecraft.nbt.Tag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
@@ -82,7 +87,9 @@ public class MuseumCuratorMod implements ModInitializer {
 
         ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
             FriendlyByteBuf buffer = PacketByteBufs.create();
-            buffer.writeWithCodec(NbtOps.INSTANCE, LogOnMessage.CODEC, new LogOnMessage(MuseumCollections.getCollections(), ChecklistState.get(server, handler.getPlayer()).getCheckedItems()));
+            LogOnMessage message = new LogOnMessage(MuseumCollections.getCollections(), ChecklistState.get(server, handler.getPlayer()).getCheckedItems());
+            Tag tag = Util.getOrThrow(LogOnMessage.CODEC.encodeStart(NbtOps.INSTANCE, message), string -> new EncoderException("Failed to encode: " + string + " " + message));
+            buffer.writeNbt(tag);
             ServerPlayNetworking.send(handler.getPlayer(), LOG_ON_MESSAGE, buffer);
         });
 
@@ -100,7 +107,8 @@ public class MuseumCuratorMod implements ModInitializer {
         MUSEUM_CHECKLIST_MENU = ScreenHandlerRegistry.registerSimple(createId("museumchecklistmenu"), MuseumChecklistMenu::new);
 
         ServerPlayNetworking.registerGlobalReceiver(MuseumCuratorMod.CHECKLIST_UPDATE, (server, serverPlayer, listener, buf, responseSender) -> {
-            ChecklistChangeRequest updateMessage = buf.readWithCodec(NbtOps.INSTANCE, ChecklistChangeRequest.CODEC);
+            Tag tag = buf.readNbt();
+            ChecklistChangeRequest updateMessage = Util.getOrThrow(ChecklistChangeRequest.CODEC.parse(NbtOps.INSTANCE, tag), string -> new DecoderException("Failed to decode: " + string + " " + tag));
             ServerChecklistUpdateReceiver.receive(server, serverPlayer, updateMessage);
         });
 

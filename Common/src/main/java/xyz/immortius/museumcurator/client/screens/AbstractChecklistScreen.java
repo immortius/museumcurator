@@ -54,7 +54,7 @@ public abstract class AbstractChecklistScreen extends AbstractContainerScreen<Mu
 
     @Override
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
-        renderBackground(graphics);
+        renderBackground(graphics, mouseX, mouseY, delta);
         super.render(graphics, mouseX, mouseY, delta);
         renderContent(graphics, mouseX, mouseY, delta);
         renderTooltip(graphics, mouseX, mouseY);
@@ -66,9 +66,6 @@ public abstract class AbstractChecklistScreen extends AbstractContainerScreen<Mu
 
     @Override
     protected void renderBg(GuiGraphics graphics, float delta, int mouseX, int mouseY) {
-        RenderSystem.setShader(GameRenderer::getPositionTexShader);
-        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-        RenderSystem.setShaderTexture(0, CONTAINER_TEXTURE);
         graphics.blit(CONTAINER_TEXTURE, leftPos, topPos, 0, 0, imageWidth, imageHeight, TEXTURE_DIM, TEXTURE_DIM);
     }
 
@@ -83,8 +80,8 @@ public abstract class AbstractChecklistScreen extends AbstractContainerScreen<Mu
     }
 
     @Override
-    public boolean mouseScrolled(double $$0, double $$1, double $$2) {
-        return super.mouseScrolled($$0, $$1, $$2);
+    public boolean mouseScrolled(double $$0, double $$1, double $$2, double $$3) {
+        return super.mouseScrolled($$0, $$1, $$2, $$3);
     }
 
     @Override

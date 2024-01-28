@@ -29,7 +29,7 @@ public class SettingListWidget extends ContainerObjectSelectionList<SettingListW
     private int rowWidth;
 
     public SettingListWidget(Minecraft minecraft, Screen parent, int width, int top, int bottom, int rowWidth) {
-        super(minecraft, width, parent.height, top, bottom, 22);
+        super(minecraft, width, bottom - top, top, 22);
         this.rowWidth = rowWidth;
         ConfigMetadata metadata = MetadataBuilder.build(MuseumCuratorConfig.class);
         MuseumCuratorConfig defaultConfig = new MuseumCuratorConfig();
@@ -153,6 +153,7 @@ public class SettingListWidget extends ContainerObjectSelectionList<SettingListW
         public boolean mouseClicked(double x, double y, int mouseButton) {
             if (super.mouseClicked(x, y, mouseButton)) {
                 lastFocused = widget;
+                widget.setFocused(true);
                 return true;
             }
             return false;
@@ -174,10 +175,6 @@ public class SettingListWidget extends ContainerObjectSelectionList<SettingListW
             return widget.charTyped(p_94683_, p_94684_);
         }
 
-        @Override
-        public void tick() {
-            widget.tick();
-        }
     }
 
     public class BooleanEntry extends AbstractWidgetEntry<CycleButton<Boolean>> {
@@ -245,6 +242,7 @@ public class SettingListWidget extends ContainerObjectSelectionList<SettingListW
         public boolean mouseClicked(double x, double y, int mouseButton) {
             if (super.mouseClicked(x, y, mouseButton)) {
                 lastFocused = widget;
+                widget.setFocused(true);
                 return true;
             }
             return false;
@@ -265,10 +263,6 @@ public class SettingListWidget extends ContainerObjectSelectionList<SettingListW
             return widget.charTyped(p_94683_, p_94684_);
         }
 
-        @Override
-        public void tick() {
-            widget.tick();
-        }
     }
 
     public class EnumEntry extends AbstractWidgetEntry<CycleButton<Enum<?>>> {
