@@ -2,7 +2,13 @@ package xyz.immortius.museumcurator.common.network;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.world.item.ItemStack;
+import xyz.immortius.museumcurator.common.MuseumCuratorConstants;
+import xyz.immortius.museumcurator.common.data.MuseumCollection;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -12,12 +18,9 @@ import java.util.List;
 /**
  * Message from the Server to clients to update the list of checked items
  */
-public class ChecklistUpdateMessage {
-    public static Codec<ChecklistUpdateMessage> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            ItemStack.CODEC.listOf().fieldOf("checkedItems").forGetter(ChecklistUpdateMessage::getCheckedItems),
-            ItemStack.CODEC.listOf().fieldOf("uncheckedItems").forGetter(ChecklistUpdateMessage::getUncheckedItems),
-            Codec.BOOL.fieldOf("clearAll").forGetter(ChecklistUpdateMessage::isClearAll)
-    ).apply(instance, ChecklistUpdateMessage::new));
+public class ChecklistUpdateMessage implements CustomPacketPayload {
+    public static final CustomPacketPayload.Type<ChecklistUpdateMessage> ID = new CustomPacketPayload.Type<>(MuseumCuratorConstants.CHECKLIST_UPDATE_MESSAGE_ID);
+    public static final StreamCodec<RegistryFriendlyByteBuf, ChecklistUpdateMessage> STREAM_CODEC = StreamCodec.composite(ItemStack.LIST_STREAM_CODEC, ChecklistUpdateMessage::getCheckedItems, ItemStack.LIST_STREAM_CODEC, ChecklistUpdateMessage::getUncheckedItems, ByteBufCodecs.BOOL, ChecklistUpdateMessage::isClearAll, ChecklistUpdateMessage::new);
 
     private final List<ItemStack> checkedItems;
     private final List<ItemStack> uncheckedItems;
@@ -59,5 +62,10 @@ public class ChecklistUpdateMessage {
 
     public boolean isClearAll() {
         return clearAll;
+    }
+
+    @Override
+    public Type<? extends CustomPacketPayload> type() {
+        return ID;
     }
 }

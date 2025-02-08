@@ -22,17 +22,17 @@ public final class ForgePlatformHelper implements MCPlatformHelper {
 
     @Override
     public void broadcastChecklistUpdate(MinecraftServer server, ChecklistUpdateMessage msg) {
-        PacketDistributor.ALL.noArg().send(new MuseumCuratorMod.ChecklistUpdateMessagePayload(msg));
+        PacketDistributor.sendToAllPlayers(msg);
     }
 
     @Override
     public void sendChecklistUpdate(MinecraftServer server, ServerPlayer player, ChecklistUpdateMessage msg) {
-        PacketDistributor.PLAYER.with(player).send(new MuseumCuratorMod.ChecklistUpdateMessagePayload(msg));
+        PacketDistributor.sendToPlayer(player, msg);
     }
 
     @Override
     public void sendClientChecklistChange(ChecklistChangeRequest msg) {
-        PacketDistributor.SERVER.noArg().send(new MuseumCuratorMod.ChecklistChangeRequestPayload(msg));
+        PacketDistributor.sendToServer(msg);
     }
 
     @Override

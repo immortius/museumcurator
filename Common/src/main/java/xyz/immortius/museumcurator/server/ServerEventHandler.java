@@ -63,7 +63,7 @@ public final class ServerEventHandler {
         for (Map.Entry<ResourceLocation, Resource> entry : resourceManager.listResources(MuseumCuratorConstants.EXHIBIT_DATA_PATH, r -> true).entrySet()) {
             try (InputStreamReader reader = new InputStreamReader(entry.getValue().open())) {
                 JsonElement jsonElement = JsonParser.parseReader(reader);
-                RawExhibit exhibit = RawExhibit.EXHIBIT_CODEC.parse(JsonOps.INSTANCE, jsonElement).getOrThrow(false, Util.prefix("Error parsing museum collection: ", MuseumCuratorConstants.LOGGER::error));
+                RawExhibit exhibit = RawExhibit.EXHIBIT_CODEC.parse(JsonOps.INSTANCE, jsonElement).getOrThrow();
                 rawExhibits.add(exhibit);
             } catch (IOException | RuntimeException e) {
                 MuseumCuratorConstants.LOGGER.error("Failed to read museum exhibit data '{}'", entry.getKey(), e);

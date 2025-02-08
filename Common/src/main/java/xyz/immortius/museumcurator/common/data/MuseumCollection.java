@@ -2,7 +2,16 @@ package xyz.immortius.museumcurator.common.data;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.core.Holder;
+import net.minecraft.core.NonNullList;
+import net.minecraft.core.component.DataComponentPatch;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,10 +21,11 @@ import java.util.List;
  */
 public class MuseumCollection {
 
-    public static final Codec<MuseumCollection> NET_CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            Codec.STRING.fieldOf("name").forGetter(x -> x.name),
-            MuseumExhibit.NET_CODEC.listOf().fieldOf("exhibits").forGetter(MuseumCollection::getExhibits)
-    ).apply(instance, MuseumCollection::new));
+    public static final StreamCodec<RegistryFriendlyByteBuf, MuseumCollection> STREAM_CODEC = StreamCodec.composite(ByteBufCodecs.STRING_UTF8, MuseumCollection::getRawName, MuseumExhibit.LIST_STREAM_CODEC, MuseumCollection::getExhibits, MuseumCollection::new);
+
+    public static final StreamCodec<RegistryFriendlyByteBuf, List<MuseumCollection>> LIST_STREAM_CODEC = STREAM_CODEC.apply(
+            ByteBufCodecs.collection(NonNullList::createWithCapacity)
+    );
 
     private final String name;
     private final List<MuseumExhibit> exhibits;
@@ -28,6 +38,8 @@ public class MuseumCollection {
     public Component getName() {
         return Component.translatable(name);
     }
+
+    public String getRawName() { return name; }
 
     public List<MuseumExhibit> getExhibits() {
         return exhibits;

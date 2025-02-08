@@ -1,16 +1,9 @@
 package xyz.immortius.museumcurator.forge;
 
-import io.netty.handler.codec.DecoderException;
-import io.netty.handler.codec.EncoderException;
-import net.minecraft.Util;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.nbt.NbtOps;
-import net.minecraft.nbt.Tag;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.ResourceManagerReloadListener;
@@ -24,6 +17,7 @@ import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.AddReloadListenerEvent;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
@@ -33,8 +27,8 @@ import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.server.ServerAboutToStartEvent;
 import net.neoforged.neoforge.event.server.ServerStartedEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
-import net.neoforged.neoforge.network.event.RegisterPayloadHandlerEvent;
-import net.neoforged.neoforge.network.registration.IPayloadRegistrar;
+import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
+import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import xyz.immortius.museumcurator.client.network.ChecklistUpdateReceiver;
@@ -73,7 +67,7 @@ public class MuseumCuratorMod {
 
     public static final DeferredHolder<SoundEvent, SoundEvent> WRITING_SOUND = SOUNDS.register("writing", () -> SoundEvent.createVariableRangeEvent(MuseumCuratorConstants.WRITING_SOUND_ID));
 
-    public static final DeferredHolder<MenuType<?>, MenuType<MuseumChecklistMenu>> MUSEUM_CHECKLIST_MENU = MENU_TYPES.register("worldforgemenu", () -> new MenuType<>(MuseumChecklistMenu::new, FeatureFlags.DEFAULT_FLAGS));
+    public static final DeferredHolder<MenuType<?>, MenuType<MuseumChecklistMenu>> MUSEUM_CHECKLIST_MENU = MENU_TYPES.register("museumchecklistmenu", () -> new MenuType<>(MuseumChecklistMenu::new, FeatureFlags.DEFAULT_FLAGS));
 
     public MuseumCuratorMod(IEventBus eventBus) {
         new ConfigSystem().synchConfig(Paths.get(MuseumCuratorConstants.DEFAULT_CONFIG_PATH, MuseumCuratorConstants.CONFIG_FILE), MuseumCuratorConfig.get());
@@ -85,6 +79,7 @@ public class MuseumCuratorMod {
         eventBus.addListener(this::updateCreativeTabs);
         eventBus.addListener(this::clientSetup);
         eventBus.addListener(this::registerPayloadHandler);
+        eventBus.addListener(this::registerMenuScreenEvents);
 
         NeoForge.EVENT_BUS.addListener(this::registerResourceReloadListeners);
         NeoForge.EVENT_BUS.addListener(this::onEntityInteract);
@@ -93,6 +88,7 @@ public class MuseumCuratorMod {
         NeoForge.EVENT_BUS.addListener(this::onServerStarting);
         NeoForge.EVENT_BUS.addListener(this::onServerStarted);
         NeoForge.EVENT_BUS.addListener(this::onServerLogin);
+
     }
 
     public void updateCreativeTabs(BuildCreativeModeTabContentsEvent e) {
@@ -102,10 +98,11 @@ public class MuseumCuratorMod {
     }
 
     private void clientSetup(final FMLClientSetupEvent event) {
-        event.enqueueWork(() -> {
-            MuseumCuratorClientMod.registerConfigScreen();
-            MenuScreens.register(MUSEUM_CHECKLIST_MENU.get(), ChecklistOverviewScreen::new);
-        });
+        event.enqueueWork(MuseumCuratorClientMod::registerConfigScreen);
+    }
+
+    public void registerMenuScreenEvents(RegisterMenuScreensEvent e) {
+        e.register(MUSEUM_CHECKLIST_MENU.get(), ChecklistOverviewScreen::new);
     }
 
     public void registerResourceReloadListeners(AddReloadListenerEvent e) {
@@ -158,93 +155,22 @@ public class MuseumCuratorMod {
         ServerEventHandler.onServerStarting(event.getServer());
     }
 
-    public void registerPayloadHandler(final RegisterPayloadHandlerEvent event) {
-        final IPayloadRegistrar registrar = event.registrar(MuseumCuratorConstants.MOD_ID).versioned(PROTOCOL_VERSION);
-        registrar.play(LogOnMessagePayload.ID, LogOnMessagePayload::new, handler -> handler
-                .client((payload, context) -> {
-                    context.workHandler().submitAsync(() -> {
-                        LogonReceiver.receive(payload.message);
-                    });
-                })
-        );
+    public void registerPayloadHandler(final RegisterPayloadHandlersEvent event) {
 
-        registrar.play(ChecklistUpdateMessagePayload.ID, ChecklistUpdateMessagePayload::new, handler -> handler.client(
-                ((payload, context) -> {
-                    if (context.player().isPresent()) {
-                        context.workHandler().submitAsync(() ->
-                                ChecklistUpdateReceiver.receive((LocalPlayer) context.player().get(), payload.message));
-                    }
-                })
-        ));
+        final PayloadRegistrar registrar = event.registrar(MuseumCuratorConstants.MOD_ID).versioned(PROTOCOL_VERSION);
+        registrar.playToClient(LogOnMessage.ID, LogOnMessage.STREAM_CODEC, (payload, context) -> LogonReceiver.receive(payload));
+        registrar.playToClient(ChecklistUpdateMessage.ID, ChecklistUpdateMessage.STREAM_CODEC,
+                (payload, context) -> {
+                    ChecklistUpdateReceiver.receive((LocalPlayer) context.player(), payload);
+                });
 
-        registrar.play(ChecklistChangeRequestPayload.ID, ChecklistChangeRequestPayload::new, handler -> handler.server(
-                ((payload, context) -> {
-                    if (context.player().isPresent()) {
-                        ServerChecklistUpdateReceiver.receive(context.player().get().getServer(), (ServerPlayer) context.player().get(), payload.message);
-                    }
-                })
-        ));
+        registrar.playToServer(ChecklistChangeRequest.ID, ChecklistChangeRequest.STREAM_CODEC,
+                (payload, context) -> {
+                    ServerChecklistUpdateReceiver.receive(context.player().getServer(), (ServerPlayer) context.player(), payload);
+                });
     }
 
     public void onServerLogin(PlayerEvent.PlayerLoggedInEvent event) {
-        PacketDistributor.PLAYER.with((ServerPlayer) event.getEntity()).send(new LogOnMessagePayload(new LogOnMessage(MuseumCollections.getCollections(), ChecklistState.get(event.getEntity().getServer(), (ServerPlayer) event.getEntity()).getCheckedItems())));
+        PacketDistributor.sendToPlayer((ServerPlayer) event.getEntity(), new LogOnMessage(MuseumCollections.getCollections(), ChecklistState.get(event.getEntity().getServer(), (ServerPlayer) event.getEntity()).getCheckedItems()));
     }
-
-    public record LogOnMessagePayload(LogOnMessage message) implements CustomPacketPayload {
-        public static final ResourceLocation ID = new ResourceLocation(MuseumCuratorConstants.MOD_ID, "logon");
-
-        LogOnMessagePayload(final FriendlyByteBuf buffer) {
-            this(Util.getOrThrow(LogOnMessage.CODEC.parse(NbtOps.INSTANCE, buffer.readNbt()), string -> new DecoderException("Failed to decode LogOnMessage: " + string)));
-        }
-
-        @Override
-        public void write(FriendlyByteBuf buffer) {
-            Tag tag = Util.getOrThrow(LogOnMessage.CODEC.encodeStart(NbtOps.INSTANCE, message), string -> new EncoderException("Failed to encode: " + string + " " + message));
-            buffer.writeNbt(tag);
-        }
-
-        @Override
-        public ResourceLocation id() {
-            return ID;
-        }
-    }
-
-    public record ChecklistUpdateMessagePayload(ChecklistUpdateMessage message) implements CustomPacketPayload {
-        public static final ResourceLocation ID = new ResourceLocation(MuseumCuratorConstants.MOD_ID, "checklistupdate");
-
-        ChecklistUpdateMessagePayload(final FriendlyByteBuf buffer) {
-            this(Util.getOrThrow(ChecklistUpdateMessage.CODEC.parse(NbtOps.INSTANCE, buffer.readNbt()), string -> new DecoderException("Failed to decode ChecklistUpdate: " + string)));
-        }
-
-        @Override
-        public void write(FriendlyByteBuf buffer) {
-            Tag tag = Util.getOrThrow(ChecklistUpdateMessage.CODEC.encodeStart(NbtOps.INSTANCE, message), string -> new EncoderException("Failed to encode: " + string + " " + message));
-            buffer.writeNbt(tag);
-        }
-
-        @Override
-        public ResourceLocation id() {
-            return ID;
-        }
-    }
-
-    public record ChecklistChangeRequestPayload(ChecklistChangeRequest message) implements CustomPacketPayload {
-        public static final ResourceLocation ID = new ResourceLocation(MuseumCuratorConstants.MOD_ID, "checklistchangerequest");
-
-        ChecklistChangeRequestPayload(final FriendlyByteBuf buffer) {
-            this(Util.getOrThrow(ChecklistChangeRequest.CODEC.parse(NbtOps.INSTANCE, buffer.readNbt()), string -> new DecoderException("Failed to decode ChecklistChangeRequest: " + string)));
-        }
-
-        @Override
-        public void write(FriendlyByteBuf buffer) {
-            Tag tag = Util.getOrThrow(ChecklistChangeRequest.CODEC.encodeStart(NbtOps.INSTANCE, message), string -> new EncoderException("Failed to encode: " + string + " " + message));
-            buffer.writeNbt(tag);
-        }
-
-        @Override
-        public ResourceLocation id() {
-            return ID;
-        }
-    }
-
 }

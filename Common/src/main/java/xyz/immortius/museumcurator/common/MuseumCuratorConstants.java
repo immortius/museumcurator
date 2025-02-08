@@ -17,7 +17,11 @@ public final class MuseumCuratorConstants {
 
     public static final String DEFAULT_CONFIG_PATH = "defaultconfigs";
     public static final String CONFIG_FILE = MOD_ID + ".toml";
-    public static final ResourceLocation WRITING_SOUND_ID = new ResourceLocation(MOD_ID + ":writing");
+    public static final ResourceLocation WRITING_SOUND_ID = new ResourceLocation(MOD_ID, "writing");
+
+    public static final ResourceLocation LOG_ON_MESSAGE_ID = new ResourceLocation(MOD_ID, "logon_message");
+    public static final ResourceLocation CHECKLIST_UPDATE_MESSAGE_ID = new ResourceLocation(MOD_ID, "checklist_update_message");
+    public static final ResourceLocation CHECKLIST_CHANGE_REQUEST_MESSAGE_ID = new ResourceLocation(MOD_ID, "checklist_change_request");
 
     private MuseumCuratorConstants() {
     }

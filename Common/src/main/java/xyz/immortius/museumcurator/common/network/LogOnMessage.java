@@ -1,8 +1,11 @@
 package xyz.immortius.museumcurator.common.network;
 
-import com.mojang.serialization.Codec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.NotNull;
+import xyz.immortius.museumcurator.common.MuseumCuratorConstants;
 import xyz.immortius.museumcurator.common.data.MuseumCollection;
 
 import java.util.ArrayList;
@@ -12,11 +15,9 @@ import java.util.List;
 /**
  * Message from server to client on logon to provide the list of collections and all currently checked off items
  */
-public class LogOnMessage {
-    public static Codec<LogOnMessage> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            MuseumCollection.NET_CODEC.listOf().fieldOf("collections").forGetter(LogOnMessage::getCollections),
-            ItemStack.CODEC.listOf().fieldOf("checkedItem").forGetter(LogOnMessage::getCheckedItems)
-    ).apply(instance, LogOnMessage::new));
+public class LogOnMessage implements CustomPacketPayload {
+    public static final CustomPacketPayload.Type<LogOnMessage> ID = new CustomPacketPayload.Type<>(MuseumCuratorConstants.LOG_ON_MESSAGE_ID);
+    public static final StreamCodec<RegistryFriendlyByteBuf, LogOnMessage> STREAM_CODEC = StreamCodec.composite(MuseumCollection.LIST_STREAM_CODEC, LogOnMessage::getCollections, ItemStack.LIST_STREAM_CODEC, LogOnMessage::getCheckedItems, LogOnMessage::new);
 
     private final List<MuseumCollection> collections;
     private final List<ItemStack> checkedItems;
@@ -33,4 +34,11 @@ public class LogOnMessage {
     public List<ItemStack> getCheckedItems() {
         return checkedItems;
     }
+
+    @Override
+    public @NotNull Type<? extends CustomPacketPayload> type() {
+        return ID;
+    }
 }
+
+

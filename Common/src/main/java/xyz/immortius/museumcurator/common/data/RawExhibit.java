@@ -1,13 +1,8 @@
 package xyz.immortius.museumcurator.common.data;
 
 import com.google.common.collect.ImmutableMap;
-import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.*;
@@ -19,50 +14,29 @@ public class RawExhibit {
     private final String name;
     private String relativeTo;
     private Placement placement;
-    private final List<ItemStack> items;
+    private final List<MuseumExhibit.CollectionItem> items;
     private List<ItemGroup> insertGroups;
 
-    public static final Codec<ItemStack> TAGGED_ITEM_STACK = RecordCodecBuilder.create(instance -> instance.group(
-            Codec.STRING.fieldOf("id").forGetter(x -> BuiltInRegistries.ITEM.getKey(x.getItem()).toString()),
-            CompoundTag.CODEC.fieldOf("tags").forGetter(ItemStack::getTag)
-    ).apply(instance, (id, tags) -> {
-        ItemStack itemStack = BuiltInRegistries.ITEM.get(new ResourceLocation(id)).getDefaultInstance().copy();
-        itemStack.setTag(tags);
-        return itemStack;
-    }));
-
     public static final Codec<ItemGroup> ITEM_GROUP_CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            Codec.either(TAGGED_ITEM_STACK, BuiltInRegistries.ITEM.byNameCodec().xmap(Item::getDefaultInstance, ItemStack::getItem)).optionalFieldOf("relativeTo", Either.left(null)).forGetter(x -> Either.left(x.relativeTo)),
+            MuseumExhibit.CollectionItem.CODEC.optionalFieldOf("relativeTo", null).forGetter(x -> x.relativeTo),
             Codec.STRING.optionalFieldOf("placement", Placement.After.getId()).forGetter(x -> (x.placement() != null) ? x.placement().getId() : ""),
-            Codec.either(TAGGED_ITEM_STACK, BuiltInRegistries.ITEM.byNameCodec().xmap(Item::getDefaultInstance, ItemStack::getItem)).listOf().fieldOf("items").forGetter((x) ->
-                    x.items.stream().<Either<ItemStack, ItemStack>>map(Either::left).toList()
-            )
+            MuseumExhibit.CollectionItem.CODEC.listOf().fieldOf("items").forGetter((x) ->x.items)
     ).apply(instance, (relativeTo, positioning, items) -> new ItemGroup(
-            (relativeTo.left().isPresent()) ? relativeTo.left().get() : relativeTo.right().orElse(null),
-            Placement.parse(positioning), items.stream().map(x -> {
-        if (x.left().isPresent()) {
-            return x.left().get();
-        }
-        return x.right().orElseThrow();
-    }).toList())));
+            relativeTo,
+            Placement.parse(positioning),
+            items
+    )));
 
     public static final Codec<RawExhibit> EXHIBIT_CODEC = RecordCodecBuilder.create(instance -> instance.group(
             Codec.STRING.fieldOf("collection").forGetter(x -> x.collection),
             Codec.STRING.fieldOf("name").forGetter(x -> x.name),
             Codec.STRING.optionalFieldOf("relativeTo", "").forGetter(x -> x.relativeTo),
             Codec.STRING.optionalFieldOf("placement", Placement.After.getId()).forGetter(x -> (x.placement != null) ? x.placement.getId() : ""),
-            Codec.either(TAGGED_ITEM_STACK, BuiltInRegistries.ITEM.byNameCodec().xmap(Item::getDefaultInstance, ItemStack::getItem)).listOf().optionalFieldOf("items", Collections.emptyList()).forGetter((x) ->
-                    x.items.stream().<Either<ItemStack, ItemStack>>map(Either::left).toList()
-            ),
+            MuseumExhibit.CollectionItem.CODEC.listOf().fieldOf("items").forGetter(x -> x.items),
             ITEM_GROUP_CODEC.listOf().optionalFieldOf("insertGroups", Collections.emptyList()).forGetter(x -> x.insertGroups)
-    ).apply(instance, (collection, name, relativeTo, positioning, items, insertGroups) -> new RawExhibit(collection, name, relativeTo, Placement.parse(positioning), items.stream().map(x -> {
-        if (x.left().isPresent()) {
-            return x.left().get();
-        }
-        return x.right().orElseThrow();
-    }).toList(), insertGroups)));
+    ).apply(instance, (collection, name, relativeTo, positioning, items, insertGroups) -> new RawExhibit(collection, name, relativeTo, Placement.parse(positioning), items, insertGroups)));
 
-    public RawExhibit(String collection, String name, String relativeTo, Placement placement, List<ItemStack> items, List<ItemGroup> itemGroups) {
+    public RawExhibit(String collection, String name, String relativeTo, Placement placement, List<MuseumExhibit.CollectionItem> items, List<ItemGroup> itemGroups) {
         this.collection = collection;
         this.name = name;
         this.relativeTo = relativeTo;
@@ -87,7 +61,7 @@ public class RawExhibit {
         return placement;
     }
 
-    public List<ItemStack> getItems() {
+    public List<MuseumExhibit.CollectionItem> getItems() {
         return items;
     }
 
@@ -119,16 +93,13 @@ public class RawExhibit {
         }
     }
 
-    private boolean matchItems(ItemStack a, ItemStack b) {
-        if (!ItemStack.isSameItem(a, b)) {
+    private boolean matchItems(MuseumExhibit.CollectionItem a, MuseumExhibit.CollectionItem b) {
+        if (!ItemStack.isSameItem(a.itemStack(), b.itemStack())) {
             return false;
         }
-        if (a.getTag() != null) {
-            if (b.getTag() == null) {
-                return false;
-            } else {
-                return new MuseumCollections.ComparingTagVisitor(a.getTag()).isMatch(b.getTag());
-            }
+        if (!a.componentFilter().isEmpty()) {
+            // TODO
+            return false; //new MuseumCollections.ComparingTagVisitor(a.getComponents()).isMatch(b.getComponents());
         }
         return true;
     }
@@ -141,7 +112,7 @@ public class RawExhibit {
         this.placement = placement;
     }
 
-    public record ItemGroup(ItemStack relativeTo, Placement placement, List<ItemStack> items) {
+    public record ItemGroup(MuseumExhibit.CollectionItem relativeTo, Placement placement, List<MuseumExhibit.CollectionItem> items) {
     }
 
     public enum Placement {

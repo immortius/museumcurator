@@ -1,6 +1,7 @@
 package xyz.immortius.museumcurator.server;
 
 import com.google.common.base.Strings;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.server.MinecraftServer;
@@ -9,7 +10,9 @@ import net.minecraft.util.datafix.DataFixTypes;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.saveddata.SavedData;
+import org.jetbrains.annotations.NotNull;
 import xyz.immortius.museumcurator.common.data.MuseumCollections;
+import xyz.immortius.museumcurator.common.data.MuseumExhibit;
 import xyz.immortius.museumcurator.common.network.ChecklistUpdateMessage;
 import xyz.immortius.museumcurator.config.MuseumCuratorConfig;
 import xyz.immortius.museumcurator.interop.Services;
@@ -28,19 +31,19 @@ public class ChecklistState extends SavedData {
     public static ChecklistState get(MinecraftServer server, ServerPlayer player) {
         if (MuseumCuratorConfig.get().gameplayConfig.isIndividualChecklists(MuseumCuratorConfig.get())) {
             String checklistId = Services.GROUP_HELPER.getLeaderId(player);
-            return server.getLevel(Level.OVERWORLD).getChunkSource().getDataStorage().computeIfAbsent(new Factory<>(() -> new ChecklistState(server, checklistId), (tag) -> ChecklistState.load(server, tag, checklistId), DataFixTypes.LEVEL), "museumchecklist-" + checklistId);
+            return server.getLevel(Level.OVERWORLD).getChunkSource().getDataStorage().computeIfAbsent(new Factory<>(() -> new ChecklistState(server, checklistId), (tag, provider) -> ChecklistState.load(server, provider, tag, checklistId), DataFixTypes.LEVEL), "museumchecklist-" + checklistId);
         } else {
-            return server.getLevel(Level.OVERWORLD).getChunkSource().getDataStorage().computeIfAbsent(new Factory<>(() -> new ChecklistState(server, ""), (tag) -> ChecklistState.load(server, tag, ""), DataFixTypes.LEVEL), "museumchecklist");
+            return server.getLevel(Level.OVERWORLD).getChunkSource().getDataStorage().computeIfAbsent(new Factory<>(() -> new ChecklistState(server, ""), (tag, provider) -> ChecklistState.load(server, provider, tag, ""), DataFixTypes.LEVEL), "museumchecklist");
         }
     }
 
-    private static ChecklistState load(MinecraftServer server, CompoundTag tag, String ownerId) {
+    private static ChecklistState load(MinecraftServer server, HolderLookup.Provider provider, CompoundTag tag, String ownerId) {
         ListTag items = tag.getList("items", ListTag.TAG_COMPOUND);
         Set<ItemStack> checkedItems = new LinkedHashSet<>();
         for (int i = 0; i < items.size(); i++) {
-            ItemStack item = MuseumCollections.getCollectionItemStack(ItemStack.of(items.getCompound(i)));
+            MuseumExhibit.CollectionItem item = MuseumCollections.getCollectionItemStack(ItemStack.parseOptional(provider, items.getCompound(i)));
             if (item != null) {
-                checkedItems.add(item);
+                checkedItems.add(item.itemStack());
             }
         }
         return new ChecklistState(server, ownerId, checkedItems);
@@ -57,12 +60,10 @@ public class ChecklistState extends SavedData {
     }
 
     @Override
-    public synchronized CompoundTag save(CompoundTag parent) {
+    public @NotNull CompoundTag save(@NotNull CompoundTag parent, HolderLookup.@NotNull Provider provider) {
         ListTag listTag = new ListTag();
         for (ItemStack item : checkedItems) {
-            CompoundTag itemTag = new CompoundTag();
-            item.save(itemTag);
-            listTag.add(itemTag);
+            listTag.add(item.save(provider));
         }
         parent.put("items", listTag);
         if (ownerId != null) {
@@ -72,7 +73,7 @@ public class ChecklistState extends SavedData {
     }
 
     public synchronized boolean check(Collection<ItemStack> items) {
-        List<ItemStack> toAdd = items.stream().map(MuseumCollections::getCollectionItemStack).filter(Objects::nonNull).filter(x -> !checkedItems.contains(x)).toList();
+        List<ItemStack> toAdd = items.stream().map(MuseumCollections::getCollectionItemStack).filter(Objects::nonNull).filter(x -> !checkedItems.contains(x)).map(MuseumExhibit.CollectionItem::itemStack).toList();
         if (!toAdd.isEmpty()) {
             checkedItems.addAll(toAdd);
             ChecklistUpdateMessage msg = ChecklistUpdateMessage.check(toAdd);
@@ -92,7 +93,7 @@ public class ChecklistState extends SavedData {
     }
 
     public synchronized boolean uncheck(Collection<ItemStack> items) {
-        Set<ItemStack> toRemove = items.stream().map(MuseumCollections::getCollectionItemStack).filter(Objects::nonNull).filter(checkedItems::contains).collect(Collectors.toSet());
+        Set<ItemStack> toRemove = items.stream().map(MuseumCollections::getCollectionItemStack).filter(Objects::nonNull).filter(checkedItems::contains).map(MuseumExhibit.CollectionItem::itemStack).collect(Collectors.toSet());
         if (!toRemove.isEmpty()) {
             checkedItems.removeAll(toRemove);
 
@@ -132,5 +133,4 @@ public class ChecklistState extends SavedData {
     public synchronized Set<ItemStack> getCheckedItems() {
         return new LinkedHashSet<>(checkedItems);
     }
-
 }

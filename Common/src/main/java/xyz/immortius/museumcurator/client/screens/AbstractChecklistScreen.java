@@ -104,9 +104,4 @@ public abstract class AbstractChecklistScreen extends AbstractContainerScreen<Mu
         super.setInitialFocus($$0);
     }
 
-    @Override
-    public void magicalSpecialHackyFocus(@Nullable GuiEventListener $$0) {
-        super.magicalSpecialHackyFocus($$0);
-    }
-
 }

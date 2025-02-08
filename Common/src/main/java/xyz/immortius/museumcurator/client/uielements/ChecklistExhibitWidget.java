@@ -11,6 +11,7 @@ import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import xyz.immortius.museumcurator.client.screens.AbstractChecklistScreen;
@@ -36,14 +37,14 @@ public class ChecklistExhibitWidget extends AbstractWidget {
     }
 
     public List<Component> getTooltip(int mouseX, int mouseY) {
-        ItemStack item = mouseOverItem(mouseX, mouseY);
+        MuseumExhibit.CollectionItem item = mouseOverItem(mouseX, mouseY);
         if (item != null) {
-            return item.getTooltipLines(Minecraft.getInstance().player, TooltipFlag.Default.NORMAL);
+            return item.itemStack().getTooltipLines(Item.TooltipContext.of(Minecraft.getInstance().level), Minecraft.getInstance().player, TooltipFlag.Default.NORMAL);
         }
         return null;
     }
 
-    private ItemStack mouseOverItem(int mouseX, int mouseY) {
+    private MuseumExhibit.CollectionItem mouseOverItem(int mouseX, int mouseY) {
         if (mouseY < getY() + TITLE_HEIGHT) {
             return null;
         }
@@ -72,12 +73,12 @@ public class ChecklistExhibitWidget extends AbstractWidget {
         graphics.drawString(minecraft.font, title, getX() + offsetX, getY() + offsetY, 0x404040, false);
 
         offsetY += TITLE_HEIGHT;
-        for (ItemStack item : exhibit.getItems()) {
+        for (MuseumExhibit.CollectionItem item : exhibit.getItems()) {
             if (offsetX + 18 > width) {
                 offsetX = 0;
                 offsetY += 20;
             }
-            graphics.renderItem(item, getX() + offsetX + 1, getY() + offsetY + 1);
+            graphics.renderItem(item.itemStack(), getX() + offsetX + 1, getY() + offsetY + 1);
             RenderSystem.disableDepthTest();
             RenderSystem.enableBlend();
 
@@ -96,15 +97,16 @@ public class ChecklistExhibitWidget extends AbstractWidget {
         if (button != 0) {
             return false;
         }
-        ItemStack item = mouseOverItem((int)mouseX, (int)mouseY);
+        MuseumExhibit.CollectionItem item = mouseOverItem((int)mouseX, (int)mouseY);
         if (item != null) {
+            // TODO: Review use of item stack
             if (MuseumCollections.isChecked(item)) {
-                MuseumCollections.uncheckItems(Collections.singleton(item));
-                Services.PLATFORM.sendClientChecklistChange(ChecklistChangeRequest.uncheck(item));
+                MuseumCollections.uncheckItems(Collections.singleton(item.itemStack()));
+                Services.PLATFORM.sendClientChecklistChange(ChecklistChangeRequest.uncheck(item.itemStack()));
 
             } else {
-                MuseumCollections.checkItems(Collections.singleton(item));
-                Services.PLATFORM.sendClientChecklistChange(ChecklistChangeRequest.check(item));
+                MuseumCollections.checkItems(Collections.singleton(item.itemStack()));
+                Services.PLATFORM.sendClientChecklistChange(ChecklistChangeRequest.check(item.itemStack()));
             }
             Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.UI_BUTTON_CLICK, 1.0F));
             return true;

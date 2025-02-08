@@ -28,28 +28,19 @@ public final class FabricPlatformHelper implements MCPlatformHelper {
     }
 
     public void broadcastChecklistUpdate(MinecraftServer server, ChecklistUpdateMessage msg) {
-        FriendlyByteBuf buffer = PacketByteBufs.create();
-        Tag tag = Util.getOrThrow(ChecklistUpdateMessage.CODEC.encodeStart(NbtOps.INSTANCE, msg), string -> new EncoderException("Failed to encode: " + string + " " + msg));
-        buffer.writeNbt(tag);
         for (ServerPlayer player : server.getPlayerList().getPlayers()) {
-            ServerPlayNetworking.send(player, MuseumCuratorMod.CHECKLIST_UPDATE, buffer);
+            ServerPlayNetworking.send(player, msg);
         }
     }
 
     @Override
     public void sendChecklistUpdate(MinecraftServer server, ServerPlayer player, ChecklistUpdateMessage msg) {
-        FriendlyByteBuf buffer = PacketByteBufs.create();
-        Tag tag = Util.getOrThrow(ChecklistUpdateMessage.CODEC.encodeStart(NbtOps.INSTANCE, msg), string -> new EncoderException("Failed to encode: " + string + " " + msg));
-        buffer.writeNbt(tag);
-        ServerPlayNetworking.send(player, MuseumCuratorMod.CHECKLIST_UPDATE, buffer);
+        ServerPlayNetworking.send(player, msg);
     }
 
     @Override
     public void sendClientChecklistChange(ChecklistChangeRequest msg) {
-        FriendlyByteBuf buffer = PacketByteBufs.create();
-        Tag tag = Util.getOrThrow(ChecklistChangeRequest.CODEC.encodeStart(NbtOps.INSTANCE, msg), string -> new EncoderException("Failed to encode: " + string + " " + msg));
-        buffer.writeNbt(tag);
-        ClientPlayNetworking.send(MuseumCuratorMod.CHECKLIST_UPDATE, buffer);
+        ClientPlayNetworking.send(msg);
     }
 
     @Override

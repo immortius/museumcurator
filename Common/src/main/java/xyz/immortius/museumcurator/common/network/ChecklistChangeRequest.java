@@ -2,7 +2,13 @@ package xyz.immortius.museumcurator.common.network;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.NotNull;
+import xyz.immortius.museumcurator.common.MuseumCuratorConstants;
+import xyz.immortius.museumcurator.common.data.MuseumCollection;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -12,11 +18,9 @@ import java.util.List;
 /**
  * A request from the client to the server to update checked items.
  */
-public class ChecklistChangeRequest {
-    public static Codec<ChecklistChangeRequest> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            ItemStack.CODEC.listOf().fieldOf("checkedItems").forGetter(ChecklistChangeRequest::getCheckedItems),
-            ItemStack.CODEC.listOf().fieldOf("uncheckedItems").forGetter(ChecklistChangeRequest::getUncheckedItems)
-    ).apply(instance, ChecklistChangeRequest::new));
+public class ChecklistChangeRequest implements CustomPacketPayload {
+    public static final CustomPacketPayload.Type<ChecklistChangeRequest> ID = new CustomPacketPayload.Type<>(MuseumCuratorConstants.CHECKLIST_CHANGE_REQUEST_MESSAGE_ID);
+    public static final StreamCodec<RegistryFriendlyByteBuf, ChecklistChangeRequest> STREAM_CODEC = StreamCodec.composite(ItemStack.LIST_STREAM_CODEC, ChecklistChangeRequest::getCheckedItems, ItemStack.LIST_STREAM_CODEC, ChecklistChangeRequest::getUncheckedItems, ChecklistChangeRequest::new);
 
     private final List<ItemStack> checkedItems;
     private final List<ItemStack> uncheckedItems;
@@ -50,4 +54,8 @@ public class ChecklistChangeRequest {
         return uncheckedItems;
     }
 
+    @Override
+    public @NotNull Type<? extends CustomPacketPayload> type() {
+        return ID;
+    }
 }
