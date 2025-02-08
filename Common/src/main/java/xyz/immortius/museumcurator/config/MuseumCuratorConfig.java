@@ -1,6 +1,5 @@
 package xyz.immortius.museumcurator.config;
 
-import xyz.immortius.museumcurator.config.system.Comment;
 import xyz.immortius.museumcurator.config.system.Name;
 
 /**

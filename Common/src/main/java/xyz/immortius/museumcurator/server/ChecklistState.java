@@ -13,7 +13,6 @@ import net.minecraft.world.level.saveddata.SavedData;
 import org.jetbrains.annotations.NotNull;
 import xyz.immortius.museumcurator.common.data.CollectionItem;
 import xyz.immortius.museumcurator.common.data.MuseumCollections;
-import xyz.immortius.museumcurator.common.data.MuseumExhibit;
 import xyz.immortius.museumcurator.common.network.ChecklistUpdateMessage;
 import xyz.immortius.museumcurator.config.MuseumCuratorConfig;
 import xyz.immortius.museumcurator.interop.Services;

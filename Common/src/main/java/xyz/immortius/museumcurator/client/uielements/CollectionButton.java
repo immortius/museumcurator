@@ -1,6 +1,5 @@
 package xyz.immortius.museumcurator.client.uielements;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import xyz.immortius.museumcurator.common.data.MuseumCollection;

@@ -3,7 +3,6 @@ package xyz.immortius.museumcurator.common.data;
 import com.google.common.collect.ImmutableMap;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.core.component.DataComponentType;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.*;

@@ -1,14 +1,11 @@
 package xyz.immortius.museumcurator.common.network;
 
-import com.mojang.serialization.Codec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import xyz.immortius.museumcurator.common.MuseumCuratorConstants;
-import xyz.immortius.museumcurator.common.data.MuseumCollection;
 
 import java.util.ArrayList;
 import java.util.Collection;

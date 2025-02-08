@@ -24,12 +24,8 @@ import xyz.immortius.museumcurator.config.system.ConfigSystem;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.*;
 import java.util.stream.IntStream;
-import java.util.Map;
 
 /**
  * Server event handlers for events triggered server-side. Primarily loads the collection data

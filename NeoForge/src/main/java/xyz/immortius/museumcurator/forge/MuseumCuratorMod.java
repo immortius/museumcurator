@@ -1,8 +1,6 @@
 package xyz.immortius.museumcurator.forge;
 
-import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -31,7 +29,6 @@ import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
-import net.neoforged.neoforge.registries.NewRegistryEvent;
 import xyz.immortius.museumcurator.client.network.ChecklistUpdateReceiver;
 import xyz.immortius.museumcurator.client.network.LogonReceiver;
 import xyz.immortius.museumcurator.client.screens.ChecklistOverviewScreen;
