@@ -3,6 +3,7 @@ package xyz.immortius.museumcurator.common.data;
 import com.google.common.collect.ImmutableMap;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.core.component.DataComponentType;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.*;
@@ -14,13 +15,13 @@ public class RawExhibit {
     private final String name;
     private String relativeTo;
     private Placement placement;
-    private final List<MuseumExhibit.CollectionItem> items;
+    private final List<CollectionItem> items;
     private List<ItemGroup> insertGroups;
 
     public static final Codec<ItemGroup> ITEM_GROUP_CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            MuseumExhibit.CollectionItem.CODEC.optionalFieldOf("relativeTo", null).forGetter(x -> x.relativeTo),
+            CollectionItem.CODEC.optionalFieldOf("relativeTo", null).forGetter(x -> x.relativeTo),
             Codec.STRING.optionalFieldOf("placement", Placement.After.getId()).forGetter(x -> (x.placement() != null) ? x.placement().getId() : ""),
-            MuseumExhibit.CollectionItem.CODEC.listOf().fieldOf("items").forGetter((x) ->x.items)
+            CollectionItem.CODEC.listOf().fieldOf("items").forGetter((x) ->x.items)
     ).apply(instance, (relativeTo, positioning, items) -> new ItemGroup(
             relativeTo,
             Placement.parse(positioning),
@@ -32,11 +33,11 @@ public class RawExhibit {
             Codec.STRING.fieldOf("name").forGetter(x -> x.name),
             Codec.STRING.optionalFieldOf("relativeTo", "").forGetter(x -> x.relativeTo),
             Codec.STRING.optionalFieldOf("placement", Placement.After.getId()).forGetter(x -> (x.placement != null) ? x.placement.getId() : ""),
-            MuseumExhibit.CollectionItem.CODEC.listOf().fieldOf("items").forGetter(x -> x.items),
+            CollectionItem.CODEC.listOf().fieldOf("items").forGetter(x -> x.items),
             ITEM_GROUP_CODEC.listOf().optionalFieldOf("insertGroups", Collections.emptyList()).forGetter(x -> x.insertGroups)
     ).apply(instance, (collection, name, relativeTo, positioning, items, insertGroups) -> new RawExhibit(collection, name, relativeTo, Placement.parse(positioning), items, insertGroups)));
 
-    public RawExhibit(String collection, String name, String relativeTo, Placement placement, List<MuseumExhibit.CollectionItem> items, List<ItemGroup> itemGroups) {
+    public RawExhibit(String collection, String name, String relativeTo, Placement placement, List<CollectionItem> items, List<ItemGroup> itemGroups) {
         this.collection = collection;
         this.name = name;
         this.relativeTo = relativeTo;
@@ -61,7 +62,7 @@ public class RawExhibit {
         return placement;
     }
 
-    public List<MuseumExhibit.CollectionItem> getItems() {
+    public List<CollectionItem> getItems() {
         return items;
     }
 
@@ -93,15 +94,11 @@ public class RawExhibit {
         }
     }
 
-    private boolean matchItems(MuseumExhibit.CollectionItem a, MuseumExhibit.CollectionItem b) {
+    private boolean matchItems(CollectionItem a, CollectionItem b) {
         if (!ItemStack.isSameItem(a.itemStack(), b.itemStack())) {
             return false;
         }
-        if (!a.componentFilter().isEmpty()) {
-            // TODO
-            return false; //new MuseumCollections.ComparingTagVisitor(a.getComponents()).isMatch(b.getComponents());
-        }
-        return true;
+        return a.componentFilter().equals(b.componentFilter());
     }
 
     public void setRelativeTo(String relativeTo) {
@@ -112,7 +109,7 @@ public class RawExhibit {
         this.placement = placement;
     }
 
-    public record ItemGroup(MuseumExhibit.CollectionItem relativeTo, Placement placement, List<MuseumExhibit.CollectionItem> items) {
+    public record ItemGroup(CollectionItem relativeTo, Placement placement, List<CollectionItem> items) {
     }
 
     public enum Placement {

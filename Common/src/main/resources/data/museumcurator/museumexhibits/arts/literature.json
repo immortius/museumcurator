@@ -13,430 +13,313 @@
     {
       "id": "minecraft:enchanted_book",
       "tags": {
-        "StoredEnchantments": [
-          {
-            "lvl": 1,
-            "id": "minecraft:aqua_affinity"
-          }
-        ]
+        "minecraft:stored_enchantments": {
+          "minecraft:aqua_affinity": 1
+        }
       }
     },
     {
       "id": "minecraft:enchanted_book",
       "tags": {
-        "StoredEnchantments": [
-          {
-            "lvl": 5,
-            "id": "minecraft:bane_of_arthropods"
-          }
-        ]
+        "minecraft:stored_enchantments": {
+          "minecraft:bane_of_arthropods": 5
+        }
       }
     },
     {
       "id": "minecraft:enchanted_book",
       "tags": {
-        "StoredEnchantments": [
-          {
-            "lvl": 4,
-            "id": "minecraft:blast_protection"
-          }
-        ]
+        "minecraft:stored_enchantments": {
+          "minecraft:blast_protection": 4
+        }
       }
     },
     {
       "id": "minecraft:enchanted_book",
       "tags": {
-        "StoredEnchantments": [
-          {
-            "lvl": 1,
-            "id": "minecraft:channeling"
-          }
-        ]
+        "minecraft:stored_enchantments": {
+          "minecraft:channeling": 1
+        }
       }
     },
     {
       "id": "minecraft:enchanted_book",
       "tags": {
-        "StoredEnchantments": [
-          {
-            "lvl": 1,
-            "id": "minecraft:binding_curse"
-          }
-        ]
+        "minecraft:stored_enchantments": {
+          "minecraft:binding_curse": 1
+        }
       }
     },
     {
       "id": "minecraft:enchanted_book",
       "tags": {
-        "StoredEnchantments": [
-          {
-            "lvl": 1,
-            "id": "minecraft:vanishing_curse"
-          }
-        ]
+        "minecraft:stored_enchantments": {
+          "minecraft:vanishing_curse": 1
+        }
       }
     },
     {
       "id": "minecraft:enchanted_book",
       "tags": {
-        "StoredEnchantments": [
-          {
-            "lvl": 3,
-            "id": "minecraft:depth_strider"
-          }
-        ]
+        "minecraft:stored_enchantments": {
+          "minecraft:depth_strider": 3
+        }
       }
     },
     {
       "id": "minecraft:enchanted_book",
       "tags": {
-        "StoredEnchantments": [
-          {
-            "lvl": 5,
-            "id": "minecraft:efficiency"
-          }
-        ]
+        "minecraft:stored_enchantments": {
+          "minecraft:efficiency": 5
+        }
       }
     },
     {
       "id": "minecraft:enchanted_book",
       "tags": {
-        "StoredEnchantments": [
-          {
-            "lvl": 4,
-            "id": "minecraft:feather_falling"
-          }
-        ]
+        "minecraft:stored_enchantments": {
+          "minecraft:feather_falling": 4
+        }
       }
     },
     {
       "id": "minecraft:enchanted_book",
       "tags": {
-        "StoredEnchantments": [
-          {
-            "lvl": 2,
-            "id": "minecraft:fire_aspect"
-          }
-        ]
+        "minecraft:stored_enchantments": {
+          "minecraft:fire_aspect": 2
+        }
       }
     },
     {
       "id": "minecraft:enchanted_book",
       "tags": {
-        "StoredEnchantments": [
-          {
-            "lvl": 4,
-            "id": "minecraft:fire_protection"
-          }
-        ]
+        "minecraft:stored_enchantments": {
+          "minecraft:fire_protection": 4
+        }
       }
     },
     {
       "id": "minecraft:enchanted_book",
       "tags": {
-        "StoredEnchantments": [
-          {
-            "lvl": 1,
-            "id": "minecraft:flame"
-          }
-        ]
+        "minecraft:stored_enchantments": {
+          "minecraft:flame": 1
+        }
       }
     },
     {
       "id": "minecraft:enchanted_book",
       "tags": {
-        "StoredEnchantments": [
-          {
-            "lvl": 3,
-            "id": "minecraft:fortune"
-          }
-        ]
+        "minecraft:stored_enchantments": {
+          "minecraft:fortune": 3
+        }
       }
     },
     {
       "id": "minecraft:enchanted_book",
       "tags": {
-        "StoredEnchantments": [
-          {
-            "lvl": 2,
-            "id": "minecraft:frost_walker"
-          }
-        ]
+        "minecraft:stored_enchantments": {
+          "minecraft:frost_walker": 2
+        }
       }
     },
     {
       "id": "minecraft:enchanted_book",
       "tags": {
-        "StoredEnchantments": [
-          {
-            "lvl": 5,
-            "id": "minecraft:impaling"
-          }
-        ]
+        "minecraft:stored_enchantments": {
+          "minecraft:impaling": 5
+        }
       }
     },
     {
       "id": "minecraft:enchanted_book",
       "tags": {
-        "StoredEnchantments": [
-          {
-            "lvl": 1,
-            "id": "minecraft:infinity"
-          }
-        ]
+        "minecraft:stored_enchantments": {
+          "minecraft:infinity": 1
+        }
       }
     },
     {
       "id": "minecraft:enchanted_book",
       "tags": {
-        "StoredEnchantments": [
-          {
-            "lvl": 2,
-            "id": "minecraft:knockback"
-          }
-        ]
+        "minecraft:stored_enchantments": {
+          "minecraft:knockback": 2
+        }
       }
     },
     {
       "id": "minecraft:enchanted_book",
       "tags": {
-        "StoredEnchantments": [
-          {
-            "lvl": 3,
-            "id": "minecraft:looting"
-          }
-        ]
+        "minecraft:stored_enchantments": {
+          "minecraft:looting": 3
+        }
       }
     },
     {
       "id": "minecraft:enchanted_book",
       "tags": {
-        "StoredEnchantments": [
-          {
-            "lvl": 3,
-            "id": "minecraft:loyalty"
-          }
-        ]
+        "minecraft:stored_enchantments": {
+          "minecraft:loyalty": 3
+        }
       }
     },
     {
       "id": "minecraft:enchanted_book",
       "tags": {
-        "StoredEnchantments": [
-          {
-            "lvl": 3,
-            "id": "minecraft:luck_of_the_sea"
-          }
-        ]
+        "minecraft:stored_enchantments": {
+          "minecraft:luck_of_the_sea": 3
+        }
       }
     },
     {
       "id": "minecraft:enchanted_book",
       "tags": {
-        "StoredEnchantments": [
-          {
-            "lvl": 3,
-            "id": "minecraft:lure"
-          }
-        ]
+        "minecraft:stored_enchantments": {
+          "minecraft:lure": 3
+        }
       }
     },
     {
       "id": "minecraft:enchanted_book",
       "tags": {
-        "StoredEnchantments": [
-          {
-            "lvl": 1,
-            "id": "minecraft:mending"
-          }
-        ]
+        "minecraft:stored_enchantments": {
+          "minecraft:mending": 1
+        }
       }
     },
     {
       "id": "minecraft:enchanted_book",
       "tags": {
-        "StoredEnchantments": [
-          {
-            "lvl": 1,
-            "id": "minecraft:multishot"
-          }
-        ]
+        "minecraft:stored_enchantments": {
+          "minecraft:multishot": 1
+        }
       }
     },
     {
       "id": "minecraft:enchanted_book",
       "tags": {
-        "StoredEnchantments": [
-          {
-            "lvl": 4,
-            "id": "minecraft:piercing"
-          }
-        ]
+        "minecraft:stored_enchantments": {
+          "minecraft:piercing": 4
+        }
       }
     },
     {
       "id": "minecraft:enchanted_book",
       "tags": {
-        "StoredEnchantments": [
-          {
-            "lvl": 5,
-            "id": "minecraft:power"
-          }
-        ]
+        "minecraft:stored_enchantments": {
+          "minecraft:power": 5
+        }
       }
     },
     {
       "id": "minecraft:enchanted_book",
       "tags": {
-        "StoredEnchantments": [
-          {
-            "lvl": 4,
-            "id": "minecraft:projectile_protection"
-          }
-        ]
+        "minecraft:stored_enchantments": {
+          "minecraft:projectile_protection": 4
+        }
       }
     },
     {
       "id": "minecraft:enchanted_book",
       "tags": {
-        "StoredEnchantments": [
-          {
-            "lvl": 4,
-            "id": "minecraft:protection"
-          }
-        ]
+        "minecraft:stored_enchantments": {
+          "minecraft:protection": 4
+        }
       }
     },
     {
       "id": "minecraft:enchanted_book",
       "tags": {
-        "StoredEnchantments": [
-          {
-            "lvl": 2,
-            "id": "minecraft:punch"
-          }
-        ]
+        "minecraft:stored_enchantments": {
+          "minecraft:punch": 2
+        }
       }
     },
     {
       "id": "minecraft:enchanted_book",
       "tags": {
-        "StoredEnchantments": [
-          {
-            "lvl": 3,
-            "id": "minecraft:quick_charge"
-          }
-        ]
+        "minecraft:stored_enchantments": {
+          "minecraft:quick_charge": 3
+        }
       }
     },
     {
       "id": "minecraft:enchanted_book",
       "tags": {
-        "StoredEnchantments": [
-          {
-            "lvl": 3,
-            "id": "minecraft:respiration"
-          }
-        ]
+        "minecraft:stored_enchantments": {
+          "minecraft:respiration": 3
+        }
       }
     },
     {
       "id": "minecraft:enchanted_book",
       "tags": {
-        "StoredEnchantments": [
-          {
-            "lvl": 3,
-            "id": "minecraft:riptide"
-          }
-        ]
+        "minecraft:stored_enchantments": {
+          "minecraft:riptide": 3
+        }
       }
     },
     {
       "id": "minecraft:enchanted_book",
       "tags": {
-        "StoredEnchantments": [
-          {
-            "lvl": 5,
-            "id": "minecraft:sharpness"
-          }
-        ]
+        "minecraft:stored_enchantments": {
+          "minecraft:sharpness": 5
+        }
       }
     },
     {
       "id": "minecraft:enchanted_book",
       "tags": {
-        "StoredEnchantments": [
-          {
-            "lvl": 1,
-            "id": "minecraft:silk_touch"
-          }
-        ]
+        "minecraft:stored_enchantments": {
+          "minecraft:silk_touch": 1
+        }
       }
     },
     {
       "id": "minecraft:enchanted_book",
       "tags": {
-        "StoredEnchantments": [
-          {
-            "lvl": 5,
-            "id": "minecraft:smite"
-          }
-        ]
+        "minecraft:stored_enchantments": {
+          "minecraft:smite": 5
+        }
       }
     },
     {
       "id": "minecraft:enchanted_book",
       "tags": {
-        "StoredEnchantments": [
-          {
-            "lvl": 3,
-            "id": "minecraft:soul_speed"
-          }
-        ]
+        "minecraft:stored_enchantments": {
+          "minecraft:soul_speed": 3
+        }
       }
     },
     {
       "id": "minecraft:enchanted_book",
       "tags": {
-        "StoredEnchantments": [
-          {
-            "lvl": 3,
-            "id": "minecraft:sweeping"
-          }
-        ]
+        "minecraft:stored_enchantments": {
+          "minecraft:sweeping_edge": 3
+        }
       }
     },
     {
       "id": "minecraft:enchanted_book",
       "tags": {
-        "StoredEnchantments": [
-          {
-            "lvl": 3,
-            "id": "minecraft:swift_sneak"
-          }
-        ]
+        "minecraft:stored_enchantments": {
+          "minecraft:swift_sneak": 3
+        }
       }
     },
     {
       "id": "minecraft:enchanted_book",
       "tags": {
-        "StoredEnchantments": [
-          {
-            "lvl": 3,
-            "id": "minecraft:thorns"
-          }
-        ]
+        "minecraft:stored_enchantments": {
+          "minecraft:thorns": 3
+        }
       }
     },
     {
       "id": "minecraft:enchanted_book",
       "tags": {
-        "StoredEnchantments": [
-          {
-            "lvl": 3,
-            "id": "minecraft:unbreaking"
-          }
-        ]
+        "minecraft:stored_enchantments": {
+          "minecraft:unbreaking": 3
+        }
       }
     }
   ]

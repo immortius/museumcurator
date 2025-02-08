@@ -13,7 +13,6 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
-import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.flag.FeatureFlags;
@@ -32,6 +31,7 @@ import xyz.immortius.museumcurator.common.network.ChecklistUpdateMessage;
 import xyz.immortius.museumcurator.common.network.LogOnMessage;
 import xyz.immortius.museumcurator.config.MuseumCuratorConfig;
 import xyz.immortius.museumcurator.config.system.ConfigSystem;
+import xyz.immortius.museumcurator.fabric.extensions.ResourceManagerWithRegistryAccess;
 import xyz.immortius.museumcurator.server.ChecklistState;
 import xyz.immortius.museumcurator.server.ServerEventHandler;
 import xyz.immortius.museumcurator.server.commands.ChecklistCommands;
@@ -51,20 +51,6 @@ public class MuseumCuratorMod implements ModInitializer {
     public static SoundEvent WRITING_SOUND = SoundEvent.createVariableRangeEvent(MuseumCuratorConstants.WRITING_SOUND_ID);
 
     public static MenuType<MuseumChecklistMenu> MUSEUM_CHECKLIST_MENU;
-
-    static {
-        ResourceManagerHelper.get(PackType.SERVER_DATA).registerReloadListener(new SimpleSynchronousResourceReloadListener() {
-            @Override
-            public ResourceLocation getFabricId() {
-                return new ResourceLocation(MuseumCuratorConstants.MOD_ID, "server_data");
-            }
-
-            @Override
-            public void onResourceManagerReload(ResourceManager resourceManager) {
-                ServerEventHandler.onResourceManagerReload(resourceManager);
-            }
-        });
-    }
 
     @Override
     public void onInitialize() {
@@ -86,14 +72,13 @@ public class MuseumCuratorMod implements ModInitializer {
             ServerChecklistUpdateReceiver.receive(context.player().getServer(), context.player(), payload);
         });
 
+
         CommandRegistrationCallback.EVENT.register((dispatcher, context, environment) -> {
             ItemDumpCommand.register(dispatcher);
             ChecklistCommands.register(dispatcher, context);
         });
 
         MUSEUM_CHECKLIST = Registry.register(BuiltInRegistries.ITEM, createId("museumchecklist"), new MuseumChecklist(new Item.Properties()));
-
-
 
         ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.TOOLS_AND_UTILITIES).register(content -> {
             content.addAfter(Items.MUSIC_DISC_PIGSTEP, MUSEUM_CHECKLIST);
@@ -105,8 +90,19 @@ public class MuseumCuratorMod implements ModInitializer {
 
         setupConfig();
 
-    }
+        ResourceManagerHelper.get(PackType.SERVER_DATA).registerReloadListener(new SimpleSynchronousResourceReloadListener() {
+            @Override
+            public ResourceLocation getFabricId() {
+                return new ResourceLocation(MuseumCuratorConstants.MOD_ID, "server_data");
+            }
 
+            @Override
+            public void onResourceManagerReload(ResourceManager resourceManager) {
+                ServerEventHandler.onResourceManagerReload(resourceManager, ((ResourceManagerWithRegistryAccess) resourceManager).museumcurator$getRegistryAccess());
+            }
+        });
+
+    }
     private void setupConfig() {
         new ConfigSystem().synchConfig(Paths.get("defaultconfigs", MuseumCuratorConstants.MOD_ID + ".toml"), MuseumCuratorConfig.get());
     }

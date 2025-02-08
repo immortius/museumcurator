@@ -11,91 +11,91 @@
     {
       "id": "minecraft:tipped_arrow",
       "tags": {
-        "Potion": "minecraft:night_vision"
+        "potion_contents": "minecraft:night_vision"
       }
     },
     {
       "id": "minecraft:tipped_arrow",
       "tags": {
-        "Potion": "minecraft:invisibility"
+        "potion_contents": "minecraft:invisibility"
       }
     },
     {
       "id": "minecraft:tipped_arrow",
       "tags": {
-        "Potion": "minecraft:leaping"
+        "potion_contents": "minecraft:leaping"
       }
     },
     {
       "id": "minecraft:tipped_arrow",
       "tags": {
-        "Potion": "minecraft:fire_resistance"
+        "potion_contents": "minecraft:fire_resistance"
       }
     },
     {
       "id": "minecraft:tipped_arrow",
       "tags": {
-        "Potion": "minecraft:swiftness"
+        "potion_contents": "minecraft:swiftness"
       }
     },
     {
       "id": "minecraft:tipped_arrow",
       "tags": {
-        "Potion": "minecraft:slowness"
+        "potion_contents": "minecraft:slowness"
       }
     },
     {
       "id": "minecraft:tipped_arrow",
       "tags": {
-        "Potion": "minecraft:turtle_master"
+        "potion_contents": "minecraft:turtle_master"
       }
     },
     {
       "id": "minecraft:tipped_arrow",
       "tags": {
-        "Potion": "minecraft:water_breathing"
+        "potion_contents": "minecraft:water_breathing"
       }
     },
     {
       "id": "minecraft:tipped_arrow",
       "tags": {
-        "Potion": "minecraft:healing"
+        "potion_contents": "minecraft:healing"
       }
     },
     {
       "id": "minecraft:tipped_arrow",
       "tags": {
-        "Potion": "minecraft:harming"
+        "potion_contents": "minecraft:harming"
       }
     },
     {
       "id": "minecraft:tipped_arrow",
       "tags": {
-        "Potion": "minecraft:poison"
+        "potion_contents": "minecraft:poison"
       }
     },
     {
       "id": "minecraft:tipped_arrow",
       "tags": {
-        "Potion": "minecraft:regeneration"
+        "potion_contents": "minecraft:regeneration"
       }
     },
     {
       "id": "minecraft:tipped_arrow",
       "tags": {
-        "Potion": "minecraft:strength"
+        "potion_contents": "minecraft:strength"
       }
     },
     {
       "id": "minecraft:tipped_arrow",
       "tags": {
-        "Potion": "minecraft:weakness"
+        "potion_contents": "minecraft:weakness"
       }
     },
     {
       "id": "minecraft:tipped_arrow",
       "tags": {
-        "Potion": "minecraft:slow_falling"
+        "potion_contents": "minecraft:slow_falling"
       }
     },
     "minecraft:trident"

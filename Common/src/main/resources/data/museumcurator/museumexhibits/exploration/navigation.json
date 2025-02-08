@@ -7,9 +7,7 @@
     {
       "id": "minecraft:map",
       "tags": {
-        "display": {
-          "Name": "{\"translate\":\"filled_map.buried_treasure\"}"
-        }
+        "minecraft:item_name": "{\"translate\":\"filled_map.buried_treasure\"}"
       }
     },
     "minecraft:cartography_table",

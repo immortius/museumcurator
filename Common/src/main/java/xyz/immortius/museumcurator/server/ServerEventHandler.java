@@ -6,7 +6,8 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.mojang.serialization.JsonOps;
 import joptsimple.internal.Strings;
-import net.minecraft.Util;
+import net.minecraft.core.RegistryAccess;
+import net.minecraft.resources.RegistryOps;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.packs.resources.Resource;
@@ -23,6 +24,7 @@ import xyz.immortius.museumcurator.config.system.ConfigSystem;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.*;
@@ -54,16 +56,15 @@ public final class ServerEventHandler {
      * @param server The minecraft server that has started
      */
     public static void onServerStarted(MinecraftServer server) {
-
     }
 
-    public static void onResourceManagerReload(ResourceManager resourceManager) {
+    public static void onResourceManagerReload(ResourceManager resourceManager, RegistryAccess registryAccess) {
         List<RawExhibit> rawExhibits = new ArrayList<>();
 
         for (Map.Entry<ResourceLocation, Resource> entry : resourceManager.listResources(MuseumCuratorConstants.EXHIBIT_DATA_PATH, r -> true).entrySet()) {
             try (InputStreamReader reader = new InputStreamReader(entry.getValue().open())) {
                 JsonElement jsonElement = JsonParser.parseReader(reader);
-                RawExhibit exhibit = RawExhibit.EXHIBIT_CODEC.parse(JsonOps.INSTANCE, jsonElement).getOrThrow();
+                RawExhibit exhibit = RawExhibit.EXHIBIT_CODEC.parse(RegistryOps.create(JsonOps.INSTANCE, registryAccess), jsonElement).getOrThrow();
                 rawExhibits.add(exhibit);
             } catch (IOException | RuntimeException e) {
                 MuseumCuratorConstants.LOGGER.error("Failed to read museum exhibit data '{}'", entry.getKey(), e);

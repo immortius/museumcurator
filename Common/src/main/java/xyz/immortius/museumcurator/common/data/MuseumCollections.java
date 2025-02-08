@@ -4,8 +4,13 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableListMultimap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.ListMultimap;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.mojang.serialization.DataResult;
+import com.mojang.serialization.JsonOps;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.component.DataComponentPatch;
+import net.minecraft.core.component.DataComponentType;
 import net.minecraft.nbt.*;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -13,6 +18,7 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import xyz.immortius.museumcurator.common.MuseumCuratorConstants;
 
 import java.util.*;
 
@@ -25,8 +31,8 @@ public final class MuseumCollections {
 
     private static final Set<String> IGNORE_TAGS = ImmutableSet.of("Damage");
     private static List<MuseumCollection> collections = Collections.emptyList();
-    private static ListMultimap<Item, MuseumExhibit.CollectionItem> collectionItems = ImmutableListMultimap.of();
-    private static final Set<MuseumExhibit.CollectionItem> checkedItems = new LinkedHashSet<>();
+    private static ListMultimap<Item, CollectionItem> collectionItems = ImmutableListMultimap.of();
+    private static final Set<CollectionItem> checkedItems = new LinkedHashSet<>();
 
     private MuseumCollections() {}
 
@@ -43,10 +49,10 @@ public final class MuseumCollections {
      */
     public static void setCollections(Collection<MuseumCollection> newCollections) {
         collections = ImmutableList.copyOf(newCollections);
-        ImmutableListMultimap.Builder<Item, MuseumExhibit.CollectionItem> builder = ImmutableListMultimap.builder();
+        ImmutableListMultimap.Builder<Item, CollectionItem> builder = ImmutableListMultimap.builder();
         for (MuseumCollection collection : newCollections) {
             for (MuseumExhibit exhibit : collection.getExhibits()) {
-                for (MuseumExhibit.CollectionItem item : exhibit.getItems()) {
+                for (CollectionItem item : exhibit.getItems()) {
                     builder.put(item.itemStack().getItem(), item);
                 }
             }
@@ -59,15 +65,19 @@ public final class MuseumCollections {
         return getCollectionItemStack(queryItem) != null;
     }
 
-    public static MuseumExhibit.CollectionItem getCollectionItemStack(ItemStack itemStack) {
-        List<MuseumExhibit.CollectionItem> candidates = collectionItems.get(itemStack.getItem());
-        MuseumExhibit.CollectionItem bestMatch = null;
+    public static CollectionItem getCollectionItemStack(ItemStack itemStack) {
+        List<CollectionItem> candidates = collectionItems.get(itemStack.getItem());
+        CollectionItem bestMatch = null;
         int bestExcessTags = 0;
-        for (MuseumExhibit.CollectionItem candidate : candidates) {
+        for (CollectionItem candidate : candidates) {
             boolean match = true;
             if (!candidate.componentFilter().isEmpty()) {
-                // TODO
-                match = false;//new ComparingTagVisitor(collectionItem.getComponents().).isMatch(itemStack.getComponents());
+                for (Map.Entry<DataComponentType<?>, Optional<?>> entry : candidate.componentFilter().entrySet()) {
+                    if (entry.getValue().isPresent()) {
+                        Object data = entry.getValue().get();
+                        match = itemStack.getComponents().get(entry.getKey()) != null && data.equals(itemStack.getComponents().get(entry.getKey()));
+                    }
+                }
             }
             if (match) {
                 int excessTags = itemStack.getComponents().size() - candidate.itemStack().getComponents().size();
@@ -96,7 +106,7 @@ public final class MuseumCollections {
      */
     public static void checkItems(Collection<ItemStack> items) {
         for (ItemStack item : items) {
-            MuseumExhibit.CollectionItem collectionItem = getCollectionItemStack(item);
+            CollectionItem collectionItem = getCollectionItemStack(item);
             if (collectionItem != null) {
                 checkedItems.add(collectionItem);
             }
@@ -109,7 +119,7 @@ public final class MuseumCollections {
      */
     public static void uncheckItems(Collection<ItemStack> items) {
         for (ItemStack item : items) {
-            MuseumExhibit.CollectionItem collectionItem = getCollectionItemStack(item);
+            CollectionItem collectionItem = getCollectionItemStack(item);
             if (collectionItem != null) {
                 checkedItems.remove(collectionItem);
             }
@@ -127,7 +137,7 @@ public final class MuseumCollections {
      * @param item
      * @return Whether the item has been checked
      */
-    public static boolean isChecked(MuseumExhibit.CollectionItem item) {
+    public static boolean isChecked(CollectionItem item) {
         return item != null && checkedItems.contains(item);
     }
 
@@ -135,7 +145,7 @@ public final class MuseumCollections {
      * @param items
      * @return The count of how many of the provided items are checked
      */
-    public static long countChecked(List<MuseumExhibit.CollectionItem> items) {
+    public static long countChecked(List<CollectionItem> items) {
         return items.stream().filter(MuseumCollections::isChecked).count();
     }
 

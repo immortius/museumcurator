@@ -31,6 +31,7 @@ import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import net.neoforged.neoforge.registries.NewRegistryEvent;
 import xyz.immortius.museumcurator.client.network.ChecklistUpdateReceiver;
 import xyz.immortius.museumcurator.client.network.LogonReceiver;
 import xyz.immortius.museumcurator.client.screens.ChecklistOverviewScreen;
@@ -88,7 +89,6 @@ public class MuseumCuratorMod {
         NeoForge.EVENT_BUS.addListener(this::onServerStarting);
         NeoForge.EVENT_BUS.addListener(this::onServerStarted);
         NeoForge.EVENT_BUS.addListener(this::onServerLogin);
-
     }
 
     public void updateCreativeTabs(BuildCreativeModeTabContentsEvent e) {
@@ -110,7 +110,7 @@ public class MuseumCuratorMod {
             @Override
             public void onResourceManagerReload(ResourceManager resourceManager) {
                 MuseumCuratorConstants.LOGGER.info("Loading resources");
-                ServerEventHandler.onResourceManagerReload(resourceManager);
+                ServerEventHandler.onResourceManagerReload(resourceManager, e.getRegistryAccess());
             }
 
             @Override

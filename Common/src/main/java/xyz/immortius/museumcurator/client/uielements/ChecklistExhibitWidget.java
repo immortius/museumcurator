@@ -15,6 +15,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import xyz.immortius.museumcurator.client.screens.AbstractChecklistScreen;
+import xyz.immortius.museumcurator.common.data.CollectionItem;
 import xyz.immortius.museumcurator.common.data.MuseumCollections;
 import xyz.immortius.museumcurator.common.data.MuseumExhibit;
 import xyz.immortius.museumcurator.common.network.ChecklistChangeRequest;
@@ -37,14 +38,14 @@ public class ChecklistExhibitWidget extends AbstractWidget {
     }
 
     public List<Component> getTooltip(int mouseX, int mouseY) {
-        MuseumExhibit.CollectionItem item = mouseOverItem(mouseX, mouseY);
+        CollectionItem item = mouseOverItem(mouseX, mouseY);
         if (item != null) {
             return item.itemStack().getTooltipLines(Item.TooltipContext.of(Minecraft.getInstance().level), Minecraft.getInstance().player, TooltipFlag.Default.NORMAL);
         }
         return null;
     }
 
-    private MuseumExhibit.CollectionItem mouseOverItem(int mouseX, int mouseY) {
+    private CollectionItem mouseOverItem(int mouseX, int mouseY) {
         if (mouseY < getY() + TITLE_HEIGHT) {
             return null;
         }
@@ -73,7 +74,7 @@ public class ChecklistExhibitWidget extends AbstractWidget {
         graphics.drawString(minecraft.font, title, getX() + offsetX, getY() + offsetY, 0x404040, false);
 
         offsetY += TITLE_HEIGHT;
-        for (MuseumExhibit.CollectionItem item : exhibit.getItems()) {
+        for (CollectionItem item : exhibit.getItems()) {
             if (offsetX + 18 > width) {
                 offsetX = 0;
                 offsetY += 20;
@@ -97,9 +98,8 @@ public class ChecklistExhibitWidget extends AbstractWidget {
         if (button != 0) {
             return false;
         }
-        MuseumExhibit.CollectionItem item = mouseOverItem((int)mouseX, (int)mouseY);
+        CollectionItem item = mouseOverItem((int)mouseX, (int)mouseY);
         if (item != null) {
-            // TODO: Review use of item stack
             if (MuseumCollections.isChecked(item)) {
                 MuseumCollections.uncheckItems(Collections.singleton(item.itemStack()));
                 Services.PLATFORM.sendClientChecklistChange(ChecklistChangeRequest.uncheck(item.itemStack()));

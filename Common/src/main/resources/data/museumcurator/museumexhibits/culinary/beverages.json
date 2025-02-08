@@ -10,151 +10,151 @@
     {
       "id": "minecraft:potion",
       "tags": {
-        "Potion": "minecraft:mundane"
+        "potion_contents": "minecraft:mundane"
       }
     },
     {
       "id": "minecraft:potion",
       "tags": {
-        "Potion": "minecraft:thick"
+        "potion_contents": "minecraft:thick"
       }
     },
     {
       "id": "minecraft:potion",
       "tags": {
-        "Potion": "minecraft:awkward"
+        "potion_contents": "minecraft:awkward"
       }
     },
     {
       "id": "minecraft:potion",
       "tags": {
-        "Potion": "minecraft:long_night_vision"
+        "potion_contents": "minecraft:long_night_vision"
       }
     },
     {
       "id": "minecraft:potion",
       "tags": {
-        "Potion": "minecraft:long_invisibility"
+        "potion_contents": "minecraft:long_invisibility"
       }
     },
     {
       "id": "minecraft:potion",
       "tags": {
-        "Potion": "minecraft:long_leaping"
+        "potion_contents": "minecraft:long_leaping"
       }
     },
     {
       "id": "minecraft:potion",
       "tags": {
-        "Potion": "minecraft:strong_leaping"
+        "potion_contents": "minecraft:strong_leaping"
       }
     },
     {
       "id": "minecraft:potion",
       "tags": {
-        "Potion": "minecraft:long_fire_resistance"
+        "potion_contents": "minecraft:long_fire_resistance"
       }
     },
     {
       "id": "minecraft:potion",
       "tags": {
-        "Potion": "minecraft:long_swiftness"
+        "potion_contents": "minecraft:long_swiftness"
       }
     },
     {
       "id": "minecraft:potion",
       "tags": {
-        "Potion": "minecraft:strong_swiftness"
+        "potion_contents": "minecraft:strong_swiftness"
       }
     },
     {
       "id": "minecraft:potion",
       "tags": {
-        "Potion": "minecraft:long_slowness"
+        "potion_contents": "minecraft:long_slowness"
       }
     },
     {
       "id": "minecraft:potion",
       "tags": {
-        "Potion": "minecraft:strong_slowness"
+        "potion_contents": "minecraft:strong_slowness"
       }
     },
     {
       "id": "minecraft:potion",
       "tags": {
-        "Potion": "minecraft:long_turtle_master"
+        "potion_contents": "minecraft:long_turtle_master"
       }
     },
     {
       "id": "minecraft:potion",
       "tags": {
-        "Potion": "minecraft:strong_turtle_master"
+        "potion_contents": "minecraft:strong_turtle_master"
       }
     },
     {
       "id": "minecraft:potion",
       "tags": {
-        "Potion": "minecraft:long_water_breathing"
+        "potion_contents": "minecraft:long_water_breathing"
       }
     },
     {
       "id": "minecraft:potion",
       "tags": {
-        "Potion": "minecraft:strong_healing"
+        "potion_contents": "minecraft:strong_healing"
       }
     },
     {
       "id": "minecraft:potion",
       "tags": {
-        "Potion": "minecraft:strong_harming"
+        "potion_contents": "minecraft:strong_harming"
       }
     },
     {
       "id": "minecraft:potion",
       "tags": {
-        "Potion": "minecraft:long_poison"
+        "potion_contents": "minecraft:long_poison"
       }
     },
     {
       "id": "minecraft:potion",
       "tags": {
-        "Potion": "minecraft:strong_poison"
+        "potion_contents": "minecraft:strong_poison"
       }
     },
     {
       "id": "minecraft:potion",
       "tags": {
-        "Potion": "minecraft:long_regeneration"
+        "potion_contents": "minecraft:long_regeneration"
       }
     },
     {
       "id": "minecraft:potion",
       "tags": {
-        "Potion": "minecraft:strong_regeneration"
+        "potion_contents": "minecraft:strong_regeneration"
       }
     },
     {
       "id": "minecraft:potion",
       "tags": {
-        "Potion": "minecraft:long_strength"
+        "potion_contents": "minecraft:long_strength"
       }
     },
     {
       "id": "minecraft:potion",
       "tags": {
-        "Potion": "minecraft:strong_strength"
+        "potion_contents": "minecraft:strong_strength"
       }
     },
     {
       "id": "minecraft:potion",
       "tags": {
-        "Potion": "minecraft:long_weakness"
+        "potion_contents": "minecraft:long_weakness"
       }
     },
     {
       "id": "minecraft:potion",
       "tags": {
-        "Potion": "minecraft:long_slow_falling"
+        "potion_contents": "minecraft:long_slow_falling"
       }
     },
     "minecraft:splash_potion",

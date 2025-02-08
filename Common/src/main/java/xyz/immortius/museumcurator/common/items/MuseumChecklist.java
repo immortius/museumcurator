@@ -1,5 +1,10 @@
 package xyz.immortius.museumcurator.common.items;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.mojang.serialization.DataResult;
+import com.mojang.serialization.JsonOps;
+import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -20,6 +25,7 @@ import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
+import xyz.immortius.museumcurator.common.MuseumCuratorConstants;
 import xyz.immortius.museumcurator.common.data.MuseumCollections;
 import xyz.immortius.museumcurator.common.menus.MuseumChecklistMenu;
 import xyz.immortius.museumcurator.interop.Services;
@@ -67,6 +73,7 @@ public class MuseumChecklist extends Item implements MenuProvider {
         if (blockEntity instanceof Container container) {
             for (int i = 0; i < container.getContainerSize(); i++) {
                 ItemStack content = container.getItem(i);
+
                 if (MuseumCollections.isValidCollectionItem(content)) {
                     items.add(content);
                 }
