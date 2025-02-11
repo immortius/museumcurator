@@ -1,0 +1,42 @@
+{
+	"homepage": "https://modrinth.com/mod/museum-curator",
+    "1.20.5": {
+      "1.4.2": "Initial version"
+	},
+    "1.20.4": {
+      "1.4.2": "Initial version"
+	},
+    "1.20.1": {
+      "1.4.2": "Removed unused argonauts references",		
+      "1.4.1": "Fix for broken world when not using per-player checklists",		
+	  "1.4.0": "Added option for per-player checklists",		
+	  "1.3.0": "Reworked museum data format for modpack extensibility",		
+	  "1.2.1": "Initial release"
+	},
+    "1.20": {
+	  "1.2.1": "Initial release"
+	},
+    "1.19.4": {
+	  "1.4.1": "Fix for broken world when not using per-player checklists",		
+	  "1.4.0": "Added option for per-player checklists",		
+	  "1.3.0": "Reworked museum data format for modpack extensibility",		
+	  "1.2.1": "Changed potions to long or strong versions as appropriate",
+      "1.2.0": "Improved UI. Added chinese translation",
+      "1.1.1": "Fixed checklist state persistance",
+      "1.1.0": "Added support for potions, enchanted books and arrows. Recategorisations.",
+      "1.0.1": "Initial release"
+	},
+	"1.18.2": {
+	  "1.4.1": "Fix for broken world when not using per-player checklists",		
+	  "1.4.0": "Added option for per-player checklists",		
+	  "1.3.0": "Reworked museum data format for modpack extensibility",		
+	  "1.2.1": "Changed potions to long or strong versions as appropriate",
+      "1.2.0": "Improved UI. Added chinese translation",
+      "1.1.1": "Fixed checklist state persistance",
+      "1.1.0": "Added support for potions, enchanted books and arrows. Recategorisations.",
+      "1.0.1": "Recategorisations and fixes",
+	  "1.0.0": "Initial Release"
+	},
+	"promos" : {
+	}
+}

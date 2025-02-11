@@ -11,7 +11,7 @@ version="${version}"
 displayName="${mod_name}"
 # A URL to query for updates for this mod. See the JSON update specification https://mcforge.readthedocs.io/en/latest/gettingstarted/autoupdate/
 updateJSONURL="https://immortius.xyz/museumcurator/updates.json"
-displayURL="https://immortius.xyz/museumcurator"
+displayURL="https://modrinth.com/mod/museum-curator"
 logoFile="museumcuratorlogo.png"
 authors="${mod_author}"
 description='''${description}'''
