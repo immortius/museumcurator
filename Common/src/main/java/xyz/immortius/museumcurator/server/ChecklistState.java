@@ -73,7 +73,7 @@ public class ChecklistState extends SavedData {
     }
 
     public synchronized boolean check(Collection<ItemStack> items) {
-        List<ItemStack> toAdd = items.stream().map(MuseumCollections::getCollectionItemStack).filter(Objects::nonNull).filter(x -> !checkedItems.contains(x)).map(CollectionItem::itemStack).toList();
+        List<ItemStack> toAdd = items.stream().map(MuseumCollections::getCollectionItemStack).filter(Objects::nonNull).map(CollectionItem::itemStack).filter(x -> !checkedItems.contains(x)).toList();
         if (!toAdd.isEmpty()) {
             checkedItems.addAll(toAdd);
             ChecklistUpdateMessage msg = ChecklistUpdateMessage.check(toAdd);
@@ -93,7 +93,7 @@ public class ChecklistState extends SavedData {
     }
 
     public synchronized boolean uncheck(Collection<ItemStack> items) {
-        Set<ItemStack> toRemove = items.stream().map(MuseumCollections::getCollectionItemStack).filter(Objects::nonNull).filter(checkedItems::contains).map(CollectionItem::itemStack).collect(Collectors.toSet());
+        Set<ItemStack> toRemove = items.stream().map(MuseumCollections::getCollectionItemStack).filter(Objects::nonNull).map(CollectionItem::itemStack).filter(checkedItems::contains).collect(Collectors.toSet());
         if (!toRemove.isEmpty()) {
             checkedItems.removeAll(toRemove);
 
