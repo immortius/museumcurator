@@ -3,6 +3,8 @@
   "name": "museumcurator.technology.artifacts",
   "relativeTo": "museumcurator.technology.trophies",
   "items": [
+    "minecraft:trial_key",
+    "minecraft:ominous_trial_key",
     "minecraft:totem_of_undying",
     "minecraft:respawn_anchor",
     "minecraft:nether_star",

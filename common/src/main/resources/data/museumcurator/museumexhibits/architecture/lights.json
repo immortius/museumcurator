@@ -4,7 +4,6 @@
   "relativeTo": "museumcurator.architecture.containers",
   "items": [
     "minecraft:flint_and_steel",
-    "minecraft:fire_charge",
     "minecraft:torch",
     "minecraft:campfire",
     "minecraft:lantern",
@@ -13,6 +12,15 @@
     "minecraft:soul_lantern",
     "minecraft:ochre_froglight",
     "minecraft:pearlescent_froglight",
-    "minecraft:verdant_froglight"
+    "minecraft:verdant_froglight",
+
+    "minecraft:copper_bulb",
+    "minecraft:waxed_copper_bulb",
+    "minecraft:exposed_copper_bulb",
+    "minecraft:waxed_exposed_copper_bulb",
+    "minecraft:weathered_copper_bulb",
+    "minecraft:waxed_weathered_copper_bulb",
+    "minecraft:oxidized_copper_bulb",
+    "minecraft:waxed_oxidized_copper_bulb"
   ]
 }

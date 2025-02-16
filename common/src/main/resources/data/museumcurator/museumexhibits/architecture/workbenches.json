@@ -4,6 +4,7 @@
   "relativeTo": "museumcurator.architecture.fittingsanddecorations",
   "items": [
     "minecraft:crafting_table",
-    "minecraft:stonecutter"
+    "minecraft:stonecutter",
+    "minecraft:crafter"
   ]
 }

@@ -1,9 +1,8 @@
 {
   "collection": "museumcurator.collection.lithology",
   "name": "museumcurator.lithology.volcanic",
-  "relativeTo": "museumcurator.lithology.limestone",
+  "relativeTo": "museumcurator.lithology.tuff",
   "items": [
-    "minecraft:tuff",
     "minecraft:lava_bucket",
     "minecraft:magma_block",
     "minecraft:obsidian",

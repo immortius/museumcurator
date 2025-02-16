@@ -1,7 +1,7 @@
 {
   "collection": "museumcurator.collection.architecture",
   "name": "museumcurator.architecture.signs",
-  "relativeTo": "museumcurator.architecture.fences",
+  "relativeTo": "museumcurator.architecture.grates",
   "items": [
     "minecraft:oak_sign",
     "minecraft:oak_hanging_sign",

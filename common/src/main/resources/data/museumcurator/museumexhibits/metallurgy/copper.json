@@ -8,6 +8,7 @@
     "minecraft:raw_copper",
     "minecraft:raw_copper_block",
     "minecraft:copper_ingot",
+
     "minecraft:copper_block",
     "minecraft:waxed_copper_block",
     "minecraft:exposed_copper",
@@ -16,6 +17,17 @@
     "minecraft:waxed_weathered_copper",
     "minecraft:oxidized_copper",
     "minecraft:waxed_oxidized_copper",
+
+    "minecraft:chiseled_copper",
+    "minecraft:waxed_chiseled_copper",
+    "minecraft:exposed_chiseled_copper",
+    "minecraft:waxed_exposed_chiseled_copper",
+    "minecraft:weathered_chiseled_copper",
+    "minecraft:waxed_exposed_chiseled_copper",
+    "minecraft:waxed_weathered_chiseled_copper",
+    "minecraft:oxidized_chiseled_copper",
+    "minecraft:waxed_oxidized_chiseled_copper",
+
     "minecraft:cut_copper",
     "minecraft:waxed_cut_copper",
     "minecraft:exposed_cut_copper",
@@ -24,6 +36,7 @@
     "minecraft:waxed_weathered_cut_copper",
     "minecraft:oxidized_cut_copper",
     "minecraft:waxed_oxidized_cut_copper",
+
     "minecraft:cut_copper_slab",
     "minecraft:waxed_cut_copper_slab",
     "minecraft:exposed_cut_copper_slab",
@@ -32,6 +45,7 @@
     "minecraft:waxed_weathered_cut_copper_slab",
     "minecraft:oxidized_cut_copper_slab",
     "minecraft:waxed_oxidized_cut_copper_slab",
+
     "minecraft:cut_copper_stairs",
     "minecraft:waxed_cut_copper_stairs",
     "minecraft:exposed_cut_copper_stairs",

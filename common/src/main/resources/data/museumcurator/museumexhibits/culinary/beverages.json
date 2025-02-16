@@ -158,6 +158,7 @@
       }
     },
     "minecraft:splash_potion",
-    "minecraft:experience_bottle"
+    "minecraft:experience_bottle",
+    "minecraft:ominous_bottle"
   ]
 }

@@ -1,0 +1,9 @@
+
+{
+  "collection": "museumcurator.collection.equipment",
+  "name": "museumcurator.equipment.maces",
+  "items": [
+    "minecraft:heavy_core",
+    "minecraft:mace"
+  ]
+}
