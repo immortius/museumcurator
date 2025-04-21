@@ -2,6 +2,9 @@ package xyz.immortius.museumcurator.forge;
 
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.ResourceManagerReloadListener;
@@ -61,7 +64,7 @@ public class MuseumCuratorMod {
     private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(BuiltInRegistries.ITEM, MuseumCuratorConstants.MOD_ID);
     private static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(BuiltInRegistries.SOUND_EVENT, MuseumCuratorConstants.MOD_ID);
 
-    public static final DeferredHolder<Item, MuseumChecklist> MUSEUM_CHECKLIST = ITEMS.register("museumchecklist", () -> new MuseumChecklist(new Item.Properties()));
+    public static final DeferredHolder<Item, MuseumChecklist> MUSEUM_CHECKLIST = ITEMS.register("museumchecklist", () -> new MuseumChecklist(new Item.Properties().setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(MuseumCuratorConstants.MOD_ID, "museumchecklist")))));
 
     public static final DeferredHolder<SoundEvent, SoundEvent> WRITING_SOUND = SOUNDS.register("writing", () -> SoundEvent.createVariableRangeEvent(MuseumCuratorConstants.WRITING_SOUND_ID));
 

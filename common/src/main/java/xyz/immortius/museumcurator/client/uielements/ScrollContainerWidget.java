@@ -10,7 +10,9 @@ import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.narration.NarratableEntry;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
 import java.util.ArrayList;
@@ -23,6 +25,7 @@ import java.util.Objects;
  */
 public class ScrollContainerWidget extends AbstractContainerEventHandler implements Renderable, GuiEventListener, NarratableEntry {
 
+    private static final ResourceLocation SCROLLER_SPRITE = ResourceLocation.withDefaultNamespace("widget/scroller");
     private static final int SCROLLBAR_WIDTH = 6;
     private static final int SCROLLBAR_SPACE = 2;
 
@@ -69,15 +72,9 @@ public class ScrollContainerWidget extends AbstractContainerEventHandler impleme
 
     @Override
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
-        Tesselator tesselator = Tesselator.getInstance();
-
-        RenderSystem.setShader(GameRenderer::getPositionTexColorShader);
         this.hovered = this.isMouseOver(mouseX, mouseY) ? this.getEntryAtPosition(mouseX, mouseY) : null;
-
         this.renderList(graphics, mouseX, mouseY, delta);
-        renderScrollbar(tesselator);
-
-        RenderSystem.disableBlend();
+        renderScrollbar(graphics);
     }
 
     public List<Component> getTooltip(int mouseX, int mouseY) {
@@ -85,37 +82,6 @@ public class ScrollContainerWidget extends AbstractContainerEventHandler impleme
             return hovered.getTooltip(mouseX, mouseY);
         }
         return Collections.emptyList();
-    }
-
-    private void renderScrollbar(Tesselator tesselator) {
-        int maxScroll = this.getMaxScroll();
-        if (maxScroll > 0) {
-            RenderSystem.setShader(GameRenderer::getPositionColorShader);
-            int scrollerSize = (int)((float)((height) * (height)) / (float)this.getTotalListHeight());
-            scrollerSize = Mth.clamp(scrollerSize, 32, height - 8);
-            int scrollerPos = (int)this.scrollAmount * (height - scrollerSize) / maxScroll + y;
-            if (scrollerPos < y) {
-                scrollerPos = y;
-            }
-
-            int startX = x + width - SCROLLBAR_WIDTH;
-            int endX = x + width;
-
-            BufferBuilder bufferbuilder = tesselator.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_COLOR);
-            bufferbuilder.addVertex(startX, y + height, 0).setColor(0, 0, 0, 255);
-            bufferbuilder.addVertex(endX, y + height, 0).setColor(0, 0, 0, 255);
-            bufferbuilder.addVertex(endX, y, 0).setColor(0, 0, 0, 255);
-            bufferbuilder.addVertex(startX, y, 0).setColor(0, 0, 0, 255);
-            bufferbuilder.addVertex(startX, scrollerPos + scrollerSize, 0).setColor(128, 128, 128, 255);
-            bufferbuilder.addVertex(endX, scrollerPos + scrollerSize, 0).setColor(128, 128, 128, 255);
-            bufferbuilder.addVertex(endX, scrollerPos, 0).setColor(128, 128, 128, 255);
-            bufferbuilder.addVertex(startX, scrollerPos, 0).setColor(128, 128, 128, 255);
-            bufferbuilder.addVertex(startX, scrollerPos + scrollerSize - 1, 0).setColor(192, 192, 192, 255);
-            bufferbuilder.addVertex(endX - 1, scrollerPos + scrollerSize - 1, 0).setColor(192, 192, 192, 255);
-            bufferbuilder.addVertex(endX - 1, scrollerPos, 0).setColor(192, 192, 192, 255);
-            bufferbuilder.addVertex(startX, scrollerPos, 0).setColor(192, 192, 192, 255);
-            BufferUploader.drawWithShader(bufferbuilder.buildOrThrow());
-        }
     }
 
     private int getMaxScroll() {
@@ -127,8 +93,7 @@ public class ScrollContainerWidget extends AbstractContainerEventHandler impleme
     }
 
     protected void renderList(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
-        double scale = Minecraft.getInstance().getWindow().getGuiScale();
-        RenderSystem.enableScissor((int) (scale * x), (int) (scale * (Minecraft.getInstance().getWindow().getGuiScaledHeight() - height - y)), (int) (scale * width), (int) (scale * height));
+        graphics.enableScissor(x, y, x + width, y + height);
         int absoluteY = 0;
         for (ScrollContainerEntry child : children) {
             int rowBottom = absoluteY + child.getHeight(width - SCROLLBAR_WIDTH - SCROLLBAR_SPACE);
@@ -137,7 +102,23 @@ public class ScrollContainerWidget extends AbstractContainerEventHandler impleme
             }
             absoluteY = rowBottom;
         }
-        RenderSystem.disableScissor();
+        graphics.disableScissor();
+    }
+
+    private void renderScrollbar(GuiGraphics graphics) {
+        int maxScroll = getMaxScroll();
+        if (maxScroll == 0) {
+            return;
+        }
+
+        int right = x + this.width;
+        int scrollerSize = (int)((float)((height) * (height)) / (float)this.getTotalListHeight());
+        scrollerSize = Mth.clamp(scrollerSize, 32, height - 8);
+        int scrollerPos = (int)this.scrollAmount * (height - scrollerSize) / maxScroll + y;
+        if (scrollerPos < y) {
+            scrollerPos = y;
+        }
+        graphics.blitSprite(RenderType::guiTextured, SCROLLER_SPRITE, right - SCROLLBAR_WIDTH, scrollerPos, SCROLLBAR_WIDTH, scrollerSize);
     }
 
     @Override
@@ -146,7 +127,7 @@ public class ScrollContainerWidget extends AbstractContainerEventHandler impleme
     }
 
     protected void updateScrollingState(double mouseX, double mouseY, int button) {
-        this.scrolling = button == 0 && mouseX >= (double) (x + width - SCROLLBAR_WIDTH) && mouseX < (double)(x + width);
+        this.scrolling = button == 0 && mouseX >= (double) (x + width - SCROLLBAR_WIDTH) && mouseX < (double) (x + width);
         this.setDragging(true);
     }
 
@@ -180,14 +161,14 @@ public class ScrollContainerWidget extends AbstractContainerEventHandler impleme
         if (super.mouseDragged(mouseX, mouseY, button, deltaX, deltaY)) {
             return true;
         } else if (button == 0 && this.scrolling) {
-            if (mouseY < (double)this.y) {
+            if (mouseY < (double) this.y) {
                 setScrollAmount(0.0D);
-            } else if (mouseY > (double)this.y + height) {
+            } else if (mouseY > (double) this.y + height) {
                 setScrollAmount(this.getMaxScroll());
             } else {
                 double d0 = Math.max(1, this.getMaxScroll());
-                int j = Mth.clamp((int)((float)(height * height) / (float)this.getTotalListHeight()), 32, height - 8);
-                double d1 = Math.max(1.0D, d0 / (double)(height - j));
+                int j = Mth.clamp((int) ((float) (height * height) / (float) this.getTotalListHeight()), 32, height - 8);
+                double d1 = Math.max(1.0D, d0 / (double) (height - j));
                 setScrollAmount(scrollAmount + deltaY * d1);
             }
 

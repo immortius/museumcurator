@@ -1,6 +1,7 @@
 package xyz.immortius.museumcurator.common.network;
 
 import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.world.item.ItemStack;
@@ -17,7 +18,10 @@ import java.util.List;
  */
 public class ChecklistChangeRequest implements CustomPacketPayload {
     public static final CustomPacketPayload.Type<ChecklistChangeRequest> ID = new CustomPacketPayload.Type<>(MuseumCuratorConstants.CHECKLIST_CHANGE_REQUEST_MESSAGE_ID);
-    public static final StreamCodec<RegistryFriendlyByteBuf, ChecklistChangeRequest> STREAM_CODEC = StreamCodec.composite(ItemStack.LIST_STREAM_CODEC, ChecklistChangeRequest::getCheckedItems, ItemStack.LIST_STREAM_CODEC, ChecklistChangeRequest::getUncheckedItems, ChecklistChangeRequest::new);
+    public static final StreamCodec<RegistryFriendlyByteBuf, ChecklistChangeRequest> STREAM_CODEC = StreamCodec.composite(
+            ItemStack.STREAM_CODEC.apply(ByteBufCodecs.list()), ChecklistChangeRequest::getCheckedItems,
+            ItemStack.STREAM_CODEC.apply(ByteBufCodecs.list()), ChecklistChangeRequest::getUncheckedItems,
+            ChecklistChangeRequest::new);
 
     private final List<ItemStack> checkedItems;
     private final List<ItemStack> uncheckedItems;

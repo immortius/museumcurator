@@ -1,0 +1,23 @@
+{
+  "collection": "museumcurator.collection.technology",
+  "name": "museumcurator.technology.bundles",
+  "items": [
+    "minecraft:bundle",
+    "minecraft:white_bundle",
+    "minecraft:light_gray_bundle",
+    "minecraft:gray_bundle",
+    "minecraft:black_bundle",
+    "minecraft:light_blue_bundle",
+    "minecraft:cyan_bundle",
+    "minecraft:blue_bundle",
+    "minecraft:lime_bundle",
+    "minecraft:green_bundle",
+    "minecraft:yellow_bundle",
+    "minecraft:orange_bundle",
+    "minecraft:red_bundle",
+    "minecraft:pink_bundle",
+    "minecraft:magenta_bundle",
+    "minecraft:purple_bundle",
+    "minecraft:brown_bundle"
+  ]
+}

@@ -6,6 +6,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
@@ -77,15 +78,9 @@ public class ChecklistExhibitWidget extends AbstractWidget {
                 offsetY += 20;
             }
             graphics.renderItem(item.itemStack(), getX() + offsetX + 1, getY() + offsetY + 1);
-            RenderSystem.disableDepthTest();
-            RenderSystem.enableBlend();
-
-            RenderSystem.setShader(GameRenderer::getPositionTexShader);
-            RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-            RenderSystem.setShaderTexture(0, AbstractChecklistScreen.CONTAINER_TEXTURE);
 
             boolean unlocked = MuseumCollections.isChecked(item);
-            graphics.blit(AbstractChecklistScreen.CONTAINER_TEXTURE, offsetX + getX(), offsetY + getY(), (unlocked) ? 18 : 0, 256, 18, 18, AbstractChecklistScreen.TEXTURE_DIM, AbstractChecklistScreen.TEXTURE_DIM);
+            graphics.blit(RenderType::guiTexturedOverlay, AbstractChecklistScreen.CONTAINER_TEXTURE, offsetX + getX(), offsetY + getY(), (unlocked) ? 18 : 0, 256, 18, 18, AbstractChecklistScreen.TEXTURE_DIM, AbstractChecklistScreen.TEXTURE_DIM);
             offsetX += 20;
         }
     }

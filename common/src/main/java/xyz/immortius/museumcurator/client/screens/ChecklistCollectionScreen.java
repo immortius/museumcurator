@@ -60,6 +60,11 @@ public class ChecklistCollectionScreen extends AbstractChecklistScreen {
         return super.keyPressed($$0, $$1, $$2);
     }
 
+    @Override
+    public boolean mouseScrolled(double mouseX, double mouseY, double delta, double wheelDelta) {
+        return containerWidget.mouseScrolled(mouseX, mouseY, delta, wheelDelta);
+    }
+
     public static class ChecklistExhibitEntry implements ScrollContainerEntry {
 
         private ChecklistExhibitWidget sectionWidget;

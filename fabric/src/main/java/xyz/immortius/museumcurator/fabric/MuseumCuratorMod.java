@@ -11,7 +11,10 @@ import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.ReloadableServerResources;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.sounds.SoundEvent;
@@ -78,7 +81,7 @@ public class MuseumCuratorMod implements ModInitializer {
             ChecklistCommands.register(dispatcher, context);
         });
 
-        MUSEUM_CHECKLIST = Registry.register(BuiltInRegistries.ITEM, createId("museumchecklist"), new MuseumChecklist(new Item.Properties()));
+        MUSEUM_CHECKLIST = Registry.register(BuiltInRegistries.ITEM, createId("museumchecklist"), new MuseumChecklist(new Item.Properties().setId(ResourceKey.create(Registries.ITEM, createId("museumchecklist")))));
 
         ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.TOOLS_AND_UTILITIES).register(content -> {
             content.addAfter(Items.MUSIC_DISC_PIGSTEP, MUSEUM_CHECKLIST);

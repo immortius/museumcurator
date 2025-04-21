@@ -3,6 +3,7 @@ package xyz.immortius.museumcurator.client.uielements;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
@@ -39,7 +40,7 @@ public class ShapedButton extends AbstractWidget {
             texX = normalX;
             texY = normalY;
         }
-        graphics.blit(texture, getX(), getY(), texX, texY, getWidth(), getHeight(), textureDim, textureDim);
+        graphics.blit(RenderType::guiTextured, texture, getX(), getY(), texX, texY, getWidth(), getHeight(), textureDim, textureDim);
     }
 
     @Override

@@ -5,8 +5,10 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.WidgetSprites;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.ARGB;
 import net.minecraft.util.Mth;
 
 /**
@@ -30,15 +32,19 @@ public class ColorTextButton extends Button {
         super(x, y, width, height, label, onPress, createNarration);
     }
 
-    public void renderWidget(GuiGraphics $$0, int $$1, int $$2, float $$3) {
-        Minecraft $$4 = Minecraft.getInstance();
-        $$0.setColor(1.0F, 1.0F, 1.0F, this.alpha);
-        RenderSystem.enableBlend();
-        RenderSystem.enableDepthTest();
-        $$0.blitSprite(SPRITES.get(this.active, this.isHoveredOrFocused()), this.getX(), this.getY(), this.getWidth(), this.getHeight());
-        $$0.setColor(1.0F, 1.0F, 1.0F, 1.0F);
-        int $$5 = this.active ? activeTextColor : textColor;
-        this.renderString($$0, $$4.font, $$5 | Mth.ceil(this.alpha * 255.0F) << 24);
+    public void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+        Minecraft minecraft = Minecraft.getInstance();
+        guiGraphics.blitSprite(
+                RenderType::guiTextured,
+                SPRITES.get(this.active, this.isHoveredOrFocused()),
+                this.getX(),
+                this.getY(),
+                this.getWidth(),
+                this.getHeight(),
+                ARGB.white(this.alpha)
+        );
+        int color = this.active ? activeTextColor : textColor;
+        this.renderString(guiGraphics, minecraft.font, color);
     }
 
     private int getTextureY() {

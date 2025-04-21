@@ -5,6 +5,7 @@ import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
@@ -64,7 +65,7 @@ public abstract class AbstractChecklistScreen extends AbstractContainerScreen<Mu
 
     @Override
     protected void renderBg(GuiGraphics graphics, float delta, int mouseX, int mouseY) {
-        graphics.blit(CONTAINER_TEXTURE, leftPos, topPos, 0, 0, imageWidth, imageHeight, TEXTURE_DIM, TEXTURE_DIM);
+        graphics.blit(RenderType::guiTextured, CONTAINER_TEXTURE, leftPos, topPos, 0, 0, imageWidth, imageHeight, TEXTURE_DIM, TEXTURE_DIM);
     }
 
     @Override

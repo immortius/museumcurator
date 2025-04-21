@@ -17,7 +17,11 @@ import java.util.List;
  */
 public class ChecklistUpdateMessage implements CustomPacketPayload {
     public static final CustomPacketPayload.Type<ChecklistUpdateMessage> ID = new CustomPacketPayload.Type<>(MuseumCuratorConstants.CHECKLIST_UPDATE_MESSAGE_ID);
-    public static final StreamCodec<RegistryFriendlyByteBuf, ChecklistUpdateMessage> STREAM_CODEC = StreamCodec.composite(ItemStack.LIST_STREAM_CODEC, ChecklistUpdateMessage::getCheckedItems, ItemStack.LIST_STREAM_CODEC, ChecklistUpdateMessage::getUncheckedItems, ByteBufCodecs.BOOL, ChecklistUpdateMessage::isClearAll, ChecklistUpdateMessage::new);
+    public static final StreamCodec<RegistryFriendlyByteBuf, ChecklistUpdateMessage> STREAM_CODEC = StreamCodec.composite(
+            ItemStack.STREAM_CODEC.apply(ByteBufCodecs.list()), ChecklistUpdateMessage::getCheckedItems,
+            ItemStack.STREAM_CODEC.apply(ByteBufCodecs.list()), ChecklistUpdateMessage::getUncheckedItems,
+            ByteBufCodecs.BOOL, ChecklistUpdateMessage::isClearAll,
+            ChecklistUpdateMessage::new);
 
     private final List<ItemStack> checkedItems;
     private final List<ItemStack> uncheckedItems;

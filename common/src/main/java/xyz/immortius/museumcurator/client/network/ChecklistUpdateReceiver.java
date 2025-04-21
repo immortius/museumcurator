@@ -17,10 +17,10 @@ public class ChecklistUpdateReceiver {
         MuseumCollections.uncheckItems(msg.getUncheckedItems());
         MuseumCollections.checkItems(msg.getCheckedItems());
         for (ItemStack item : msg.getCheckedItems()) {
-            player.sendSystemMessage(Component.translatable("commands.museumcurator.checked", item.getDisplayName()));
+            player.displayClientMessage(Component.translatable("commands.museumcurator.checked", item.getDisplayName()), false);
         }
         for (ItemStack item : msg.getUncheckedItems()) {
-            player.sendSystemMessage(Component.translatable("commands.museumcurator.unchecked", item.getDisplayName()));
+            player.displayClientMessage(Component.translatable("commands.museumcurator.unchecked", item.getDisplayName()), false);
         }
     }
 }
